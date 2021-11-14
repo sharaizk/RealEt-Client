@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react'
+import './index.css'
+import {Routes, Route,useLocation} from 'react-router-dom'
+import LandingScreen from './Screens/LandingScreen'
+import SignUpScreen from './Screens/SignUpScreen'
+import LoginScreen from './Screens/LoginScreen'
+import Header from './Components/LayoutComponents/Header'
 function App() {
+  const location = useLocation()
+  console.log(location.pathname)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {location.pathname !== "/signup" && location.pathname !== '/signin' ?<Header/>:null}
+      <Routes>
+        <Route path="/" element={<LandingScreen />}/>
+        <Route path="/signup" element={<SignUpScreen/>} />
+        <Route path="/signin" element={<LoginScreen/>}/>
+      </Routes>
     </div>
   );
 }
