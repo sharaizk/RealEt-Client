@@ -1,10 +1,10 @@
 import React from 'react'
-
+import { LandingScreenContainer } from './LandingScreenElements'
 const LandingScreen = () => {
     return (
-        <div style={{height:"84vh"}}>
-            LandingScreen
-        </div>
+        <LandingScreenContainer>
+            Landing
+        </LandingScreenContainer>
     )
 }
 

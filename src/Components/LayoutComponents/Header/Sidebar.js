@@ -1,9 +1,12 @@
 import React from "react";
-import { SidebarContainer,SidebarWrapper,SidebarMenu,SidebarLink,SidebarBtn1 } from "./SidebarElemets";
-const Sidebar = ({ isOpen }) => {
+import { SidebarContainer,SidebarWrapper,SidebarMenu,SidebarLink,SidebarBtn1,  Icon,
+  CloseIcon } from "./SidebarElemets";
+const Sidebar = ({ isOpen,toggle }) => {
   return (
     <SidebarContainer isOpen={isOpen}>
-
+      <Icon onClick={toggle}>
+        <CloseIcon />
+      </Icon>
       <SidebarWrapper>
         <SidebarMenu>
           <SidebarLink to="/signup">

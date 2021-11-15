@@ -10,7 +10,8 @@ export const Navbar = styled.nav`
   font-size: 1rem;
   position: fixed;
   width: 100%;
-  transition: 0.2s height ease;
+  z-index: 10;
+  transition: 0.2s height ease-out;
   @media screen and (max-width: 960px) {
     transition: 0.8s all ease;
     transition: 0.2s height ease;
@@ -41,12 +42,13 @@ export const NavBanner = styled.div`
 export const MobileIcon = styled.div`
   display: none;
   @media screen and (max-width: 870px) {
+    transition: 0.2s translate ease;
     display: block;
     position: absolute;
     color: #424242;
     top: 0;
     right: 0;
-    transform: translate(-100%, 35%);
+    transform: ${({ scrollNav }) => (!scrollNav ? "translate(-100%, 35%)" : "translate(-100%, 25%)")};
     font-size: 1.8rem;
     cursor: pointer;
   }

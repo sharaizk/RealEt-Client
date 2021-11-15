@@ -5,19 +5,20 @@ import { NavLink } from "react-router-dom";
 export const SidebarContainer = styled.aside`
   display: none;
   @media screen and (max-width:870px){
-    position: fixed;
+  position: fixed;
   z-index: 999;
   width: 100%;
-  height:auto;
+  height:100%;
   background: #FC6E20;
   display: grid;
   align-items: center;
-  left: 0;
-  top: 10%;
-  transition: 0.3s ease-in-out;
+
+  top: 0%;
+  right: 0%;
+  transition: 0.3s ease;
   opacity: 100%;
   opacity: ${({ isOpen }) => (isOpen ? "100%" : "0%")};
-  top: ${({ isOpen }) => (isOpen ? "10%" : "-100%")};
+  right: ${({ isOpen }) => (isOpen ? "0%" : "100%")};
   }
 `;
 
@@ -41,7 +42,7 @@ export const SidebarWrapper = styled.div`
 export const SidebarMenu = styled.ul`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 80px);
+  grid-template-rows: repeat(6, 70px);
   text-align: center;
   font-family: "Poppins",'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   -webkit-touch-callout: none;
@@ -56,9 +57,7 @@ export const SidebarMenu = styled.ul`
 `;
 
 export const SidebarLink = styled(NavLink)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
   font-size: 1.5rem;
   text-decoration: none;
   list-style: none;

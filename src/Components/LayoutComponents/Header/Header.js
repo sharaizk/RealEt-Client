@@ -13,7 +13,6 @@ import {
 } from "./HeaderElements";
 
 import { Sling as Hamburger } from 'hamburger-react'
-
 const Nav = ({ isOpen,toggle }) => {
   const [scrollNav, setScrollNav] = useState(false);
 
@@ -35,7 +34,7 @@ const Nav = ({ isOpen,toggle }) => {
         <NavBanner>
           Real<span style={{ color: "#424242" }}>Et</span>
         </NavBanner>
-        <MobileIcon onClick={toggle}>
+        <MobileIcon scrollNav={scrollNav}>
           <Hamburger size={25} color="#FC6E20" toggled={isOpen} toggle={toggle} />
         </MobileIcon>
         <NavMenu>
