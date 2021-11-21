@@ -11,7 +11,6 @@ import {
   PostAddbtn,
   SignInBtn
 } from "./HeaderElements";
-
 import { Sling as Hamburger } from 'hamburger-react'
 const Nav = ({ isOpen,toggle }) => {
   const [scrollNav, setScrollNav] = useState(false);

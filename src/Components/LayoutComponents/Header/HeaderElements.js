@@ -66,6 +66,7 @@ export const NavMenu = styled.ul`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  margin-bottom: 0px !important;
   @media screen and (max-width: 870px) {
     display: none;
   }
@@ -87,6 +88,9 @@ export const NavLinks = styled(NavLink)`
   height: 100%;
   cursor: pointer;
   transition: all 0.05s ease-in;
+  :hover{
+    color: #424242 !important
+  }
   &.active {
     border-bottom: 3px solid #FC6E20;
   }

@@ -1,4 +1,5 @@
 import React from 'react'
+import 'antd/dist/antd.css';
 import './index.css'
 import {Routes, Route,useLocation} from 'react-router-dom'
 import LandingScreen from './Screens/LandingScreen'
@@ -7,7 +8,6 @@ import LoginScreen from './Screens/LoginScreen'
 import Header from './Components/LayoutComponents/Header'
 function App() {
   const location = useLocation()
-  console.log(location.pathname)
   return (
     <div className="App">
       {location.pathname !== "/signup" && location.pathname !== '/signin' ?<Header/>:null}
