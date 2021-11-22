@@ -1,0 +1,27 @@
+.rec.rec-arrow {
+    background-color: #FC6E20;
+    color: #FFF;
+}
+
+.rec.rec-arrow:hover,.rec.rec-arrow:hover:enabled,.rec.rec-arrow:enabled{
+    background-color: #FC6E20 !important;
+    color: #FFF !important;
+}
+.rec.rec-arrow:disabled {
+    visibility: hidden;
+}
+.carousel{
+    width: 75% !important;
+}
+
+@media screen and (max-width:550px) {
+    .rec.rec-arrow{
+        display: none;
+    }
+}
+
+@media screen and (max-width:780px) {
+    .carousel{
+        width: 100% !important;
+    }
+}
