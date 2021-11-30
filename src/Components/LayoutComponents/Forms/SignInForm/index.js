@@ -2,32 +2,42 @@ import React from "react";
 import {
   SignInFromContainer,
   LogoImg,
-  FormInput,
-  PasswordInput,
+  InputField,
+  InputFieldPassword,
   SubmitButton,
   BtnLink,
-  FSubmitButton,
-  GSubmitButton,
-  BtnContainer
+  FSignInButtom,
+  GSignInButton,
 } from "./Elements";
 import Logo from "../../../../assets/images/logo.png";
-import { Form, Row, Col,Divider } from "antd";
+import { Form, Row, Col, Divider, Tooltip, message } from "antd";
 import { FaUser, FaKey } from "react-icons/fa";
-import {GoogleOutlined,FacebookFilled} from '@ant-design/icons'
+import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
+import { NavLink } from "react-router-dom";
 import "./style.scss";
+
+
 const SignInForm = () => {
+  // const RegEx = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+    
+  const [form] = Form.useForm();
+  const onFinish = (values) => {
+    console.log(values);
+     message.success("Hello")
+    form.resetFields();
+  };
   return (
     <SignInFromContainer>
-      <LogoImg src={Logo} alt="logo" />
+      <NavLink to="/">
+        <LogoImg src={Logo} alt="Logo Img" />
+      </NavLink>
       <Form
-        name="basic"
-        layout={"vertical"}
-        initialValues={{
-          remember: true,
-        }}
-        // onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
-        // autoComplete="off"
+        form={form}
+        name="signin-form"
+        layout="vertical"
+        onFinish={onFinish}
+        autoComplete="off"
+        requiredMark={"optional"}
       >
         <Form.Item
           name="email"
@@ -37,24 +47,37 @@ const SignInForm = () => {
               required: true,
               message: "Please enter your email or phone number",
             },
+            {
+              min: 6,
+              max: 10,
+              message: "Credential must be between 6 and 10",
+            },
           ]}
         >
-          <FormInput
+          <InputField
             placeholder={"Email or Phone Number"}
-            prefix={<FaUser />}
+            prefix={<FaUser color="#545454" />}
           />
         </Form.Item>
         <Form.Item
-          name="password"
+          name="Password"
           label={<label className="formLabel">Password</label>}
           rules={[
             {
               required: true,
               message: "Please enter your password",
             },
+            {
+              min: 6,
+              max: 10,
+              message: "Password must be between 6 and 10",
+            },
           ]}
         >
-          <PasswordInput placeholder={"*******"} prefix={<FaKey />} />
+          <InputFieldPassword
+            placeholder={"Pass****"}
+            prefix={<FaKey color="#545454" />}
+          />
         </Form.Item>
         <Form.Item>
           <SubmitButton type="primary" htmlType="submit">
@@ -62,20 +85,26 @@ const SignInForm = () => {
           </SubmitButton>
         </Form.Item>
         <Row justify="space-between">
-          <Col span={8}><BtnLink to="/signup">Forgot Password</BtnLink></Col>
-          <Col span={3.5}><BtnLink to="/signup">Sign Up</BtnLink></Col>
+          <Col span={15}>
+            <BtnLink to="/signup">Forgot Password</BtnLink>
+          </Col>
+          <Col span={3.5}>
+            <BtnLink to="/signup">Sign Up</BtnLink>
+          </Col>
         </Row>
-        <Divider />
-        <BtnContainer>
-      <FSubmitButton type="primary"  icon={<FacebookFilled />}>
-            Sign In
-        </FSubmitButton>
-        <GSubmitButton  type="primary"  icon={<GoogleOutlined />}>
-          Sign In
-        </GSubmitButton>
-      </BtnContainer>
       </Form>
 
+      <Divider />
+      <Tooltip title="Sign in with Facebook">
+        <FSignInButtom type="primary" icon={<FacebookFilled />}>
+          Sign In
+        </FSignInButtom>
+      </Tooltip>
+      <Tooltip title="Sign in with Google" placement="bottom">
+        <GSignInButton type="primary" icon={<GoogleOutlined />}>
+          Sign In
+        </GSignInButton>
+      </Tooltip>
     </SignInFromContainer>
   );
 };

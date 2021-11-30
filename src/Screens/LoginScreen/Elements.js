@@ -8,9 +8,6 @@ export const SignInContainer = styled(motion.div)`
   align-items: center;
   width: 100vw;
   background-color: #e2e2e2;
-  @media screen and (max-height: 700px){
-    height: 100%;
-  }
 `;
 
 export const ImageContainer = styled.img`
@@ -27,8 +24,11 @@ export const ImageContainer = styled.img`
 `;
 export const FormContainer = styled.div`
   flex: 0.5;
-  height: 100%;
+  height: 100vh;
   background-color: #ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   @media screen and (max-width: 768px) {
     flex: 1;

@@ -1,176 +1,144 @@
 import styled from "styled-components";
-import { Input,Button } from "antd";
-import {NavLink} from 'react-router-dom'
+import { Input, Button } from "antd";
+import { NavLink } from "react-router-dom";
 export const SignInFromContainer = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
+  height: 100vh;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  width: 100%;
-  padding: 0.5rem 1rem;
-  background-color: transparent;
+  width: max-content;
+  background-color: #fff;
+  padding: 1rem 1rem;
   @media screen and (max-width: 768px) {
     z-index: 5;
+  }
+  @media screen and (max-height:600px) and (min-width:768px){
+    padding: 0 0 10rem 0;
   }
 `;
 
 export const LogoImg = styled.img`
-  height: 300px;
-  width: 300px;
-
-  @media screen and (max-width: 480px) {
-    height: 250px;
-    width: 250px;
-  }
-
-  @media screen and (max-width: 320px) {
-    height: 200px;
-    width: 200px;
-  }
-  
+  height: 26.852846401718583vh;
+  width: 26.852846401718583vh;
 `;
 
-export const FormInput = styled(Input)`
+export const InputField = styled(Input)`
   height: 50px;
-  width: 450px;
+  width: 26.609898882384247vw;
   border-radius: 5px;
+  :hover {
+    border-color: #fc6e20 !important;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+  @media screen and (max-height: 700px) {
+    height: 7vh;
+  }
+`;
+export const InputFieldPassword = styled(InputField.Password)`
+  height: 50px;
+  width: 26.609898882384247vw;
+  border-radius: 5px;
+  :hover {
+    border-color: #fc6e20 !important;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+  @media screen and (max-height: 700px) {
+    height: 7vh;
+  }
+`;
+export const SubmitButton = styled(Button)`
+  background-color: #fc6e20;
+  border-color: #fc6e20;
+  font-weight: 500;
+  height: 45px;
+  width: 26.609898882384247vw;
+  border-radius: 5px;
+  margin-top: 5px;
   :hover,
   :active,
   :focus {
-    border-color: #fc6e20 !important;
+    background-color: #fff;
+    color: #fc6e20;
     box-shadow: none !important;
+    border: 1px solid #fc6e20;
   }
-  @media screen and (max-width: 1200px) {
-    width: 400px;
+  @media screen and (max-width: 768px) {
+    width: 100%;
   }
-  @media screen and (max-width: 1000px) {
-    width: 350px;
-  }
-  @media screen and (max-width: 780px) {
-    width: 300px;
-  }
-  @media screen and (max-width: 320px) {
-    width:100%;
+  @media screen and (max-height: 700px) {
+    height: 7vh;
   }
 `;
-export const PasswordInput = styled(Input.Password)`
-  height: 50px;
-  width: 450px;
-  border-radius: 5px;
-  :hover,
-  :active,
-  :focus {
-    border-color: #fc6e20 !important;
-    box-shadow: none !important;
-  }
-  @media screen and (max-width: 1200px) {
-    width: 400px;
-  }
-  @media screen and (max-width: 1000px) {
-    width: 350px;
-  }
-  @media screen and (max-width: 780px) {
-    width: 300px;
-  }
-  @media screen and (max-width: 320px) {
-    width:100%;
-  }
-`;
-
-export const SubmitButton=styled(Button)`
-  background:#FC6E20;
-  border-color:#FC6E20;
-  height: 50px;
-  width: 450px;
-  border-radius: 5px;
-  margin-top:20px;
-  font-size: 20px;
-  font-weight: bold;
-  @media screen and (max-width: 1200px) {
-    width: 400px;
-  }
-  @media screen and (max-width: 1000px) {
-    width: 350px;
-  }
-  @media screen and (max-width: 780px) {
-    width: 300px;
-  }
-  @media screen and (max-width: 320px) {
-    width:100%;
-  }
-  :hover,:active,:focus{
-    background:#FFF;
-    color: #FC6E20;
-    border-color: #FC6E20;
-  }
-`
-export const GSubmitButton=styled(Button)`
-  background:#DB4437;
-  border-color:#DB4437;
-  height: 50px;
-  width: 450px;
-  border-radius: 5px;
-  margin-top:20px;
-  font-size: 20px;
-  font-weight: bold;
-  @media screen and (max-width: 1200px) {
-    width: 400px;
-  }
-  @media screen and (max-width: 1000px) {
-    width: 350px;
-  }
-  @media screen and (max-width: 780px) {
-    width: 300px;
-  }
-  @media screen and (max-width: 320px) {
-    width:100%;
-  }
-  :hover,:active,:focus{
-    background:#FFF;
-    color: #DB4437;
-    border-color: #DB4437;
-  }
-`
-export const FSubmitButton=styled(Button)`
-  background:#4267B2;
-  border-color:#4267B2;
-  height: 50px;
-  width: 450px;
-  border-radius: 5px;
-  font-size: 20px;
-  font-weight: bold;
-  @media screen and (max-width: 1200px) {
-    width: 400px;
-  }
-  @media screen and (max-width: 1000px) {
-    width: 350px;
-  }
-  @media screen and (max-width: 780px) {
-    width: 300px;
-  }
-  @media screen and (max-width: 320px) {
-    width:100%;
-  }
-  :hover,:active,:focus{
-    background:#FFF;
-    color: #4267B2;
-    border-color: #4267B2;
-  }
-`
-
-export const BtnContainer=styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-
-export const BtnLink =styled(NavLink)`
+export const BtnLink = styled(NavLink)`
   color: #424242;
-  font-size: 16px;
-  font-weight: 400;
-  :hover{
+  display: inline-block;
+  ::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #fc6e20;
+    transition: width 0.3s cubic-bezier(0,.89,.75,.9);
+  }
+  :hover::after {
+    width: 100%;
+    //transition: width .3s;
+  }
+  :hover {
     color: #424242;
   }
-`
+`;
+
+export const FSignInButtom = styled(Button)`
+  background-color: #4267b2;
+  border-color: #4267b2;
+  font-weight: 500;
+  height: 45px;
+  width: 26.609898882384247vw;
+  border-radius: 5px;
+  margin-top: 5px;
+  :hover,
+  :active,
+  :focus {
+    background-color: #fff;
+    color: #4267b2;
+    box-shadow: none !important;
+    border: 1px solid #4267b2;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+  @media screen and (max-height: 700px) {
+    height: 7vh;
+  }
+`;
+
+export const GSignInButton = styled(Button)`
+  background-color: #DB4437;
+  border-color: #DB4437;
+  font-weight: 500;
+  height: 45px;
+  width: 26.609898882384247vw;
+  border-radius: 5px;
+  margin-top: 20px;
+  :hover,
+  :active,
+  :focus {
+    background-color: #fff;
+    color: #DB4437;
+    box-shadow: none !important;
+    border: 1px solid #DB4437;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+  @media screen and (max-height: 700px) {
+    height: 7vh;
+  }
+`;
