@@ -7,7 +7,7 @@ export const SignInContainer = styled(motion.div)`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  background-color: #e2e2e2;
+  background-color: #FFF;
   @media screen and (max-height: 700px){
     height: 100%;
   }
