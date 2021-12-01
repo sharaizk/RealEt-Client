@@ -33,10 +33,11 @@
   .ant-slider-track{
     background-color: #fc6e20 !important;
   }
-  // .ant-btn-primary{
-  //   background-color: #fc6e20 !important;
-  //   border-color: #fc6e20 !important;
-  // }
+
+  .ant-modal-footer >.ant-btn-primary{
+    background-color: #fc6e20 !important;
+    border-color: #fc6e20 !important;
+  }
   .ant-slider-handle{
     border-color: #fc6e20 !important;
   }

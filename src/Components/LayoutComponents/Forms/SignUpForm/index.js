@@ -168,7 +168,7 @@ const SignUpForm = () => {
             },
           ]}
         >
-          <ImgCrop quality={0.5} grid={true} zoom={true} rotate modalOk="Upload">
+          <ImgCrop quality={0.5} grid={true} zoom={true} rotate modalOk="Upload" className="imgcropper">
             <Upload
               maxCount={1}
               listType="text"
