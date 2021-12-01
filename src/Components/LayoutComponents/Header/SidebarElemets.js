@@ -65,6 +65,9 @@ export const SidebarLink = styled(NavLink)`
   color: #fff;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  :hover{
+    color:#424242;
+  }
   @media screen and (max-width:480px){
     font-size: 1.25rem;
   }
@@ -81,9 +84,8 @@ export const SidebarBtn1=styled(NavLink)`
   color: #fff;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  &:hover {
-    color: #01bf71;
-    transition: 0.2s ease-in-out;
+  :hover{
+    color:#424242;
   }
   @media screen and (max-width:480px){
     font-size: 1.25rem;

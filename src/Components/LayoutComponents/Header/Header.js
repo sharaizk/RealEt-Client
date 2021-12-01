@@ -9,8 +9,10 @@ import {
   NavLinks,
   NavBtn,
   PostAddbtn,
-  SignInBtn
+  SignInBtn,
+  Brand
 } from "./HeaderElements";
+import { NavLink } from "react-router-dom";
 import { Sling as Hamburger } from 'hamburger-react'
 const Nav = ({ isOpen,toggle }) => {
   const [scrollNav, setScrollNav] = useState(false);
@@ -31,7 +33,9 @@ const Nav = ({ isOpen,toggle }) => {
     <Navbar scrollNav={scrollNav}>
       <NavbarContainer>
         <NavBanner>
-          Real<span style={{ color: "#424242" }}>Et</span>
+          <NavLink to="/">
+          <Brand>Real</Brand><span style={{ color: "#424242" }}>Et</span>
+          </NavLink>
         </NavBanner>
         <MobileIcon scrollNav={scrollNav}>
           <Hamburger size={25} color="#FC6E20" toggled={isOpen} toggle={toggle} />
@@ -44,7 +48,7 @@ const Nav = ({ isOpen,toggle }) => {
             <NavLinks to="/signup">Rent a Property</NavLinks>
           </NavItem>
           <NavItem scrollNav={scrollNav}>
-            <NavLinks to="/signup">Cost Calculator</NavLinks>
+            <NavLinks to="/costcalculator">Cost Calculator</NavLinks>
           </NavItem>
           <NavItem scrollNav={scrollNav}>
             <NavLinks to="/signup">Book a Builder</NavLinks>

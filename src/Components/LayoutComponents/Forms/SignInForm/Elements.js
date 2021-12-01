@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Input, Button } from "antd";
 import { NavLink } from "react-router-dom";
+import {PasswordInput} from 'antd-password-input-strength'
 export const SignInFromContainer = styled.div`
   position: relative;
   display: flex;
@@ -38,7 +39,7 @@ export const InputField = styled(Input)`
     height: 7vh;
   }
 `;
-export const InputFieldPassword = styled(InputField.Password)`
+export const InputFieldPassword = styled(PasswordInput)`
   height: 50px;
   width: 26.609898882384247vw;
   border-radius: 5px;

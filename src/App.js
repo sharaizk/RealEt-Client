@@ -5,6 +5,7 @@ import {Routes, Route,useLocation} from 'react-router-dom'
 import LandingScreen from './Screens/LandingScreen'
 import SignUpScreen from './Screens/SignUpScreen'
 import LoginScreen from './Screens/LoginScreen'
+import CostCalculator from './Screens/CostScreen';
 import Header from './Components/LayoutComponents/Header'
 import {AnimatePresence} from 'framer-motion'
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<LandingScreen />}/>
         <Route path="/signup" element={<SignUpScreen/>} />
         <Route path="/signin" element={<LoginScreen/>}/>
+        <Route path="/costcalculator" element={<CostCalculator/>}/>
       </Routes>
       </AnimatePresence>
     </div>

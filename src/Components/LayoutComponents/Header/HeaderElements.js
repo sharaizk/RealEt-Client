@@ -18,6 +18,11 @@ export const Navbar = styled.nav`
   }
 `;
 
+export const Brand=styled.label`
+color: #FC6E20;
+cursor: pointer;
+`
+
 export const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -36,7 +41,7 @@ export const NavBanner = styled.div`
   font-family: "Poppins",'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: #FC6E20;
   cursor: pointer;
-
+  
 `;
 
 export const MobileIcon = styled.div`
