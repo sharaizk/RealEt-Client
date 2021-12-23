@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+@font-face {
+  font-family: 'ABeatByKaiRegular';
+  src: local('ABeatByKaiRegular'), url(./assets/fonts/ABeatByKai/ABEAKRG.TTF) format('truetype');
+}
 *{
   margin: 0;
   padding:0 ;

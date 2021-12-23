@@ -28,11 +28,12 @@ export const SectionContainer = styled.div`
   }
 `;
 
+
 export const BuyandSell = styled.h3`
-  font-size: 3.3rem;
+  font-size: 2.5rem;
   color: #fff;
   letter-spacing: 3%;
-  font-weight: 300;
+  font-weight: 400;
   text-align: center;
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */

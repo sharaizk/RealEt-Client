@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import {NavLink} from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 
 export const Navbar = styled.nav`
-  background:#FFF;
+  background: ${({ scrollNav }) => (!scrollNav ? "transparent" : "#FFF")};
   height: ${({ scrollNav }) => (!scrollNav ? "80px" : "70px")};
   display: flex;
   justify-content: center;
@@ -11,17 +11,24 @@ export const Navbar = styled.nav`
   position: fixed;
   width: 100%;
   z-index: 10;
-  transition: 0.2s height ease-out;
+  transition: 0.2s all ease-out;
   @media screen and (max-width: 960px) {
     transition: 0.8s all ease;
-    transition: 0.2s height ease;
+    transition: 0.2s all ease;
   }
 `;
 
-export const Brand=styled.label`
-color: #FC6E20;
-cursor: pointer;
-`
+export const Brand = styled.label`
+  color: #fc6e20;
+  cursor: pointer;
+  font-family: "ABeatByKaiRegular", "Poppins";
+  letter-spacing: 1.5px;
+`;
+export const BrandSpan = styled.span`
+  color: ${({ scrollNav }) => (!scrollNav ? "#FFF" : "#424242")};
+  cursor: pointer;
+  font-family: "ABeatByKaiRegular", "Poppins";
+`;
 
 export const NavbarContainer = styled.div`
   display: flex;
@@ -30,7 +37,6 @@ export const NavbarContainer = styled.div`
   z-index: 1;
   width: 100%;
   padding: 0 50px;
-
 `;
 
 export const NavBanner = styled.div`
@@ -38,10 +44,8 @@ export const NavBanner = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.75rem;
-  font-family: "Poppins",'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: #FC6E20;
+  color: #fc6e20;
   cursor: pointer;
-  
 `;
 
 export const MobileIcon = styled.div`
@@ -53,7 +57,8 @@ export const MobileIcon = styled.div`
     color: #424242;
     top: 0;
     right: 0;
-    transform: ${({ scrollNav }) => (!scrollNav ? "translate(-100%, 35%)" : "translate(-100%, 25%)")};
+    transform: ${({ scrollNav }) =>
+      !scrollNav ? "translate(-100%, 35%)" : "translate(-100%, 25%)"};
     font-size: 1.8rem;
     cursor: pointer;
   }
@@ -79,25 +84,29 @@ export const NavMenu = styled.ul`
 
 export const NavItem = styled.li`
   height: ${({ scrollNav }) => (!scrollNav ? "80px" : "70px")};
+
   transition: 0.2s height ease;
-`
+`;
 
 export const NavLinks = styled(NavLink)`
-  color: #424242;
-  font-family: "Poppins",'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: ${({ scrollNav }) => (!scrollNav ? "#fff" : "#424242")};
+  font-family: "Poppins", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
   display: flex;
+  font-size: 14px;
+  font-weight: 300;
   align-items: center;
   text-decoration: none;
   white-space: nowrap;
   padding: 0 1rem;
   height: 100%;
-  cursor: pointer;
   transition: all 0.05s ease-in;
-  :hover{
-    color: #424242 !important
+  :hover {
+    color:${({ scrollNav }) => (!scrollNav ? "#fff" : "#424242")} !important;
+    border-bottom: 3px solid #fc6e20;
   }
   &.active {
-    border-bottom: 3px solid #FC6E20;
+    border-bottom: 3px solid #fc6e20;
   }
 `;
 
@@ -112,50 +121,49 @@ export const NavBtn = styled.nav`
 
 export const PostAddbtn = styled(NavLink)`
   border-radius: 5px;
-  background-color: #fff;
   white-space: nowrap;
-  border: 1px solid #424242;
-  padding: 8px 16px;
-  color: #424242;
-  font-size: 1rem;
+  border: 1px solid ${({ scrollNav }) => (!scrollNav ? "#fff" : "#424242")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 31px;
+  color: ${({ scrollNav }) => (!scrollNav ? "#fff" : "#424242")};
+  font-size: 0.75rem;
   outline: none;
-
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  font-family: "Poppins",'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Poppins", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
   margin-right: 15px;
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    background-color: #424242;
-    color: #ffff;
+  &:hover{
+    color: ${({ scrollNav }) => (!scrollNav ? "#fff" : "#424242")} !important;
   }
-  @media screen and (max-width:1000px){
-    padding: 8px 15px;
-    margin-right: 10px;
+  @media screen and (max-width: 1000px) {
+    margin-right: 8px;
   }
 `;
 
 export const SignInBtn = styled(NavLink)`
   border-radius: 5px;
-  background-color: #FC6E20;
+  background-color: #fc6e20;
   white-space: nowrap;
-  padding: 8px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6.971793507184673vw;
+  height: 31px;
   color: #fff;
   font-size: 1rem;
   outline: none;
-  border: 1px solid #FC6E20;
+  border: 1px solid #fc6e20;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  font-family: "Poppins",'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Poppins", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
   &:hover {
-    transition: all 0.2s ease-in-out;
-    border: 1px solid #FC6E20;
-    background-color: #FFFF;
-    color: #FC6E20;
+    color: #fff;
   }
-  @media screen and (max-width:1000px){
-    padding: 8px 15px;
-  }
-`
+`;
