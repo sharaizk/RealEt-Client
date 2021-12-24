@@ -5,16 +5,24 @@ export const FeaturedContainer = styled.section`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 0 30px;
+  padding: 20px 30px;
   height: 90vh;
   position: relative;
   z-index: 1;
   overflow-x: hidden;
 `
 
-export const FeaturedHead=styled.h3`
+export const CaptionContainer=styled.div`
+  flex: 0.1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+`
+
+export const SectionHead=styled.h3`
   font-size: 2.25rem;
-  letter-spacing: 1%;
+  font-weight:500;
   color: #424242;
 
   @media screen and (max-width: 480px) {
@@ -24,6 +32,24 @@ export const FeaturedHead=styled.h3`
     font-size: 1.5rem;
   }
 `
-export const CardContainer = styled.div`
-  
+export const SectionSubHead=styled.p`
+  font-size: 1rem;
+  text-align: center;
+  color: #545454;
+  font-weight: 400;
+`
+export const CarouselContainer=styled.div`
+  flex: 0.9;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+export const ArrowComponents=styled.button`
+  color: #FC6E20;
+  width: 2.5%;
+  outline: none;
+  border: none;
+  background-color: transparent;
+
 `

@@ -1,15 +1,28 @@
 import React from "react";
-import { FeaturedContainer,FeaturedHead } from './section2Elements'
-import FeaturedCard from "../../CustomComponents/featuredCard";
-
-import './style.css'
+import {
+  FeaturedContainer,
+  SectionHead,
+  SectionSubHead,
+  CaptionContainer,
+  CarouselContainer,
+} from "./section2Elements";
+import "./style.css";
 const LandSection2 = () => {
 
 
   return (
     <FeaturedContainer>
-      <FeaturedHead>Featured Properties</FeaturedHead>
-      <FeaturedCard />
+      <CaptionContainer>
+        <SectionHead>Featured Properties</SectionHead>
+        <SectionSubHead>
+          Find Real Estate Online, Browse through Properties from Verified
+          Listings.
+          <br />
+          100% reliable, safe and secure investments
+        </SectionSubHead>
+      </CaptionContainer>
+      <CarouselContainer>
+      </CarouselContainer>
     </FeaturedContainer>
   );
 };

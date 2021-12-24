@@ -1,17 +1,19 @@
 .rec.rec-arrow {
-    background-color: #FC6E20;
-    color: #FFF;
+    background-color: transparent;
+    color: #FC6E20;
 }
 
 .rec.rec-arrow:hover,.rec.rec-arrow:hover:enabled,.rec.rec-arrow:enabled{
-    background-color: #FC6E20 !important;
-    color: #FFF !important;
+    background-color: transparent !important;
+    color: #FC6E20 !important;
 }
 .rec.rec-arrow:disabled {
     visibility: hidden;
 }
 .carousel{
     width: 75% !important;
+    height: 100%;
+    padding: 20px 0px;
 }
 
 @media screen and (max-width:550px) {
