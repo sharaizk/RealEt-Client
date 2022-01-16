@@ -43,19 +43,19 @@ const Nav = ({ isOpen,toggle }) => {
         </MobileIcon>
         <NavMenu>
           <NavItem scrollNav={scrollNav}>
-            <NavLinks scrollNav={scrollNav} to="/signup">Buy a Property</NavLinks>
+            <NavLinks $scrollNav={scrollNav} to="/signup">Buy a Property</NavLinks>
           </NavItem>
           <NavItem scrollNav={scrollNav}>
-            <NavLinks scrollNav={scrollNav} to="/signup">Rent a Property</NavLinks>
+            <NavLinks $scrollNav={scrollNav} to="/signup">Rent a Property</NavLinks>
           </NavItem>
           <NavItem scrollNav={scrollNav}>
-            <NavLinks scrollNav={scrollNav} to="/costcalculator">Cost Calculator</NavLinks>
+            <NavLinks $scrollNav={scrollNav} to="/costcalculator">Cost Calculator</NavLinks>
           </NavItem>
           <NavItem scrollNav={scrollNav}>
-            <NavLinks scrollNav={scrollNav} to="/signup">Book a Builder</NavLinks>
+            <NavLinks $scrollNav={scrollNav} to="/signup">Book a Builder</NavLinks>
           </NavItem>
           <NavBtn>
-            <PostAddbtn scrollNav={scrollNav} to="/signup">Post Ad</PostAddbtn>
+            <PostAddbtn $scrollNav={scrollNav} to="/signup">Post Ad</PostAddbtn>
           </NavBtn>
           <SignInBtn to="/signin">Sign In</SignInBtn>
         </NavMenu>

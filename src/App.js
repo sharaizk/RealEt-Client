@@ -5,7 +5,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./Components/LayoutComponents/Header";
 import Loading from "./Components/CustomComponents/Loading";
 import { AnimatePresence } from "framer-motion";
-
 function App() {
   const location = useLocation();
   const LazyLanding = lazy(() => import("./Screens/LandingScreen"));
