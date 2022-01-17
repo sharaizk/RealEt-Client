@@ -1,13 +1,21 @@
 import React from "react";
 import {
   CardContainer,
+  ImgContainer,
+  DescContainer,
+  Img
 } from "./featuredCardElements";
 
 import './style.css'
-const FeaturedCard = () => {
+const FeaturedCard = ({img}) => {
   return (
     <CardContainer>
-      S
+      <ImgContainer>
+        <Img src={img} alt=""/>
+      </ImgContainer>
+      <DescContainer>
+        S
+      </DescContainer>
     </CardContainer>
   );
 };
