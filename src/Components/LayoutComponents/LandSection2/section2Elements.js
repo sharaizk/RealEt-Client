@@ -6,7 +6,7 @@ export const FeaturedContainer = styled.section`
   flex-direction: column;
   align-items: center;
   padding: 20px 30px;
-  height: 90vh;
+  height: 85vh;
   position: relative;
   z-index: 1;
   overflow-x: hidden;
@@ -31,12 +31,18 @@ export const SectionHead = styled.h3`
   @media screen and (max-width: 380px) {
     font-size: 1.5rem;
   }
+  @media screen and (max-width: 280px) {
+    font-size: 1.25rem;
+  }
 `;
 export const SectionSubHead = styled.p`
   font-size: 1rem;
   text-align: center;
   color: #545454;
   font-weight: 400;
+  @media screen and (max-width: 280px) {
+    font-size: 0.85rem;
+  }
 `;
 export const CarouselContainer = styled.div`
   flex: 1;

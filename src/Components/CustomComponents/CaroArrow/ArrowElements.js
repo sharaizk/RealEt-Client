@@ -13,6 +13,7 @@ export const Arrow=styled.button`
     align-items: center;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(.44,.53,.66,1.06);
+    filter: ${({ disabled }) => (disabled ? "drop-shadow(0 0 0 rgb(0 0 0 / 0.4))" : "drop-shadow(3px 5px 2.5px rgb(0 0 0 / 0.4))")};;
     :disabled{
         pointer-events: none;
     }
