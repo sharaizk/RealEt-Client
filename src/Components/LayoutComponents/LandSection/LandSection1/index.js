@@ -5,6 +5,7 @@ import {
   BuyandSell,
 } from "./section1Elements";
 import AdvanceSearchField from "../../../CustomComponents/advanceSearch";
+
 const LandSection1 = () => {
   return (
     <LandingScreenContainer>

@@ -3,6 +3,9 @@
   font-family: 'ABeatByKaiRegular';
   src: local('ABeatByKaiRegular'), url(./assets/fonts/ABeatByKai/ABEAKRG.TTF) format('truetype');
 }
+html{
+  scroll-behavior: smooth;
+}
 *{
   margin: 0;
   padding:0 ;
@@ -12,4 +15,7 @@
 -ms-user-select: none; /* IE10+/Edge */
 user-select: none; /* Standard */
   font-family: "Poppins",'Gill Sans',Calibri, 'Trebuchet MS', sans-serif;
+}
+.site-back-top-basic {
+  color: rgba(255, 0, 0, 0.6) !important;
 }

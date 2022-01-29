@@ -1,5 +1,16 @@
-import styled from "styled-components";
-
+import styled,{keyframes} from "styled-components";
+const scaleinvert=keyframes`
+  0% {
+    -webkit-transform: translateZ(700px) translateY(300px);
+            transform: translateZ(700px) translateY(300px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
+`
 export const CardContainer = styled.div`
   height: 48.33512352309345vh;
   width: 27.53813104189044vh;
@@ -13,6 +24,8 @@ export const CardContainer = styled.div`
   -moz-box-shadow: 0px 3px 5px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.2s ease-in;
+  -webkit-animation: ${scaleinvert} 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: ${scaleinvert} 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   &:hover{
     box-shadow: 0px 1px 5px 5px rgba(0,0,0,0.3);
 -webkit-box-shadow: 0px 1px 5px 5px rgba(0,0,0,0.3);
@@ -183,16 +196,25 @@ export const Price = styled.div`
   & > label {
     color: #159386;
     font-size: 20px;
+    @media screen and (max-width: 360px) {
+      font-size: 18px;
+      line-height: 18px;
+    }
     @media screen and (max-width: 280px) {
       font-size: 11px;
       line-height: 11px;
     }
+    
   }
   & > label > span {
     color: #333333;
     opacity: 50%;
     font-size: 14px;
     @media screen and (max-width: 280px) {
+      font-size: 10px;
+      line-height: 10px;
+    }
+    @media screen and (max-width:360px){
       font-size: 10px;
       line-height: 10px;
     }

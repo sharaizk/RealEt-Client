@@ -115,7 +115,7 @@ export const SeeMore = styled(NavLink)`
   color: #fc6e20;
   font-size: 14px;
   font-weight: 600;
-
+  cursor: pointer;
   :hover {
     color: #fc6e20;
   }

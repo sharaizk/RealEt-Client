@@ -11,6 +11,18 @@ const animatedBackground = keyframes`
     transform: scale(1);
   }
 `
+const trackingin=keyframes`  0% {
+  letter-spacing: -0.5em;
+  -webkit-filter: blur(12px);
+          filter: blur(12px);
+  opacity: 0;
+}
+100% {
+  -webkit-filter: blur(0px);
+          filter: blur(0px);
+  opacity: 1;
+}`
+
 
 export const LandingScreenContainer = styled.section`
   background-color: #0c0c0c;
@@ -64,6 +76,8 @@ export const BuyandSell = styled.h3`
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
+  -webkit-animation: ${trackingin} 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: ${trackingin} 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   @media screen and (max-width: 760px) {
     font-size: 2.5rem;
   }
