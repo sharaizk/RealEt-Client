@@ -6,7 +6,7 @@ export const SignUpFormContainer=styled.div`
   position: relative;
   display: flex;
   height: 100vh;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
   width: max-content;
@@ -32,6 +32,10 @@ export const InputField = styled(Input)`
   :hover {
     border-color: #fc6e20 !important;
   }
+  @media screen and (min-width: 2560px){
+    height: 60px;
+  }
+  
   @media screen and (max-width: 768px) {
     width: 100%;
   }
@@ -46,6 +50,9 @@ export const PasswordField = styled(PasswordInput)`
   border-radius: 5px;
   :hover {
     border-color: #fc6e20 !important;
+  }
+  @media screen and (min-width: 2560px){
+    height: 60px;
   }
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -85,6 +92,9 @@ export const SignUpBtn = styled(Button)`
     box-shadow: none !important;
     border: 1px solid #fc6e20;
   }
+  @media screen and (min-width: 2560px){
+    height: 60px;
+  }
   @media screen and (max-width: 768px) {
     width: 100%;
   }
@@ -110,6 +120,7 @@ export const OSignUpBtn=styled(Button)`
   border-radius: 5px;
   font-size: 16px;
   margin-top: 10px;
+  
   color: #F3F3F3;
   :hover,
   :active,
@@ -118,6 +129,9 @@ export const OSignUpBtn=styled(Button)`
     color: ${({color}) => color};
     box-shadow: none !important;
     border: 1px solid ${({color}) => color};
+  }
+  @media screen and (min-width: 2560px){
+    height: 60px;
   }
   @media screen and (max-width: 768px) {
     width: 100%;

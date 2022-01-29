@@ -8,9 +8,9 @@ import {
 } from "./section2Elements";
 import "./style.css";
 import Carousel from "react-elastic-carousel";
-import FeaturedCard from "../../CustomComponents/featuredCard";
-import CaroArrow from "../../CustomComponents/CaroArrow";
-import SkeletonFeaturedCard from "../../CustomComponents/SkeletonLoadings/SkeletonFeaturedCard";
+import FeaturedCard from "../../../CustomComponents/featuredCard";
+import CaroArrow from "../../../CustomComponents/CaroArrow";
+import SkeletonFeaturedCard from "../../../CustomComponents/SkeletonLoadings/SkeletonFeaturedCard";
 const LandSection2 = () => {
   const [loading, setLoading] = useState(true);
 

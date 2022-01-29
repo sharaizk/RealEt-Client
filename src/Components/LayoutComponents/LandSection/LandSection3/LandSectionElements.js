@@ -1,15 +1,21 @@
 import styled from "styled-components";
-export const FeaturedContainer = styled.section`
+
+export const NewsContainer = styled.section`
   background-color: #fff;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   padding: 20px 30px;
-  height: 85vh;
+  height: 100%;
+  min-height: 85vh;
   position: relative;
   z-index: 1;
   overflow-x: hidden;
+  @media screen and (min-width: 2500px) {
+    min-height: 55vh;
+    
+  }
 `;
 
 export const CaptionContainer = styled.div`
@@ -19,7 +25,6 @@ export const CaptionContainer = styled.div`
   align-items: center;
   justify-content: space-around;
 `;
-
 export const SectionHead = styled.h3`
   font-size: 2.25rem;
   font-weight: 500;
@@ -44,20 +49,11 @@ export const SectionSubHead = styled.p`
     font-size: 0.85rem;
   }
 `;
-export const CarouselContainer = styled.div`
-  flex: 1;
-  width: 1100px;
-  max-width: 100%;
-  height: 100%;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-export const ArrowComponents = styled.button`
-  color: #fc6e20;
-  width: 2.5%;
-  outline: none;
-  border: none;
-  background-color: transparent;
-`;
+export const ListContainer = styled.div`
+    flex: 0.9;
+    width: 1300px;
+    max-width: 100%;
+    color: #545454;
+ 
+`

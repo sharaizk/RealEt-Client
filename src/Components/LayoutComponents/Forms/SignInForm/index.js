@@ -1,4 +1,4 @@
-import React,{useState,useRef} from "react";
+import React, { useState, useRef } from "react";
 import {
   SignInFromContainer,
   LogoImg,
@@ -9,36 +9,43 @@ import {
   FSignInButtom,
   GSignInButton,
 } from "./Elements";
-import Logo from "../../../../assets/images/logo.png";
+import Logo from "../../../../assets/images/logo2.png";
 import { Form, Row, Col, Divider, Tooltip, message } from "antd";
 import { FaUser, FaKey } from "react-icons/fa";
 import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import "./style.scss";
-import Schema from 'async-validator';
-import {EmailRegEx,NumberRegEx} from '../../../../helpers/regex'
+import Schema from "async-validator";
+import { EmailRegEx, NumberRegEx } from "../../../../helpers/regex";
+import { GoogleLogin } from "react-google-login";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
-
-Schema.warning = function(){};
+Schema.warning = function () {};
 
 const SignInForm = () => {
-  const [loading,setLoading]=useState(false)
-  const BtnRef = useRef(null)
-    
+  const [loading, setLoading] = useState(false);
+  const BtnRef = useRef(null);
+
   const [form] = Form.useForm();
   const onFinish = (values) => {
-    BtnRef.current.blur()
-    setLoading(true)
-    message.success("Hello")
+    BtnRef.current.blur();
+    setLoading(true);
+    message.success("Hello");
     form.resetFields();
-    setTimeout(()=>{
-      setLoading(false)
-    },2000)
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
-  const onFinishFailed=()=>{
-    BtnRef.current.blur()
-    message.error('Please fill out the form');
-  }
+
+  const onFinishFailed = () => {
+    BtnRef.current.blur();
+    message.error("Please fill out the form");
+  };
+
+  const onGoogleLogin = (response) => {
+    console.log(response);
+  };
+
   return (
     <SignInFromContainer>
       <NavLink to="/">
@@ -64,14 +71,14 @@ const SignInForm = () => {
             },
             () => ({
               validator(_, value) {
-                if(EmailRegEx.test(value)){
+                if (EmailRegEx.test(value)) {
                   return Promise.resolve();
-                }
-                else if(NumberRegEx.test(value) &&  value.length ===13){
+                } else if (NumberRegEx.test(value) && value.length === 13) {
                   return Promise.resolve();
-                }
-                else{
-                  return Promise.reject(new Error('Not an Email or a Phone Number'));
+                } else {
+                  return Promise.reject(
+                    new Error("Not an Email or a Phone Number")
+                  );
                 }
               },
             }),
@@ -99,19 +106,23 @@ const SignInForm = () => {
         >
           <InputFieldPassword
             settings={{
-              colorScheme:{
-                levels: ["#ff3333", "#fe940d", "#ffd908", "#cbe11d", "#42ba96"]
+              colorScheme: {
+                levels: ["#ff3333", "#fe940d", "#ffd908", "#cbe11d", "#42ba96"],
               },
               height: 3,
-              alwaysVisible: false
-            
+              alwaysVisible: false,
             }}
             placeholder={"Pass****"}
             prefix={<FaKey color="#545454" />}
           />
         </Form.Item>
         <Form.Item>
-          <SubmitButton type="primary" htmlType="submit" loading={loading} ref={BtnRef}>
+          <SubmitButton
+            type="primary"
+            htmlType="submit"
+            loading={loading}
+            ref={BtnRef}
+          >
             Sign In
           </SubmitButton>
         </Form.Item>
@@ -127,14 +138,37 @@ const SignInForm = () => {
 
       <Divider />
       <Tooltip title="Sign in with Facebook">
-        <FSignInButtom type="primary" icon={<FacebookFilled />}>
-          Sign In
-        </FSignInButtom>
+        <FacebookLogin
+          appId={`${process.env.REACT_APP_FAUTHKEY}`}
+          callback={onGoogleLogin}
+          render={(renderProps) => (
+            <FSignInButtom
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+              fields="name,email,picture"
+              type="primary"
+              icon={<FacebookFilled />}
+            >
+              Sign In
+            </FSignInButtom>
+          )}
+        />
       </Tooltip>
       <Tooltip title="Sign in with Google" placement="bottom">
-        <GSignInButton type="primary" icon={<GoogleOutlined />}>
-          Sign In
-        </GSignInButton>
+        <GoogleLogin
+          clientId={`${process.env.REACT_APP_GAUTHKEY}`}
+          render={(renderProps) => (
+            <GSignInButton
+              type="primary"
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+              icon={<GoogleOutlined />}
+            >
+              Sign In
+            </GSignInButton>
+          )}
+          onSuccess={onGoogleLogin}
+        />
       </Tooltip>
     </SignInFromContainer>
   );

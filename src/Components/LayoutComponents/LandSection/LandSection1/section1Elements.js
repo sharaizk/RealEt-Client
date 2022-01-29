@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import heroBG from "../../../assets/images/heroBG.jpg";
+import heroBG from "../../../../assets/images/heroBG.jpg";
 
 const animatedBackground = keyframes`
   0%{
@@ -23,8 +23,6 @@ export const LandingScreenContainer = styled.section`
   position: relative;
   z-index: 1;
   overflow: hidden;
-
-
   &::before {
     content: "";
     background-image: url(${heroBG});

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { Input, Button } from "antd";
 import { NavLink } from "react-router-dom";
-import {PasswordInput} from 'antd-password-input-strength'
+import { PasswordInput } from "antd-password-input-strength";
 export const SignInFromContainer = styled.div`
   position: relative;
   display: flex;
   height: 100vh;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
   width: max-content;
@@ -15,14 +15,17 @@ export const SignInFromContainer = styled.div`
   @media screen and (max-width: 768px) {
     z-index: 5;
   }
-  @media screen and (max-height:600px) and (min-width:768px){
-    padding: 0 0 10rem 0;
-  }
 `;
 
 export const LogoImg = styled.img`
-  height: 26.852846401718583vh;
-  width: 26.852846401718583vh;
+  height: 13.426423200859292vh;
+  width: 12.352309344790548vh;
+  margin-bottom: 50px;
+  @media screen and (max-width: 768px) {
+    height: 12.352309344790548vh;
+    width:  11.815252416756175vh;
+    margin-bottom: 40px;
+  }
 `;
 
 export const InputField = styled(Input)`
@@ -31,6 +34,9 @@ export const InputField = styled(Input)`
   border-radius: 5px;
   :hover {
     border-color: #fc6e20 !important;
+  }
+  @media screen and (min-width: 2560px){
+    height: 70px;
   }
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -45,6 +51,9 @@ export const InputFieldPassword = styled(PasswordInput)`
   border-radius: 5px;
   :hover {
     border-color: #fc6e20 !important;
+  }
+  @media screen and (min-width: 2560px){
+    height: 70px;
   }
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -69,6 +78,9 @@ export const SubmitButton = styled(Button)`
     box-shadow: none !important;
     border: 1px solid #fc6e20;
   }
+  @media screen and (min-width: 2560px){
+    height: 70px;
+  }
   @media screen and (max-width: 768px) {
     width: 100%;
   }
@@ -85,7 +97,7 @@ export const BtnLink = styled(NavLink)`
     width: 0;
     height: 2px;
     background: #fc6e20;
-    transition: width 0.3s cubic-bezier(0,.89,.75,.9);
+    transition: width 0.3s cubic-bezier(0, 0.89, 0.75, 0.9);
   }
   :hover::after {
     width: 100%;
@@ -112,6 +124,9 @@ export const FSignInButtom = styled(Button)`
     box-shadow: none !important;
     border: 1px solid #4267b2;
   }
+  @media screen and (min-width: 2560px){
+    height: 70px;
+  }
   @media screen and (max-width: 768px) {
     width: 100%;
   }
@@ -121,8 +136,8 @@ export const FSignInButtom = styled(Button)`
 `;
 
 export const GSignInButton = styled(Button)`
-  background-color: #DB4437;
-  border-color: #DB4437;
+  background-color: #db4437;
+  border-color: #db4437;
   font-weight: 500;
   height: 45px;
   width: 26.609898882384247vw;
@@ -132,9 +147,12 @@ export const GSignInButton = styled(Button)`
   :active,
   :focus {
     background-color: #fff;
-    color: #DB4437;
+    color: #db4437;
     box-shadow: none !important;
-    border: 1px solid #DB4437;
+    border: 1px solid #db4437;
+  }
+  @media screen and (min-width: 2560px){
+    height: 70px;
   }
   @media screen and (max-width: 768px) {
     width: 100%;

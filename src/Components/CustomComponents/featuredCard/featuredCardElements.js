@@ -18,6 +18,11 @@ export const CardContainer = styled.div`
 -webkit-box-shadow: 0px 1px 5px 5px rgba(0,0,0,0.3);
 -moz-box-shadow: 0px 1px 5px 5px rgba(0,0,0,0.3);
   }
+  @media screen and (min-width: 2560px) {
+  height: 700px;
+
+  width: 400px;
+  }
   @media screen and (max-width: 768px) {
     height: 44.575725026852844vh;
     width: 29.53813104189044vh;
@@ -44,6 +49,7 @@ export const ImgContainer = styled.div`
   flex: 0.8;
   position: relative;
   width: 100%;
+ 
   display: flex;
   justify-content: center;
   align-items: center;
