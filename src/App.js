@@ -5,6 +5,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./Components/LayoutComponents/Header";
 import Loading from "./Components/CustomComponents/Loading";
 import { AnimatePresence } from "framer-motion";
+import Footer from './Components/LayoutComponents/Footer'
 function App() {
   const location = useLocation();
   const LazyLanding = lazy(() => import("./Screens/LandingScreen"));
@@ -25,6 +26,9 @@ function App() {
             <Route path="/costcalculator" element={<LazyCalculator />} />
           </Routes>
         </AnimatePresence>
+        {location.pathname !== "/signup" && location.pathname !== "/signin" ? (
+          <Footer />
+        ) : null}
       </div>
     </Suspense>
   );

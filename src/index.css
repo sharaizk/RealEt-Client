@@ -3,9 +3,6 @@
   font-family: 'ABeatByKaiRegular';
   src: local('ABeatByKaiRegular'), url(./assets/fonts/ABeatByKai/ABEAKRG.TTF) format('truetype');
 }
-html{
-  scroll-behavior: smooth;
-}
 *{
   margin: 0;
   padding:0 ;
