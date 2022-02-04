@@ -14,9 +14,14 @@ import {
   FollowUs,
   IconContainer,
   FollowIcons,
+  FirstPng,
 } from "./FooterElements";
 import { FaFacebookF,FaTwitter,FaInstagram,FaLinkedinIn,FaPinterestP } from "react-icons/fa";
 import Logo from "../../../assets/images/logo2.png";
+import First from "../../../assets/images/footer/first.svg"
+import Second from "../../../assets/images/footer/second.svg"
+import Third from "../../../assets/images/footer/third.svg"
+import Fourth from "../../../assets/images/footer/fourth.svg"
 const Footer = () => {
   return (
     <FooterContainer>
@@ -64,7 +69,12 @@ const Footer = () => {
           </IconContainer>
         </FollowContainer>
       </SocialContainer>
-      <SvgContainer>SVG</SvgContainer>
+      <SvgContainer>
+        <FirstPng src={First} alt="first-footer-img"/>
+        <FirstPng src={Second} />
+        <FirstPng src={Third} />
+        <FirstPng src={Fourth}/>
+      </SvgContainer>
     </FooterContainer>
   );
 };

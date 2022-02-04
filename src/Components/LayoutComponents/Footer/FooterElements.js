@@ -1,24 +1,26 @@
 import styled from "styled-components";
 import {NavLink} from 'react-router-dom'
 export const FooterContainer=styled.footer`
-    height: 65vh;
     background-color: rgba(226, 226, 226,0.25);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 20px 20px;
-    @media screen and (min-width:2500px) {
-        height: 55vh;
-    }
+    padding: 30px 10px;
+     /* @media screen and (min-width:2500px) {
+        height: 50vh;
+    } 
+    @media screen and (max-width:480px) {
+        height: 40vh;
+    } */
 `
 
 export const LinksContainer=styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction:column;
-    flex: 0.1;
+    flex: 0.2;
     width: 600px;
     max-width:100%;
     margin-bottom: 40px;
@@ -37,6 +39,10 @@ export const TopLinkS=styled.div`
     flex: 0.5;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 4px;
+    @media screen and (min-width:2500px) {
+        margin-bottom: 15px;
+    }
     @media screen and (max-width: 480px) {
         flex-direction: column;
         align-items: flex-start;
@@ -63,7 +69,9 @@ export const SocialContainer=styled.div`
     align-items: center;
     flex-direction: column;
     flex: 0.3;
-    /* margin-bottom: 50px; */
+    @media screen and (max-width: 480px) {
+    flex-direction: row;
+ }
 
 `
 export const SvgContainer=styled.div`
@@ -71,6 +79,9 @@ export const SvgContainer=styled.div`
     justify-content: center;
     align-items: center;
     flex: 0.4;
+    &:nth-child(2){
+        height:0vh ;
+    }
 `
 export const ImgContainer=styled.div`
   flex: 0.2;
@@ -87,6 +98,10 @@ export const Img=styled.img`
       height: 6.981740064446831vh;
     width: 5.907626208378088vh;
   }
+  @media screen and (max-width:280px){
+    height: 5.981740064446831vh;
+    width: 4.907626208378088vh;
+  }
 `
 export const Title=styled.h1`
     font-size: 2.5rem;
@@ -102,6 +117,9 @@ export const Title=styled.h1`
     @media screen and (max-width:480px){
     font-size: 30px;
   }
+  @media screen and (max-width:280px){
+    font-size: 16px;
+  }
 `
 
 export const FollowContainer=styled.div`
@@ -110,6 +128,7 @@ export const FollowContainer=styled.div`
  justify-content: center;
  align-items: center;
  flex-direction: column;
+
 `
 export const FollowUs =styled.label`
     font-size: 22px;
@@ -159,5 +178,19 @@ export const FollowIcons=styled.a`
     @media screen and (max-width:480px) {
         font-size: 1.5rem;
         
+    }
+    @media screen and (max-width:280px) {
+        font-size: 1rem;
+        
+    }
+    
+`
+export const FirstPng=styled.img`
+    height:  8vw;
+    &:nth-child(3){
+        margin-top:1.06439595529537vw ;
+    }
+    @media screen and (max-width: 768px) {
+        height: 12vw;
     }
 `
