@@ -12,6 +12,7 @@ export const SignInFromContainer = styled.div`
   width: max-content;
   background-color: #fff;
   padding: 1rem 1rem;
+  
   @media screen and (max-width: 768px) {
     z-index: 5;
   }

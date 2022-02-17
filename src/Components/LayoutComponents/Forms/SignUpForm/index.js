@@ -20,9 +20,15 @@ import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import { NumberRegEx } from "../../../../helpers/regex";
 import ImgCrop from "antd-img-crop";
 import "./style.scss";
+import {signUp} from '../../../../Redux/actions/authActions'
+import {useDispatch} from 'react-redux'
+import OTPContainer from '../../../CustomComponents/OtpInput'
 const SignUpForm = () => {
+  const dispatch = useDispatch()
   const [isEmail, setEmail] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [visible,setVisible] = useState(false)
+  const [login, setTempLogin] = useState("")
   const BtnRef = useRef(null);
   const [form] = Form.useForm();
 
@@ -30,12 +36,17 @@ const SignUpForm = () => {
     setEmail(!e.target.checked);
   };
 
-  const onFinish = (values) => {
+
+  const onFinish = async(values) => {
+    setTempLogin(values.login)
+    form.resetFields();
     setLoading(true);
+    const res = await dispatch(signUp(values))
+    setLoading(false)
+    if(!res){
+      setVisible(true)
+    }
     BtnRef.current.blur();
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
   };
 
   const onFinishFailed = () => {
@@ -45,6 +56,7 @@ const SignUpForm = () => {
 
   return (
     <SignUpFormContainer>
+      <OTPContainer visible={visible} setVisible={setVisible} login={login}/>
       <NavLink to="/">
         <LogoImg src={Logo} alt="Logo" />
       </NavLink>
@@ -59,7 +71,7 @@ const SignUpForm = () => {
         onFinish={onFinish}
       >
         <Form.Item
-          name="full name"
+          name="fullName"
           label={<label className="formLabel">Full Name</label>}
           hasFeedback
           rules={[
@@ -80,7 +92,7 @@ const SignUpForm = () => {
         </Form.Item>
         {isEmail ? (
           <Form.Item
-            name="email"
+            name="login"
             label={<label className="formLabel">Email</label>}
             hasFeedback
             rules={[
@@ -101,7 +113,7 @@ const SignUpForm = () => {
           </Form.Item>
         ) : (
           <Form.Item
-            name="number"
+            name="login"
             label={<label className="formLabel">Phone Number</label>}
             hasFeedback
             rules={[
@@ -163,7 +175,7 @@ const SignUpForm = () => {
           valuePropName="file"
           rules={[
             {
-              required: true,
+              // required: true,
               message: "Please upload your profile picture",
             },
           ]}

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { Input,Checkbox,Button } from "antd";
+import { Input, Checkbox, Button } from "antd";
 import { NavLink } from "react-router-dom";
-import {PasswordInput} from 'antd-password-input-strength'
-export const SignUpFormContainer=styled.div`
+import { PasswordInput } from "antd-password-input-strength";
+export const SignUpFormContainer = styled.div`
   position: relative;
   display: flex;
   height: 100vh;
@@ -11,18 +11,23 @@ export const SignUpFormContainer=styled.div`
   flex-direction: column;
   width: max-content;
   background-color: #fff;
-  
+
   @media screen and (max-width: 768px) {
     z-index: 5;
   }
-  @media screen and (max-height:600px) and (min-width:768px){
+  @media screen and (max-height: 600px) and (min-width: 768px) {
     padding: 0 0 10rem 0;
   }
-`
+`;
 
 export const LogoImg = styled.img`
   height: 22.852846401718583vh;
   width: 22.852846401718583vh;
+
+  @media screen and (max-width: 360px) {
+    height: 21vh;
+    width: 21vh;
+  }
 `;
 
 export const InputField = styled(Input)`
@@ -32,17 +37,17 @@ export const InputField = styled(Input)`
   :hover {
     border-color: #fc6e20 !important;
   }
-  @media screen and (min-width: 2560px){
+  @media screen and (min-width: 2560px) {
     height: 60px;
   }
-  
+
   @media screen and (max-width: 768px) {
     width: 100%;
   }
   @media screen and (max-height: 700px) {
     height: 6vh;
   }
-`
+`;
 
 export const PasswordField = styled(PasswordInput)`
   height: 40px;
@@ -51,7 +56,7 @@ export const PasswordField = styled(PasswordInput)`
   :hover {
     border-color: #fc6e20 !important;
   }
-  @media screen and (min-width: 2560px){
+  @media screen and (min-width: 2560px) {
     height: 60px;
   }
   @media screen and (max-width: 768px) {
@@ -60,20 +65,20 @@ export const PasswordField = styled(PasswordInput)`
   @media screen and (max-height: 700px) {
     height: 6vh;
   }
-`
+`;
 
 export const CheckBox = styled(Checkbox)`
-    box-shadow: none;
-    margin-bottom: 10px;
-    @media screen and (max-width:768px) {
-      margin-bottom: 0;
+  box-shadow: none;
+  margin-bottom: 10px;
+  @media screen and (max-width: 768px) {
+    margin-bottom: 0;
   }
-  @media screen and (max-height:700px) {
-      margin-bottom: 0;
+  @media screen and (max-height: 700px) {
+    margin-bottom: 0;
   }
-`
+`;
 
-export const UploadButton=styled(Button)``
+export const UploadButton = styled(Button)``;
 
 export const SignUpBtn = styled(Button)`
   background-color: #fc6e20;
@@ -92,7 +97,7 @@ export const SignUpBtn = styled(Button)`
     box-shadow: none !important;
     border: 1px solid #fc6e20;
   }
-  @media screen and (min-width: 2560px){
+  @media screen and (min-width: 2560px) {
     height: 60px;
   }
   @media screen and (max-width: 768px) {
@@ -101,36 +106,35 @@ export const SignUpBtn = styled(Button)`
   @media screen and (max-height: 700px) {
     height: 5.5vh;
   }
-`
-export const BtnLink=styled(NavLink)`
+`;
+export const BtnLink = styled(NavLink)`
   color: #424242;
   align-self: flex-start;
-  :hover{
+  :hover {
     color: #424242;
   }
+`;
 
-`
-
-export const OSignUpBtn=styled(Button)`
-  background-color: ${({color}) => color};
-  border-color: ${({color}) => color};
+export const OSignUpBtn = styled(Button)`
+  background-color: ${({ color }) => color};
+  border-color: ${({ color }) => color};
   font-weight: 500;
   height: 45px;
   width: 26.609898882384247vw;
   border-radius: 5px;
   font-size: 16px;
   margin-top: 10px;
-  
-  color: #F3F3F3;
+
+  color: #f3f3f3;
   :hover,
   :active,
   :focus {
-    background-color: #F3F3F3;
-    color: ${({color}) => color};
+    background-color: #f3f3f3;
+    color: ${({ color }) => color};
     box-shadow: none !important;
-    border: 1px solid ${({color}) => color};
+    border: 1px solid ${({ color }) => color};
   }
-  @media screen and (min-width: 2560px){
+  @media screen and (min-width: 2560px) {
     height: 60px;
   }
   @media screen and (max-width: 768px) {
@@ -139,4 +143,4 @@ export const OSignUpBtn=styled(Button)`
   @media screen and (max-height: 700px) {
     height: 5.5vh;
   }
-`
+`;

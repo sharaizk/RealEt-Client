@@ -20,6 +20,7 @@ import { EmailRegEx, NumberRegEx } from "../../../../helpers/regex";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
+
 Schema.warning = function () {};
 
 const SignInForm = () => {

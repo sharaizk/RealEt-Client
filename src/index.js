@@ -7,7 +7,7 @@ import {createStore,applyMiddleware,compose} from 'redux'
 import reducers from './Redux/reducers'
 import reduxThunk from 'redux-thunk'
 import { BrowserRouter } from "react-router-dom";
-
+import History from "./History";
 const composeEnhancers=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
   reducers,
@@ -16,7 +16,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter history={History}>
       <App />
     </BrowserRouter>
   </Provider>,
