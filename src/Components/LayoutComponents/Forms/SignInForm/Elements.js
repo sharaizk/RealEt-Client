@@ -12,7 +12,7 @@ export const SignInFromContainer = styled.div`
   width: max-content;
   background-color: #fff;
   padding: 1rem 1rem;
-  
+
   @media screen and (max-width: 768px) {
     z-index: 5;
   }
@@ -24,7 +24,7 @@ export const LogoImg = styled.img`
   margin-bottom: 50px;
   @media screen and (max-width: 768px) {
     height: 12.352309344790548vh;
-    width:  11.815252416756175vh;
+    width: 11.815252416756175vh;
     margin-bottom: 40px;
   }
 `;
@@ -36,7 +36,7 @@ export const InputField = styled(Input)`
   :hover {
     border-color: #fc6e20 !important;
   }
-  @media screen and (min-width: 2560px){
+  @media screen and (min-width: 2560px) {
     height: 70px;
   }
   @media screen and (max-width: 768px) {
@@ -53,7 +53,7 @@ export const InputFieldPassword = styled(PasswordInput)`
   :hover {
     border-color: #fc6e20 !important;
   }
-  @media screen and (min-width: 2560px){
+  @media screen and (min-width: 2560px) {
     height: 70px;
   }
   @media screen and (max-width: 768px) {
@@ -79,7 +79,7 @@ export const SubmitButton = styled(Button)`
     box-shadow: none !important;
     border: 1px solid #fc6e20;
   }
-  @media screen and (min-width: 2560px){
+  @media screen and (min-width: 2560px) {
     height: 70px;
   }
   @media screen and (max-width: 768px) {
@@ -109,6 +109,39 @@ export const BtnLink = styled(NavLink)`
   }
 `;
 
+export const ForgotBTN = styled.button`
+  color: #424242;
+  display: inline-block;
+  font-weight: 400;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  ::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #fc6e20;
+    transition: width 0.3s cubic-bezier(0, 0.89, 0.75, 0.9);
+  }
+  :hover::after {
+    width: 100%;
+    //transition: width .3s;
+  }
+  :hover {
+    color: #424242;
+  }
+`;
+
+export const BTNContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 0%.5;
+`;
+
 export const FSignInButtom = styled(Button)`
   background-color: #4267b2;
   border-color: #4267b2;
@@ -125,7 +158,7 @@ export const FSignInButtom = styled(Button)`
     box-shadow: none !important;
     border: 1px solid #4267b2;
   }
-  @media screen and (min-width: 2560px){
+  @media screen and (min-width: 2560px) {
     height: 70px;
   }
   @media screen and (max-width: 768px) {
@@ -152,7 +185,7 @@ export const GSignInButton = styled(Button)`
     box-shadow: none !important;
     border: 1px solid #db4437;
   }
-  @media screen and (min-width: 2560px){
+  @media screen and (min-width: 2560px) {
     height: 70px;
   }
   @media screen and (max-width: 768px) {
