@@ -16,7 +16,7 @@ export const CardContainer = styled.div`
     height: 425px;
   }
   @media screen and (max-width: 1400px) {
-    height: 50.59398496240601vh;
+    height: 450px;
   }
   @media screen and (max-width: 480px) {
     height: 150px;

@@ -6,15 +6,13 @@ export const NewsContainer = styled.section`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 20px 30px;
+  padding: 10.741138560687434vh 30px;
   height: 100%;
-  min-height: 85vh;
   position: relative;
   z-index: 1;
   overflow-x: hidden;
   @media screen and (min-width: 2500px) {
     min-height: 55vh;
-    
   }
 `;
 
@@ -51,9 +49,8 @@ export const SectionSubHead = styled.p`
 `;
 
 export const ListContainer = styled.div`
-    flex: 0.9;
-    width: 1300px;
-    max-width: 100%;
-    color: #545454;
- 
-`
+  flex: 0.9;
+  width: 1300px;
+  max-width: 100%;
+  color: #545454;
+`;

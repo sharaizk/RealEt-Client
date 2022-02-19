@@ -13,7 +13,7 @@ const scaleinvert = keyframes`
 `;
 export const CardContainer = styled.div`
   height: 48.33512352309345vh;
-  width: 27.53813104189044vh;
+  width: 14.635444385311336vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -38,7 +38,7 @@ export const CardContainer = styled.div`
     width: 400px;
   }
   @media screen and (max-width: 1400px) {
-    height: 54.364471669218986vh;
+    height: 500px;
     width: 265px;
   }
   @media screen and (max-width: 768px) {

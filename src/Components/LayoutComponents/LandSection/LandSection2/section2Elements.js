@@ -6,7 +6,10 @@ export const FeaturedContainer = styled.section`
   flex-direction: column;
   align-items: center;
   padding: 20px 30px;
-  height: 85vh;
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+
   position: relative;
   z-index: 1;
   overflow-x: hidden;
@@ -56,7 +59,7 @@ export const CarouselContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (min-width:2560px) {
+  @media screen and (min-width: 2560px) {
     width: 1500px;
   }
 `;
