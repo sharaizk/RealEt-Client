@@ -12,7 +12,7 @@ import {
   BTNContainer,
 } from "./Elements";
 import Logo from "../../../../assets/images/logo2.png";
-import { Form, Divider, Tooltip, message } from "antd";
+import { Form, Divider, Tooltip, message, Modal } from "antd";
 import { FaUser, FaKey } from "react-icons/fa";
 import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
@@ -23,11 +23,13 @@ import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { useDispatch } from "react-redux";
 import { signIn } from "../../../../Redux/actions/authActions";
+import ForgotPassword from "../../../CustomComponents/ForgotPassword";
 Schema.warning = function () {};
 
 const SignInForm = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
   const BtnRef = useRef(null);
 
   const [form] = Form.useForm();
@@ -35,7 +37,7 @@ const SignInForm = () => {
     BtnRef.current.blur();
     setLoading(true);
     form.resetFields();
-    const res = await dispatch(signIn(values));
+    await dispatch(signIn(values));
     setLoading(false);
   };
 
@@ -50,6 +52,15 @@ const SignInForm = () => {
 
   return (
     <SignInFromContainer>
+      <Modal
+        visible={visible}
+        footer={null}
+        centered
+        onCancel={() => setVisible(false)}
+        maskClosable={false}
+      >
+        <ForgotPassword setVisible={setVisible} />
+      </Modal>
       <NavLink to="/">
         <LogoImg src={Logo} alt="Logo Img" />
       </NavLink>
@@ -130,7 +141,13 @@ const SignInForm = () => {
         </Form.Item>
       </Form>
       <BTNContainer justify="start" type="flex">
-        <ForgotBTN>Forgot Password</ForgotBTN>
+        <ForgotBTN
+          onClick={() => {
+            setVisible(true);
+          }}
+        >
+          Forgot Password
+        </ForgotBTN>
         <BtnLink to="/signup">Sign Up</BtnLink>
       </BTNContainer>
 

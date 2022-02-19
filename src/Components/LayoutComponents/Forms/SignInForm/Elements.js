@@ -139,7 +139,8 @@ export const BTNContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 0%.5;
+  /* margin-top: 0.5; */
+  margin-bottom: 5px;
 `;
 
 export const FSignInButtom = styled(Button)`

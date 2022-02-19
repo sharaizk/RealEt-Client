@@ -11,8 +11,12 @@ export const CardContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
   @media screen and (min-width: 2500px) {
     height: 425px;
+  }
+  @media screen and (max-width: 1400px) {
+    height: 50.59398496240601vh;
   }
   @media screen and (max-width: 480px) {
     height: 150px;

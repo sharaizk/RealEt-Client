@@ -1,37 +1,67 @@
 import React, { useState } from "react";
-import { Modal } from "antd";
-import { ModalContainer, Title, InputContainer, Info, SVG } from "./Elements";
+import { ModalContainer, Title, InputContainer, Info } from "./Elements";
 import AuthCode from "react-auth-code-input";
 import server from "../../../Axios";
 import { notification } from "antd";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./styles.scss";
 
-const OTPContainer = ({ visible, setVisible, login }) => {
-    const navigate=useNavigate()
+const OTPContainer = ({ setVisible, login, password }) => {
+  const navigate = useNavigate();
   const [otp, setResult] = useState("");
 
   const verifyOTP = async () => {
     try {
-      const res = await server.patch("/auth/verify-otp", { login, otp });
-      if (res.status === 200) {
-        setResult("");
-        setVisible(false);
+      const res = await server.patch(`/auth/verify-otp`, { login, otp });
+      if (!password) {
         notification["success"]({
           message: `${res?.data?.message}`,
-          description: "OTP Verified redirecting you in a moment",
         });
-        setTimeout(()=>{
-            navigate("/signin")
-        },2000)
+        setVisible(false);
+        setResult("");
+        setTimeout(() => {
+          navigate("/signin");
+        }, 500);
+      } else {
+        const res2 = await server.patch("/auth/reset-password", {
+          password,
+          login,
+        });
+        notification["success"]({
+          description: `${res2?.data?.message}`,
+        });
+        setVisible(false);
+        setResult("");
       }
     } catch (error) {
+      console.log(error);
       notification["error"]({
         message: `${error.response.data.message}`,
         description: "Cannot verify your otp at the moment",
       });
     }
   };
+
+  // const verifyOTPReset = async () => {
+  //   try {
+  //     await server.patch(`/auth/verify-otp`, { login, otp });
+  //     const res2 = await server.patch(`/auth/reset-password`, {
+  //       login,
+  //       password: password.newpassword,
+  //     });
+  //     setResult("");
+  //     setVisible(false);
+  //     notification["success"]({
+  //       message: `${res2?.data?.message}`,
+  //     });
+  //   } catch (error) {
+  //     notification["error"]({
+  //       message: `${error.response.data.message}`,
+  //       description: "Cannot change your password at the moment",
+  //     });
+  //   }
+  // };
+
   const handleOnChange = (res) => {
     setResult(res);
   };
@@ -39,16 +69,7 @@ const OTPContainer = ({ visible, setVisible, login }) => {
     verifyOTP();
   }
   return (
-    <Modal
-      centered
-      visible={visible}
-      footer={null}
-      onCancel={() => setVisible(false)}
-      maskClosable={false}
-      closable={false}
-    >
-      <SVG />
-
+    <>
       <ModalContainer>
         <Title>Account Verification</Title>
         <InputContainer disabled={false}>
@@ -66,7 +87,7 @@ const OTPContainer = ({ visible, setVisible, login }) => {
           />
         </InputContainer>
       </ModalContainer>
-    </Modal>
+    </>
   );
 };
 

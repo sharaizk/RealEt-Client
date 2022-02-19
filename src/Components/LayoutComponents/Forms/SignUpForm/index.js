@@ -12,7 +12,7 @@ import {
 } from "./Elements";
 import { NavLink } from "react-router-dom";
 import Logo from "../../../../assets/images/logo.png";
-import { Form, Upload, Divider, message } from "antd";
+import { Form, Upload, Divider, message, Modal } from "antd";
 import { FaUser, FaPhone, FaKey } from "react-icons/fa";
 import { UploadOutlined } from "@ant-design/icons";
 import { MdEmail } from "react-icons/md";
@@ -20,15 +20,15 @@ import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import { NumberRegEx } from "../../../../helpers/regex";
 import ImgCrop from "antd-img-crop";
 import "./style.scss";
-import {signUp} from '../../../../Redux/actions/authActions'
-import {useDispatch} from 'react-redux'
-import OTPContainer from '../../../CustomComponents/OtpInput'
+import { signUp } from "../../../../Redux/actions/authActions";
+import { useDispatch } from "react-redux";
+import OTPContainer from "../../../CustomComponents/OtpInput";
 const SignUpForm = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [isEmail, setEmail] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [visible,setVisible] = useState(false)
-  const [login, setTempLogin] = useState("")
+  const [visible, setVisible] = useState(false);
+  const [login, setTempLogin] = useState("");
   const BtnRef = useRef(null);
   const [form] = Form.useForm();
 
@@ -36,15 +36,14 @@ const SignUpForm = () => {
     setEmail(!e.target.checked);
   };
 
-
-  const onFinish = async(values) => {
-    setTempLogin(values.login)
+  const onFinish = async (values) => {
+    setTempLogin(values.login);
     form.resetFields();
     setLoading(true);
-    const res = await dispatch(signUp(values))
-    setLoading(false)
-    if(!res){
-      setVisible(true)
+    const res = await dispatch(signUp(values));
+    setLoading(false);
+    if (!res) {
+      setVisible(true);
     }
     BtnRef.current.blur();
   };
@@ -56,7 +55,21 @@ const SignUpForm = () => {
 
   return (
     <SignUpFormContainer>
-      <OTPContainer visible={visible} setVisible={setVisible} login={login}/>
+      <Modal
+        centered
+        visible={visible}
+        footer={null}
+        onCancel={() => setVisible(false)}
+        maskClosable={false}
+        closable={false}
+      >
+        <OTPContainer
+          type="signup"
+          visible={visible}
+          setVisible={setVisible}
+          login={login}
+        />
+      </Modal>
       <NavLink to="/">
         <LogoImg src={Logo} alt="Logo" />
       </NavLink>
@@ -180,7 +193,14 @@ const SignUpForm = () => {
             },
           ]}
         >
-          <ImgCrop quality={0.5} grid={true} zoom={true} rotate modalOk="Upload" className="imgcropper">
+          <ImgCrop
+            quality={0.5}
+            grid={true}
+            zoom={true}
+            rotate
+            modalOk="Upload"
+            className="imgcropper"
+          >
             <Upload
               maxCount={1}
               listType="text"
