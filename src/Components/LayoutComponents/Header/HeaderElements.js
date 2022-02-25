@@ -25,7 +25,7 @@ export const Brand = styled.label`
   letter-spacing: 1.5px;
 `;
 export const BrandSpan = styled.span`
-  color: ${({ scrollNav }) => (!scrollNav ? "#FFF" : "#424242")};
+  color: ${({ scrollNav,color }) => (!scrollNav ? color : "#424242")};
   cursor: pointer;
   font-family: "ABeatByKaiRegular", "Poppins";
 `;
@@ -89,7 +89,7 @@ export const NavItem = styled.li`
 `;
 
 export const NavLinks = styled(NavLink)`
-  color: ${({ $scrollNav }) => (!$scrollNav ? "#fff" : "#424242")};
+  color: ${({ $scrollNav,color }) => (!$scrollNav ? color : "#424242")};
   font-family: "Poppins", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
     sans-serif;
   display: flex;
@@ -102,7 +102,7 @@ export const NavLinks = styled(NavLink)`
   height: 100%;
   transition: all 0.05s ease-in;
   :hover {
-    color:${({ $scrollNav }) => (!$scrollNav ? "#fff" : "#424242")} !important;
+    color:${({ $scrollNav,color }) => (!$scrollNav ? color : "#424242")} !important;
     border-bottom: 3px solid #fc6e20;
   }
   &.active {
@@ -122,13 +122,13 @@ export const NavBtn = styled.nav`
 export const PostAddbtn = styled(NavLink)`
   border-radius: 5px;
   white-space: nowrap;
-  border: 1px solid ${({ $scrollNav }) => (!$scrollNav ? "#fff" : "#424242")};
+  border: 1px solid ${({ $scrollNav,color }) => (!$scrollNav ? color : "#424242")};
   display: flex;
   justify-content: center;
   align-items: center;
   width: 65px;
   height: 31px;
-  color: ${({ $scrollNav }) => (!$scrollNav ? "#fff" : "#424242")};
+  color: ${({ $scrollNav,color }) => (!$scrollNav ? color : "#424242")};
   font-size: 0.75rem;
   outline: none;
   cursor: pointer;
@@ -138,7 +138,7 @@ export const PostAddbtn = styled(NavLink)`
     sans-serif;
   margin-right: 15px;
   &:hover{
-    color: ${({ $scrollNav }) => (!$scrollNav ? "#fff" : "#424242")} !important;
+    color: ${({ $scrollNav,color }) => (!$scrollNav ? color : "#424242")} !important;
   }
   @media screen and (max-width: 1000px) {
     margin-right: 8px;
