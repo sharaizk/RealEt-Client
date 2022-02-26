@@ -1,0 +1,18 @@
+.dashboard-layout {
+  border: 1px solid rgba(66, 66, 66, 0.15);
+  border-radius: 10px;
+  background-color: #fff;
+}
+.ant-layout-sider {
+  background: #5e5e5e;
+  border-radius: 10px 0 0 10px;
+}
+.ant-layout-content {
+  padding: 2vh;
+  height: 75vh;
+  border-radius: 10px 10px 10px 10px;
+  background-color: #fff;
+}
+.ant-layout-sider-zero-width-trigger {
+  background: #5e5e5e;
+}
