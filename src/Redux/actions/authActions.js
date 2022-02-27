@@ -1,15 +1,17 @@
 import { SIGN_UP, SIGN_IN } from "../types";
 import server from "../../Axios/index";
 import { notification } from "antd";
-export const signUp = (formValues) => {
+import { saveToken } from "../localstorage";
+export const signUp = (formValues, profilePhoto) => {
   const { fullName, login, password } = formValues;
+  const formData = new FormData();
+  formData.append("fullName", fullName);
+  formData.append("login", login);
+  formData.append("password", password);
+  formData.append("photo", profilePhoto);
   return async (dispatch) => {
     try {
-      const res = await server.post("/auth/signup", {
-        fullName,
-        login,
-        password,
-      });
+      const res = await server.post("/auth/signup", formData);
       if (res.status === 200) {
         notification["success"]({
           message: "Sign Up Successfull",
@@ -33,7 +35,7 @@ export const signIn = (formValues) => {
   return async (dispatch) => {
     try {
       const res = await server.post("/auth/login", { login, password });
-      console.log(res);
+      saveToken(res.data.token);
       dispatch({ type: SIGN_IN });
     } catch (error) {
       console.log(error);
