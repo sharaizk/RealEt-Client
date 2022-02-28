@@ -1,5 +1,5 @@
-import styled,{keyframes} from "styled-components";
-const scaleinvert=keyframes`
+import styled, { keyframes } from "styled-components";
+const scaleinvert = keyframes`
   0% {
     -webkit-transform: translateZ(700px) translateY(300px);
             transform: translateZ(700px) translateY(300px);
@@ -10,10 +10,10 @@ const scaleinvert=keyframes`
             transform: translateZ(0) translateY(0);
     opacity: 1;
   }
-`
+`;
 export const CardContainer = styled.div`
   height: 48.33512352309345vh;
-  width: 27.53813104189044vh;
+  width: 14.635444385311336vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -24,20 +24,21 @@ export const CardContainer = styled.div`
   -moz-box-shadow: 0px 3px 5px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.2s ease-in;
-  -webkit-animation: ${scaleinvert} 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: ${scaleinvert} 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  &:hover{
-    box-shadow: 0px 1px 5px 5px rgba(0,0,0,0.3);
--webkit-box-shadow: 0px 1px 5px 5px rgba(0,0,0,0.3);
--moz-box-shadow: 0px 1px 5px 5px rgba(0,0,0,0.3);
+  -webkit-animation: ${scaleinvert} 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: ${scaleinvert} 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  &:hover {
+    box-shadow: 0px 1px 5px 5px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 1px 5px 5px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 1px 5px 5px rgba(0, 0, 0, 0.3);
   }
   @media screen and (min-width: 2560px) {
-  height: 700px;
+    height: 700px;
 
-  width: 400px;
+    width: 400px;
   }
-  @media screen and (max-width:1400px){
-    height: 54.364471669218986vh;
+  @media screen and (max-width: 1400px) {
+    height: 500px;
     width: 265px;
   }
   @media screen and (max-width: 768px) {
@@ -66,7 +67,7 @@ export const ImgContainer = styled.div`
   flex: 0.8;
   position: relative;
   width: 100%;
- 
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -208,7 +209,6 @@ export const Price = styled.div`
       font-size: 11px;
       line-height: 11px;
     }
-    
   }
   & > label > span {
     color: #333333;
@@ -218,7 +218,7 @@ export const Price = styled.div`
       font-size: 10px;
       line-height: 10px;
     }
-    @media screen and (max-width:360px){
+    @media screen and (max-width: 360px) {
       font-size: 10px;
       line-height: 10px;
     }

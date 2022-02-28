@@ -1,10 +1,10 @@
 import React from 'react'
-
+import { CostScreenContainer } from './CostElements'
 const CostCalculator = () => {
     return (
-        <div>
+        <CostScreenContainer>
             COST
-        </div>
+        </CostScreenContainer>
     )
 }
 

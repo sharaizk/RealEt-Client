@@ -9,10 +9,11 @@ import {
   SignUpBtn,
   BtnLink,
   OSignUpBtn,
+  PasswordFieldContainer,
 } from "./Elements";
 import { NavLink } from "react-router-dom";
 import Logo from "../../../../assets/images/logo.png";
-import { Form, Upload, Divider, message } from "antd";
+import { Form, Upload, Divider, message, Modal } from "antd";
 import { FaUser, FaPhone, FaKey } from "react-icons/fa";
 import { UploadOutlined } from "@ant-design/icons";
 import { MdEmail } from "react-icons/md";
@@ -20,15 +21,16 @@ import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import { NumberRegEx } from "../../../../helpers/regex";
 import ImgCrop from "antd-img-crop";
 import "./style.scss";
-import {signUp} from '../../../../Redux/actions/authActions'
-import {useDispatch} from 'react-redux'
-import OTPContainer from '../../../CustomComponents/OtpInput'
+import { signUp } from "../../../../Redux/actions/authActions";
+import { useDispatch } from "react-redux";
+import OTPContainer from "../../../CustomComponents/OtpInput";
 const SignUpForm = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [isEmail, setEmail] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [visible,setVisible] = useState(false)
-  const [login, setTempLogin] = useState("")
+  const [visible, setVisible] = useState(false);
+  const [login, setTempLogin] = useState("");
+  const [profilePhoto, setPhoto] = useState({});
   const BtnRef = useRef(null);
   const [form] = Form.useForm();
 
@@ -36,16 +38,16 @@ const SignUpForm = () => {
     setEmail(!e.target.checked);
   };
 
-
-  const onFinish = async(values) => {
-    setTempLogin(values.login)
+  const onFinish = async (values) => {
+    setTempLogin(values.login);
     form.resetFields();
     setLoading(true);
-    const res = await dispatch(signUp(values))
-    setLoading(false)
-    if(!res){
-      setVisible(true)
+    const res = await dispatch(signUp(values, profilePhoto));
+    setLoading(false);
+    if (!res) {
+      setVisible(true);
     }
+    setPhoto({});
     BtnRef.current.blur();
   };
 
@@ -56,7 +58,21 @@ const SignUpForm = () => {
 
   return (
     <SignUpFormContainer>
-      <OTPContainer visible={visible} setVisible={setVisible} login={login}/>
+      <Modal
+        centered
+        visible={visible}
+        footer={null}
+        onCancel={() => setVisible(false)}
+        maskClosable={false}
+        closable={false}
+      >
+        <OTPContainer
+          type="signup"
+          visible={visible}
+          setVisible={setVisible}
+          login={login}
+        />
+      </Modal>
       <NavLink to="/">
         <LogoImg src={Logo} alt="Logo" />
       </NavLink>
@@ -73,7 +89,6 @@ const SignUpForm = () => {
         <Form.Item
           name="fullName"
           label={<label className="formLabel">Full Name</label>}
-          hasFeedback
           rules={[
             {
               required: true,
@@ -94,7 +109,6 @@ const SignUpForm = () => {
           <Form.Item
             name="login"
             label={<label className="formLabel">Email</label>}
-            hasFeedback
             rules={[
               {
                 required: true,
@@ -143,50 +157,107 @@ const SignUpForm = () => {
         <CheckBox onChange={toggle}>
           <p className="checkbox-desc">Sign Up with Phone Number</p>
         </CheckBox>
-        <Form.Item
-          name="password"
-          hasFeedback
-          label={<label className="formLabel">Password</label>}
-          rules={[
-            {
-              required: true,
-              message: "Please enter your password",
-            },
-            {
-              min: 6,
-              message: "Must be more than 6 characters",
-            },
-          ]}
-        >
-          <PasswordField
-            settings={{
-              colorScheme: {
-                levels: ["#ff3333", "#fe940d", "#ffd908", "#cbe11d", "#42ba96"],
+        <PasswordFieldContainer>
+          <Form.Item
+            name="password"
+            label={<label className="formLabel">Password</label>}
+            rules={[
+              {
+                required: true,
+                message: "Please enter your password",
               },
-              height: 3,
-              alwaysVisible: false,
-            }}
-            placeholder="Pass******"
-            prefix={<FaKey color="#545454" />}
-          />
-        </Form.Item>
+              {
+                min: 6,
+                message: "Must be more than 6 characters",
+              },
+            ]}
+          >
+            <PasswordField
+              settings={{
+                colorScheme: {
+                  levels: [
+                    "#ff3333",
+                    "#fe940d",
+                    "#ffd908",
+                    "#cbe11d",
+                    "#42ba96",
+                  ],
+                },
+                height: 3,
+                alwaysVisible: false,
+              }}
+              placeholder="Pass******"
+              prefix={<FaKey color="#545454" />}
+            />
+          </Form.Item>
+          <Form.Item
+            name="confirmpassword"
+            label={<label className="formLabel">Confirm Password</label>}
+            dependencies={["password"]}
+            rules={[
+              {
+                required: true,
+                message: "Please enter your password",
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error("Passwords don't match"));
+                },
+              }),
+            ]}
+          >
+            <PasswordField
+              settings={{
+                colorScheme: {
+                  levels: [
+                    "#ff3333",
+                    "#fe940d",
+                    "#ffd908",
+                    "#cbe11d",
+                    "#42ba96",
+                  ],
+                },
+                height: 3,
+                alwaysVisible: false,
+              }}
+              placeholder="Pass******"
+              prefix={<FaKey color="#545454" />}
+            />
+          </Form.Item>
+        </PasswordFieldContainer>
         <Form.Item
           name="upload"
           valuePropName="file"
           rules={[
-            {
-              // required: true,
-              message: "Please upload your profile picture",
-            },
+            () => ({
+              validator(_, value) {
+                if (Object.keys(profilePhoto).length === 0) {
+                  return Promise.reject(
+                    new Error("Please upload Profile Photo")
+                  );
+                }
+                return Promise.resolve();
+              },
+            }),
           ]}
         >
-          <ImgCrop quality={0.5} grid={true} zoom={true} rotate modalOk="Upload" className="imgcropper">
+          <ImgCrop
+            quality={0.5}
+            grid={true}
+            zoom={true}
+            rotate
+            modalOk="Upload"
+            className="imgcropper"
+          >
             <Upload
               maxCount={1}
               listType="text"
               accept="image/*"
               beforeUpload={(file) => {
-                console.log(file);
+                setPhoto(file);
                 return false;
               }}
             >

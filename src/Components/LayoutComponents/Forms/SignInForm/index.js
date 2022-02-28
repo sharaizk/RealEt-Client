@@ -8,9 +8,11 @@ import {
   BtnLink,
   FSignInButtom,
   GSignInButton,
+  ForgotBTN,
+  BTNContainer,
 } from "./Elements";
 import Logo from "../../../../assets/images/logo2.png";
-import { Form, Row, Col, Divider, Tooltip, message } from "antd";
+import { Form, Divider, Tooltip, message, Modal } from "antd";
 import { FaUser, FaKey } from "react-icons/fa";
 import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
@@ -18,24 +20,25 @@ import "./style.scss";
 import Schema from "async-validator";
 import { EmailRegEx, NumberRegEx } from "../../../../helpers/regex";
 import { GoogleLogin } from "react-google-login";
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-
-
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import { useDispatch } from "react-redux";
+import { signIn } from "../../../../Redux/actions/authActions";
+import ForgotPassword from "../../../CustomComponents/ForgotPassword";
 Schema.warning = function () {};
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
   const BtnRef = useRef(null);
 
   const [form] = Form.useForm();
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     BtnRef.current.blur();
     setLoading(true);
-    message.success("Hello");
     form.resetFields();
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    await dispatch(signIn(values));
+    setLoading(false);
   };
 
   const onFinishFailed = () => {
@@ -49,6 +52,15 @@ const SignInForm = () => {
 
   return (
     <SignInFromContainer>
+      <Modal
+        visible={visible}
+        footer={null}
+        centered
+        onCancel={() => setVisible(false)}
+        maskClosable={false}
+      >
+        <ForgotPassword setVisible={setVisible} />
+      </Modal>
       <NavLink to="/">
         <LogoImg src={Logo} alt="Logo Img" />
       </NavLink>
@@ -62,7 +74,7 @@ const SignInForm = () => {
         requiredMark={"optional"}
       >
         <Form.Item
-          name="email"
+          name="login"
           label={<label className="formLabel">Email or Phone Number</label>}
           hasFeedback
           rules={[
@@ -91,7 +103,7 @@ const SignInForm = () => {
           />
         </Form.Item>
         <Form.Item
-          name="Password"
+          name="password"
           label={<label className="formLabel">Password</label>}
           hasFeedback
           rules={[
@@ -127,15 +139,17 @@ const SignInForm = () => {
             Sign In
           </SubmitButton>
         </Form.Item>
-        <Row justify="space-between">
-          <Col span={15}>
-            <BtnLink to="/signup">Forgot Password</BtnLink>
-          </Col>
-          <Col span={3.5}>
-            <BtnLink to="/signup">Sign Up</BtnLink>
-          </Col>
-        </Row>
       </Form>
+      <BTNContainer justify="start" type="flex">
+        <ForgotBTN
+          onClick={() => {
+            setVisible(true);
+          }}
+        >
+          Forgot Password
+        </ForgotBTN>
+        <BtnLink to="/signup">Sign Up</BtnLink>
+      </BTNContainer>
 
       <Divider />
       <Tooltip title="Sign in with Facebook">

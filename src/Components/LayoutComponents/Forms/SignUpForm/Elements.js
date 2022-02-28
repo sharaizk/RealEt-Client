@@ -11,6 +11,7 @@ export const SignUpFormContainer = styled.div`
   flex-direction: column;
   width: max-content;
   background-color: #fff;
+  padding: 5rem 0 5rem 0;
 
   @media screen and (max-width: 768px) {
     z-index: 5;
@@ -27,6 +28,9 @@ export const LogoImg = styled.img`
   @media screen and (max-width: 360px) {
     height: 21vh;
     width: 21vh;
+  }
+  @media screen and (max-width: 280px) {
+    display: none;
   }
 `;
 
@@ -49,9 +53,19 @@ export const InputField = styled(Input)`
   }
 `;
 
+export const PasswordFieldContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+`;
+
 export const PasswordField = styled(PasswordInput)`
   height: 40px;
-  width: 26.609898882384247vw;
+  flex: 0.1;
+  width: 12.75vw;
   border-radius: 5px;
   :hover {
     border-color: #fc6e20 !important;
