@@ -1,10 +1,11 @@
 import React, { useEffect, useCallback } from "react";
-import { AnimationContainer, SvgContainer } from "./elements";
-import SVG from "../../../assets/images/loading.svg";
-import { loadProfile } from "../../../Redux/actions/authActions";
-import { getToken } from "../../../Redux/localstorage";
+import Agent from "./Agent";
+import Consumer from "./Consumer";
+import { Routes, Route } from "react-router-dom";
+import { loadProfile } from "../../Redux/actions/authActions";
+import { getToken } from "../../Redux/localstorage";
 import { useDispatch, useSelector } from "react-redux";
-const Loading = () => {
+const Dashboard = () => {
   const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const fetchProfile = useCallback(() => {
@@ -16,11 +17,13 @@ const Loading = () => {
   useEffect(() => {
     fetchProfile();
   }, [fetchProfile]);
+
   return (
-    <AnimationContainer>
-      <SvgContainer src={SVG} alt="" />
-    </AnimationContainer>
+    <Routes>
+      <Route path="/*" element={<Consumer />} />
+      <Route path="/agent/*" element={<Agent />} />
+    </Routes>
   );
 };
 
-export default Loading;
+export default Dashboard;

@@ -4,10 +4,22 @@ import "./index.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./Components/LayoutComponents/Header";
 import Loading from "./Components/CustomComponents/Loading";
-import Agent from "./Screens/Dashboard/Agent";
-import Consumer from "./Screens/Dashboard/Consumer";
 import { AnimatePresence } from "framer-motion";
 import Footer from "./Components/LayoutComponents/Footer";
+import { getToken } from "./Redux/localstorage";
+import { Navigate } from "react-router-dom";
+import Dashboard from "./Screens/Dashboard";
+
+function RequireAuth({ children, redirectTo }) {
+  let isAuthenticated = getToken();
+  return isAuthenticated ? children : <Navigate to={redirectTo} />;
+}
+
+function LoggedIn({ children, redirectTo }) {
+  let isAuthenticated = getToken();
+  return isAuthenticated ? <Navigate to={redirectTo} /> : children;
+}
+
 function App() {
   const location = useLocation();
   const LazyLanding = lazy(() => import("./Screens/LandingScreen"));
@@ -23,11 +35,31 @@ function App() {
         <AnimatePresence exitBeforeEnter>
           <Routes>
             <Route path="/" element={<LazyLanding />} />
-            <Route path="/signup" element={<LazySignUp />} />
-            <Route path="/signin" element={<LazyLogin />} />
+            <Route
+              path="/signup"
+              element={
+                <LoggedIn redirectTo={"/"}>
+                  <LazySignUp />
+                </LoggedIn>
+              }
+            />
+            <Route
+              path="/signin"
+              element={
+                <LoggedIn redirectTo={"/"}>
+                  <LazyLogin />
+                </LoggedIn>
+              }
+            />
             <Route path="/costcalculator" element={<LazyCalculator />} />
-            <Route path="/dashboard/agent" element={<Agent />} />
-            <Route path="/dashboard/consumer/*" element={<Consumer />} />
+            <Route
+              path="/dashboard/*"
+              element={
+                <RequireAuth redirectTo={"/"}>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            />
           </Routes>
         </AnimatePresence>
         {location.pathname !== "/signup" && location.pathname !== "/signin" ? (
