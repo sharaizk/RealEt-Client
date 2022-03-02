@@ -1,4 +1,4 @@
-export const loadState = () => {
+export const getToken = () => {
   try {
     const serializedState = localStorage.getItem("token");
     if (serializedState === null) {
@@ -17,7 +17,7 @@ export const saveToken = (state) => {
   } catch (err) {}
 };
 
-export const deleteState = () => {
+export const deleteToken = () => {
   try {
     localStorage.removeItem("token");
   } catch (e) {}

@@ -24,10 +24,12 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 import { useDispatch } from "react-redux";
 import { signIn } from "../../../../Redux/actions/authActions";
 import ForgotPassword from "../../../CustomComponents/ForgotPassword";
+import { useNavigate } from "react-router-dom";
 Schema.warning = function () {};
 
 const SignInForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const BtnRef = useRef(null);
@@ -37,7 +39,10 @@ const SignInForm = () => {
     BtnRef.current.blur();
     setLoading(true);
     form.resetFields();
-    await dispatch(signIn(values));
+    const res = await dispatch(signIn(values));
+    if (!res) {
+      navigate("/");
+    }
     setLoading(false);
   };
 
