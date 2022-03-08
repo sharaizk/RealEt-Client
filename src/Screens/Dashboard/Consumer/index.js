@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "antd";
-import { FaUser, FaHome } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { BsChatSquareDotsFill } from "react-icons/bs";
 import { SiHomeadvisor } from "react-icons/si";
 import { MdPending } from "react-icons/md";
@@ -15,6 +15,8 @@ import {
 } from "../DashboardElements";
 import "../styles.scss";
 
+import ProfileCard from "../../../Components/CustomComponents/ProfileCard";
+
 const Consumer = () => {
   const { Content, Sider } = Layout;
 
@@ -25,10 +27,6 @@ const Consumer = () => {
           <Sider breakpoint="lg" collapsedWidth="0">
             <LinksContainer>
               <LinkBtn to="">
-                <FaHome />
-                Welcome
-              </LinkBtn>
-              <LinkBtn to="profile">
                 <FaUser />
                 Profile
               </LinkBtn>
@@ -57,8 +55,7 @@ const Consumer = () => {
           <Layout>
             <Content>
               <Routes>
-                <Route path="/" element={<p>Welcome Consumer</p>} />
-                <Route path="profile" element={<p>Profile</p>} />
+                <Route path="/" element={<ProfileCard />} />
                 <Route path="chats" element={<p>Chats</p>} />
                 <Route path="postedads" element={<p>Posted Ads</p>} />
                 <Route path="pendingads" element={<p>Pending Ads</p>} />
