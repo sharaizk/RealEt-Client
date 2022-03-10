@@ -1,18 +1,7 @@
 import styled from "styled-components";
-// import { motion } from "framer-motion";
-
-export const ProfileContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-export const Card = styled.div`
-  height: 50vh;
+import { motion } from "framer-motion";
+export const Card = styled(motion.div)`
+  height: 30vh;
   flex: 0.3;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
@@ -22,7 +11,9 @@ export const Card = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  align-self: flex-start;
   margin-right: 0.5vw;
+
   @media screen and (max-width: 768px) {
     flex: 0.2;
     width: 100%;
@@ -31,29 +22,11 @@ export const Card = styled.div`
   }
 `;
 
-export const EditFormContainer = styled.div`
-  height: 50vh;
-  flex: 0.7;
-  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.05);
-  -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.05);
-  border-radius: 5px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    flex: 0.75;
-  }
-`;
-
-export const PictureContainer = styled.div`
+export const PictureContainer = styled(motion.div)`
   flex: 0.2;
 `;
 
-export const DetailContainer = styled.div`
+export const DetailContainer = styled(motion.div)`
   flex: 0.7;
 
   display: flex;
@@ -93,7 +66,6 @@ export const VerifiedContainer = styled.div`
 
 export const Verified = styled.div`
   color: #4bb543;
-  background-color: #dbfcc9;
   border: 1px solid #4bb543;
   padding: 0.5vh;
   border-radius: 5px;
@@ -107,6 +79,6 @@ export const Verified = styled.div`
 export const UnVerified = styled.div`
   color: #ca0b00;
   background-color: #ef9692;
-  padding: 0.5vh;
+  padding: 0.5vw;
   border-radius: 5px;
 `;

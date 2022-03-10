@@ -2,6 +2,7 @@
   border: 1px solid rgba(66, 66, 66, 0.15);
   border-radius: 10px;
   background-color: #fff;
+  overflow: hidden;
 }
 .ant-layout-sider {
   background: #5e5e5e;
@@ -10,9 +11,15 @@
 .ant-layout-content {
   padding: 2vh;
   height: 75vh;
+  width: 100%;
+  align-self: flex-end;
   border-radius: 10px 10px 10px 10px;
   background-color: #fff;
 }
 .ant-layout-sider-zero-width-trigger {
   background: #5e5e5e;
+}
+
+.side-bar {
+  z-index: 1;
 }

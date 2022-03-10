@@ -38,9 +38,10 @@ const SignInForm = () => {
   const onFinish = async (values) => {
     BtnRef.current.blur();
     setLoading(true);
-    form.resetFields();
+
     const res = await dispatch(signIn(values));
     if (!res) {
+      form.resetFields();
       navigate("/");
     }
     setLoading(false);

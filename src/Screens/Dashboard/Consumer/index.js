@@ -15,7 +15,7 @@ import {
 } from "../DashboardElements";
 import "../styles.scss";
 
-import ProfileCard from "../../../Components/CustomComponents/ProfileCard";
+import ProfileSection from "../../../Components/LayoutComponents/ProfileSection";
 
 const Consumer = () => {
   const { Content, Sider } = Layout;
@@ -24,7 +24,7 @@ const Consumer = () => {
     <DashboardContainer>
       <ConsumerDashboardContainer>
         <Layout className="dashboard-layout">
-          <Sider breakpoint="lg" collapsedWidth="0">
+          <Sider className="side-bar" breakpoint="lg" collapsedWidth="0">
             <LinksContainer>
               <LinkBtn to="">
                 <FaUser />
@@ -52,22 +52,17 @@ const Consumer = () => {
               </LinkBtn>
             </LinksContainer>
           </Sider>
-          <Layout>
-            <Content>
-              <Routes>
-                <Route path="/" element={<ProfileCard />} />
-                <Route path="chats" element={<p>Chats</p>} />
-                <Route path="postedads" element={<p>Posted Ads</p>} />
-                <Route path="pendingads" element={<p>Pending Ads</p>} />
-                <Route path="settings" element={<p>Settings</p>} />
-                <Route path="pendingads" element={<p>Pending Ads</p>} />
-                <Route
-                  path="upgrade-account"
-                  element={<p>Upgrade Account</p>}
-                />
-              </Routes>
-            </Content>
-          </Layout>
+          <Content>
+            <Routes>
+              <Route path="/" element={<ProfileSection />} />
+              <Route path="chats" element={<p>Chats</p>} />
+              <Route path="postedads" element={<p>Posted Ads</p>} />
+              <Route path="pendingads" element={<p>Pending Ads</p>} />
+              <Route path="settings" element={<p>Settings</p>} />
+              <Route path="pendingads" element={<p>Pending Ads</p>} />
+              <Route path="upgrade-account" element={<p>Upgrade Account</p>} />
+            </Routes>
+          </Content>
         </Layout>
       </ConsumerDashboardContainer>
     </DashboardContainer>
