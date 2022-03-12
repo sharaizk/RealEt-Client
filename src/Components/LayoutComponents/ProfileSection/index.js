@@ -17,7 +17,7 @@ const ProfileSection = () => {
       <CardContainer>
         <ProfileCard />
         <EditFormContainer>
-          <Row gutter={[16, 16]}>
+          <Row className="custom-antd-row" gutter={[16, 16]}>
             <Col span={24}>
               <Card>
                 <CardTitle>Ads</CardTitle>
