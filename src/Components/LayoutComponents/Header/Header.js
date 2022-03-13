@@ -107,7 +107,11 @@ const Nav = ({
             </NavLinks>
           </NavItem>
           <NavBtn>
-            <PostAddbtn $scrollNav={scrollNav} color={linksColor} to="/signup">
+            <PostAddbtn
+              $scrollNav={scrollNav}
+              color={linksColor}
+              to="/post-add"
+            >
               Post Ad
             </PostAddbtn>
             {isSignedIn ? (

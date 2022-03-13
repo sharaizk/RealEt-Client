@@ -26,6 +26,7 @@ function App() {
   const LazyLogin = lazy(() => import("./Screens/LoginScreen"));
   const LazySignUp = lazy(() => import("./Screens/SignUpScreen"));
   const LazyCalculator = lazy(() => import("./Screens/CostScreen"));
+  const LazyPostAdd = lazy(() => import("./Screens/PostAd"));
   return (
     <Suspense fallback={<Loading />}>
       <div className="App">
@@ -35,6 +36,14 @@ function App() {
         <AnimatePresence exitBeforeEnter>
           <Routes>
             <Route path="/" element={<LazyLanding />} />
+            <Route
+              path="/post-add"
+              element={
+                <RequireAuth redirectTo={"/"}>
+                  <LazyPostAdd />
+                </RequireAuth>
+              }
+            />
             <Route
               path="/signup"
               element={

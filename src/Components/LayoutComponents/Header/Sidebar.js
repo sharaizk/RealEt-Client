@@ -58,7 +58,7 @@ const Sidebar = ({
             Cost Calculator
           </SidebarLink>
           <SidebarLink to="/signup">Book a Builder</SidebarLink>
-          <SidebarBtn1 to="/signup">Post Ad</SidebarBtn1>
+          <SidebarBtn1 to="/post-add">Post Ad</SidebarBtn1>
           {isSignedIn ? (
             <Dropdown overlay={DroppedSection}>
               <Profile>
