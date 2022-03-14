@@ -1,43 +1,25 @@
 import React from "react";
 import { FormTitle } from "./PAFElements";
-import { Steps } from "antd";
+import { Stepper } from "react-form-stepper";
 import "./styles.scss";
 const PostAdForm = () => {
-  const { Step } = Steps;
-  const steps = [
-    {
-      title: "Basic Info",
-      content: "First-content",
-    },
-    {
-      title: "Location Info",
-      content: "Second-content",
-    },
-    {
-      title: "Detailed Info",
-      content: "Last-content",
-    },
-    {
-      title: "Virtual Tour",
-      content: "Last-content",
-    },
-    {
-      title: "Image",
-      content: "Last-content",
-    },
-    {
-      title: "Publish",
-      content: "Last-content",
-    },
-  ];
   return (
     <>
       <FormTitle>Enter property details to add your property</FormTitle>
-      <Steps current={3}>
-        {steps.map((item) => (
-          <Step key={item.title} title={item.title} />
-        ))}
-      </Steps>
+      <Stepper
+        steps={[
+          { label: "Basic" },
+          { label: "Location" },
+          { label: "Detailed" },
+          { label: "Finish" },
+        ]}
+        activeStep={2}
+        styleConfig={{
+          activeBgColor: "#fd6e21",
+          completedBgColor: "#424242",
+          size: "2em",
+        }}
+      />
     </>
   );
 };
