@@ -42,7 +42,6 @@ const Nav = ({
       setScrollNav(false);
     }
   };
-
   useEffect(() => {
     window.addEventListener("scroll", changeNav);
   }, []);

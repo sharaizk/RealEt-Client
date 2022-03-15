@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const PostAddMainContainer = styled.div`
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
+  max-height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -9,6 +11,7 @@ export const PostAddMainContainer = styled.div`
   flex-direction: column;
   padding-top: 80px;
   background-color: #fff;
+
   @media screen and (max-height: 700px) {
     height: 100%;
   }
@@ -49,6 +52,9 @@ export const BannerDiv = styled.div`
   @media screen and (max-width: 768px) {
     width: 100%;
   }
+  @media screen and (max-width: 280px) {
+    width: 85%;
+  }
 `;
 
 export const BannerDetails = styled.p`
@@ -81,7 +87,11 @@ export const FormContainer = styled.div`
   padding-top: 1vw;
   flex-direction: column;
   width: 60%;
+
   @media screen and (max-width: 768px) {
     width: 100%;
+  }
+  @media screen and (max-width: 280px) {
+    width: 85%;
   }
 `;

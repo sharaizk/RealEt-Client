@@ -1,5 +1,18 @@
 .RFS-StepperContainer {
   width: 100%;
-
   transition: all 0.2s;
+}
+.ant-radio-inner {
+  box-shadow: none;
+}
+.ant-radio-checked .ant-radio-inner {
+  border-color: #fc6e20 !important ;
+}
+
+.ant-radio-checked .ant-radio-inner:after {
+  background-color: #fc6e20 !important;
+}
+
+.ant-radio:hover .ant-radio-inner {
+  border-color: #fc6e20 !important;
 }
