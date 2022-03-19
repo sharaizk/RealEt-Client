@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Button, Input, Radio, Select } from "antd";
-const { Option } = Select;
+import { Button, Input, Radio } from "antd";
 export const StepContainer = styled(motion.div)`
   width: 100%;
   display: flex;
@@ -83,28 +82,21 @@ export const RadioBtn = styled(Radio)`
   }
 `;
 
-export const SubTypeCat = styled(Select)`
+export const SubTypeCat = styled.select`
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   margin: 2vh 0;
-  & > div {
-    border-radius: 10px !important;
-    &:hover {
-      border: 1px solid #fc6e20 !important;
-      box-shadow: none !important;
-    }
-    &:active {
-      border: 1px solid #fc6e20 !important;
-      box-shadow: none !important;
-    }
-    &:focus {
-      border: 1px solid #fc6e20 !important;
-      box-shadow: none !important;
-    }
+  background:transparent;
+  outline:none;
+  border: 1px solid #d9d9d9;
+  border-radius:10px;
+  padding:10px;
   }
 `;
 
-export const SubTypeOption = styled(Option)``;
+export const SubTypeOption = styled.option`
+  background-color: #fff !important;
+`;
