@@ -78,6 +78,20 @@ export const SubTypeCat = styled(Select)`
   align-items: flex-start;
   background: transparent;
   outline: none;
+  & .ant-select-selector {
+    padding: 10px !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    &:hover {
+      border-color: #fc6e20 !important;
+    }
+  }
+
+  &.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+    .ant-select-selector {
+    border-color: #fc6e20;
+    box-shadow: none;
+  }
 `;
 
 export const SubTypeOption = styled(Option)`

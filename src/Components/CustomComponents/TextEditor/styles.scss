@@ -1,0 +1,10 @@
+.react-quill {
+  height: 25vh;
+  max-height: 100%;
+  margin-bottom: 5vh;
+  max-width: 100% !important;
+  word-wrap: break-word;
+  @media screen and (max-width: 480px) {
+    margin-bottom: 8vh;
+  }
+}
