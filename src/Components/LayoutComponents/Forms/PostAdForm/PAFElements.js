@@ -46,7 +46,3 @@ export const MoveBtn = styled(Button)`
     border: none;
   }
 `;
-export const Error = styled.p`
-  font-size: 0.8rem;
-  color: #ff3333;
-`;

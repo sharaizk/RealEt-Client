@@ -1,47 +1,40 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Button, Input, Radio } from "antd";
+import { Input, Radio, Select } from "antd";
+const { Option } = Select;
 export const StepContainer = styled(motion.div)`
   width: 100%;
   display: flex;
   flex-direction: column;
 `;
 
-export const BuyRentContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  overflow-y: hidden !important;
-`;
-
-export const BuyRentButton = styled(Button)`
-  background-color: ${({ $active }) => ($active ? "#FC6E20" : "#424242")};
+export const BuyRentButton = styled(Radio.Button)`
+  background-color: #424242;
   border: none;
   outline: none;
   margin-right: 1vw;
   color: #fff;
-  opacity: ${({ $active }) => ($active ? 1 : 0.5)};
-  border-radius: 5px;
+  opacity: 1;
+  border-radius: 5px !important;
+  border-left: none !important;
   min-width: 5vw;
+  opacity: 0.5;
+  text-align: center;
+  &.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    background-color: #fc6e20;
+    color: #fff;
+    opacity: 1;
+  }
 
   &:hover,
   :active,
   :focus {
-    background-color: ${({ $active }) => ($active ? "#FC6E20" : "#424242")};
-    opacity: ${({ $active }) => ($active ? 1 : 0.5)};
+    background-color: #fc6e20 !important;
+    opacity: 1;
     color: #fff;
   }
-`;
-export const FieldsContainer = styled.div`
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin: 2vh 0;
-
-  @media screen and (max-width: 480px) {
-    width: 100%;
+  &::before {
+    display: none !important ;
   }
 `;
 
@@ -58,17 +51,12 @@ export const TextField = styled(Input)`
     border: 1px solid #d9d9d9;
   }
 `;
-export const FieldLabel = styled.label`
-  font-size: 1rem;
-  color: #424242;
-`;
 
 export const RadioButtonsContainer = styled(Radio.Group)`
   width: 50%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  margin: 2vh 0;
 
   @media screen and (max-width: 480px) {
     width: 100%;
@@ -82,21 +70,16 @@ export const RadioBtn = styled(Radio)`
   }
 `;
 
-export const SubTypeCat = styled.select`
+export const SubTypeCat = styled(Select)`
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin: 2vh 0;
-  background:transparent;
-  outline:none;
-  border: 1px solid #d9d9d9;
-  border-radius:10px;
-  padding:10px;
-  }
+  background: transparent;
+  outline: none;
 `;
 
-export const SubTypeOption = styled.option`
+export const SubTypeOption = styled(Option)`
   background-color: #fff !important;
 `;

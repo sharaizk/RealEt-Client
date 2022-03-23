@@ -1,36 +1,37 @@
-import React, { useState } from "react";
-import { FormTitle, Error } from "./PAFElements";
+import React, { useCallback, useState } from "react";
+import { FormTitle } from "./PAFElements";
 import { Stepper } from "react-form-stepper";
-
 import FirstStep from "./FirstStep";
 import SecondStep from "./SecondStep";
 import ThirdStep from "./ThirdStep";
 import FourthStep from "./FourthStep";
 import "./styles.scss";
-import { MoveBtn, MoveContainer } from "./PAFElements";
 import { AnimatePresence } from "framer-motion";
 
 const PostAdForm = () => {
   const [step, setStep] = useState(0);
-  const [step1, setStep1Value] = useState({
-    propertyList: "Sell",
-    type: "Residential",
-    title: "",
-    propertySubType: "Select Subtype",
-  });
-  const ChangeStep = (val) => {
-    setStep(val);
-  };
+  const [data, setData] = useState({});
 
-  const formFillChecker = () => {
-    if (step1.title.length > 5) {
-      return true;
-    }
-    return false;
-  };
+  const handleNextStep = useCallback(
+    (formData) => {
+      setData({
+        ...data,
+        ...formData,
+      });
+      setStep(step + 1);
+    },
+    [data, step]
+  );
+  const handlePrevStep = useCallback(() => {
+    setStep(step - 1);
+  }, [step]);
 
   return (
     <>
+      {/* <Prompt
+        when={data.title ? true : false}
+        message="You have unsaved changes, are you sure you want to leave"
+      /> */}
       <FormTitle>Enter property details to add your property</FormTitle>
       <Stepper
         steps={[
@@ -53,30 +54,30 @@ const PostAdForm = () => {
       />
       <AnimatePresence exitBeforeEnter>
         {step === 0 && (
-          <FirstStep values={step1} setValues={setStep1Value} key="FirstStep" />
+          <FirstStep
+            data={data}
+            key="FirstStep"
+            handleNextStep={handleNextStep}
+          />
         )}
-        {step === 1 && <SecondStep key="SecondStep" />}
-        {step === 2 && <ThirdStep key="ThirdStep" />}
+        {step === 1 && (
+          <SecondStep
+            data={data}
+            key="SecondStep"
+            handlePrevStep={handlePrevStep}
+            handleNextStep={handleNextStep}
+          />
+        )}
+        {step === 2 && (
+          <ThirdStep
+            key="ThirdStep"
+            data={data}
+            handlePrevStep={handlePrevStep}
+            handleNextStep={handleNextStep}
+          />
+        )}
         {step === 3 && <FourthStep key="FourthStep" />}
       </AnimatePresence>
-      {!formFillChecker() && <Error>*Please fill the form</Error>}
-      <MoveContainer>
-        <MoveBtn
-          onClick={() => ChangeStep(step - 1)}
-          disabled={step === 0 ? true : false}
-        >
-          Prev
-        </MoveBtn>
-        <MoveBtn
-          onClick={() => {
-            if (step !== 3 && formFillChecker()) {
-              ChangeStep(step + 1);
-            }
-          }}
-        >
-          {step === 3 ? <>Publish</> : <>Next</>}
-        </MoveBtn>
-      </MoveContainer>
     </>
   );
 };

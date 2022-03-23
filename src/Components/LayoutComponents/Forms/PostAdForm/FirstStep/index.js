@@ -1,102 +1,112 @@
 import React from "react";
 import {
   StepContainer,
-  BuyRentContainer,
   BuyRentButton,
   TextField,
-  FieldsContainer,
-  FieldLabel,
   RadioButtonsContainer,
   RadioBtn,
   SubTypeCat,
   SubTypeOption,
 } from "./Elements";
-import { Error } from "../PAFElements";
+import Schema from "async-validator";
 import { StepperTransition } from "../../../../../utils/StepperAnimationConfiguration";
+import { MoveContainer, MoveBtn } from "../PAFElements";
 import "../styles.scss";
-const FirstStep = ({ values, setValues }) => {
+import { Form } from "antd";
+Schema.warning = function () {};
+
+const FirstStep = ({ data, handleNextStep }) => {
+  const [form] = Form.useForm();
+
   return (
     <StepContainer {...StepperTransition}>
-      <BuyRentContainer>
-        <BuyRentButton
-          onClick={() => {
-            setValues({
-              ...values,
-              propertyList: "Sell",
-            });
-          }}
-          $active={values.propertyList === "Sell" ? true : false}
+      <Form
+        onFinish={handleNextStep}
+        form={form}
+        name="step1"
+        layout="vertical"
+        requiredMark="optional"
+      >
+        <Form.Item
+          name="buyrent"
+          rules={[{ required: true, message: "Buy or Rent is Required" }]}
+          initialValue={data.buyrent ? data.buyrent : "Rent"}
         >
-          Sell
-        </BuyRentButton>
-        <BuyRentButton
-          onClick={() => {
-            setValues({
-              ...values,
-              propertyList: "Rent",
-            });
-          }}
-          $active={values.propertyList === "Rent" ? true : false}
+          <RadioButtonsContainer>
+            <BuyRentButton value="Rent">Rent</BuyRentButton>
+            <BuyRentButton value="Sell">Sell</BuyRentButton>
+          </RadioButtonsContainer>
+        </Form.Item>
+        <Form.Item
+          name="title"
+          label="Property Title"
+          rules={[
+            {
+              required: true,
+            },
+            {
+              min: 5,
+              message: "Title should alteast be 5 letters long",
+            },
+          ]}
+          initialValue={data.title ? data.title : ""}
         >
-          Rent
-        </BuyRentButton>
-      </BuyRentContainer>
-      <FieldsContainer>
-        <FieldLabel>Property Title</FieldLabel>
-        <TextField
-          placeholder="Property Title"
-          value={values.title}
-          onChange={(e) => {
-            setValues({
-              ...values,
-              title: e.target.value,
-            });
-          }}
-        />
-        {values.title.length >= 1 && values.title.length <= 5 ? (
-          <Error>*Title Should be greater than 5</Error>
-        ) : null}
-      </FieldsContainer>
-      <FieldsContainer>
-        <FieldLabel>Type of Property</FieldLabel>
-        <RadioButtonsContainer
-          onChange={(e) => {
-            setValues({
-              ...values,
-              type: e.target.value,
-            });
-          }}
-          value={values.type}
+          <TextField placeholder="Property Title" />
+        </Form.Item>
+        <Form.Item
+          label="Type of Property"
+          name="type"
+          rules={[
+            {
+              required: true,
+              message: "Property type is required",
+            },
+          ]}
+          initialValue={data.type ? data.type : "Residential"}
         >
-          <RadioBtn value={"Residential"}>Residential</RadioBtn>
-          <RadioBtn value={"Plot"}>Plot</RadioBtn>
-          <RadioBtn value={"Commercial"}>Commercial</RadioBtn>
-        </RadioButtonsContainer>
-        <SubTypeCat
-          placeholder="Select Subtype"
-          defaultValue={values.propertySubType}
-          onChange={(value) =>
-            setValues({
-              ...values,
-              propertySubType: value,
-            })
-          }
+          <RadioButtonsContainer>
+            <RadioBtn value={"Residential"}>Residential</RadioBtn>
+            <RadioBtn value={"Plot"}>Plot</RadioBtn>
+            <RadioBtn value={"Commercial"}>Commercial</RadioBtn>
+          </RadioButtonsContainer>
+        </Form.Item>
+        <Form.Item
+          label="Sub Type"
+          name="subtype"
+          rules={[
+            {
+              required: true,
+              message: "Property Sub type is required",
+            },
+          ]}
+          initialValue={data.subtype && data.subtype}
         >
-          <SubTypeOption value="House">House</SubTypeOption>
-          <SubTypeOption value="Green House">Green House</SubTypeOption>
-          <SubTypeOption value="Apartment">Apartment</SubTypeOption>
-          <SubTypeOption value="Upper Portion">Upper Portion</SubTypeOption>
-          <SubTypeOption value="Lower Portion">Lower Portion</SubTypeOption>
-          <SubTypeOption value="Farm House">Farm House</SubTypeOption>
-          <SubTypeOption value="Room">Room</SubTypeOption>
-          <SubTypeOption value="Penthouse">Penthouse</SubTypeOption>
-          <SubTypeOption value="Hotel Suites">Hotel Suites</SubTypeOption>
-          <SubTypeOption value="Basement">Basement</SubTypeOption>
-          <SubTypeOption value="Anexxe">Anexxe</SubTypeOption>
-          <SubTypeOption value="Hostel">Hostel</SubTypeOption>
-          <SubTypeOption value="Other">Other</SubTypeOption>
-        </SubTypeCat>
-      </FieldsContainer>
+          <SubTypeCat placeholder="Select Subtype">
+            <SubTypeOption value="House">House</SubTypeOption>
+            <SubTypeOption value="Green House">Green House</SubTypeOption>
+            <SubTypeOption value="Apartment">Apartment</SubTypeOption>
+            <SubTypeOption value="Upper Portion">Upper Portion</SubTypeOption>
+            <SubTypeOption value="Lower Portion">Lower Portion</SubTypeOption>
+            <SubTypeOption value="Farm House">Farm House</SubTypeOption>
+            <SubTypeOption value="Room">Room</SubTypeOption>
+            <SubTypeOption value="Penthouse">Penthouse</SubTypeOption>
+            <SubTypeOption value="Hotel Suites">Hotel Suites</SubTypeOption>
+            <SubTypeOption value="Basement">Basement</SubTypeOption>
+            <SubTypeOption value="Anexxe">Anexxe</SubTypeOption>
+            <SubTypeOption value="Hostel">Hostel</SubTypeOption>
+            <SubTypeOption value="Other">Other</SubTypeOption>
+          </SubTypeCat>
+        </Form.Item>
+        <MoveContainer>
+          <MoveBtn
+            // onClick={() => ChangeStep(step - 1)}
+            disabled
+          >
+            Prev
+          </MoveBtn>
+          <MoveBtn htmlType="submit">Next</MoveBtn>
+        </MoveContainer>
+      </Form>
     </StepContainer>
   );
 };
