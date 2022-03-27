@@ -18,7 +18,11 @@ const PostAdForm = () => {
         ...data,
         ...formData,
       });
-      setStep(step + 1);
+      if (step < 3) {
+        setStep(step + 1);
+      } else {
+        console.log(data);
+      }
     },
     [data, step]
   );
@@ -76,7 +80,14 @@ const PostAdForm = () => {
             handleNextStep={handleNextStep}
           />
         )}
-        {step === 3 && <FourthStep key="FourthStep" />}
+        {step === 3 && (
+          <FourthStep
+            key="FourthStep"
+            data={data}
+            handlePrevStep={handlePrevStep}
+            handleNextStep={handleNextStep}
+          />
+        )}
       </AnimatePresence>
     </>
   );

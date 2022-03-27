@@ -14,7 +14,8 @@ import TextEditor from "../../../../CustomComponents/TextEditor";
 import { useForm } from "antd/lib/form/Form";
 import { HotKeys } from "react-hotkeys";
 import { stepFormMap } from "../../../../../utils/Hotkeys";
-const ThirdStep = ({ handleNextStep, handlePrevStep }) => {
+const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
+  console.log(data);
   const [form] = useForm();
   const sizeRef = useRef(null);
   useEffect(() => {
@@ -22,7 +23,7 @@ const ThirdStep = ({ handleNextStep, handlePrevStep }) => {
   }, [sizeRef]);
 
   const selectAfter = (
-    <Form.Item name="size-unit" initialValue={"Marla"} noStyle>
+    <Form.Item name="sunit" initialValue={data?.sunit} noStyle>
       <UnitCat placeholder="Unit">
         <UnitOption value="Kanal">Kanal</UnitOption>
         <UnitOption value="Marla">Marla</UnitOption>
@@ -69,7 +70,7 @@ const ThirdStep = ({ handleNextStep, handlePrevStep }) => {
       <HotKeys keyMap={stepFormMap} handlers={handlers}>
         <Form
           form={form}
-          onFinish={(v) => console.log(v)}
+          onFinish={handleNextStep}
           layout="vertical"
           requiredMark="optional"
           name="detail-info"
@@ -78,6 +79,7 @@ const ThirdStep = ({ handleNextStep, handlePrevStep }) => {
             <Col xs={24} sm={12}>
               <Form.Item
                 name="size"
+                initialValue={data?.size}
                 rules={[
                   {
                     required: true,
@@ -91,6 +93,7 @@ const ThirdStep = ({ handleNextStep, handlePrevStep }) => {
             <Col xs={24} sm={12}>
               <Form.Item
                 name="price"
+                initialValue={data?.price}
                 rules={[
                   {
                     required: true,
@@ -105,6 +108,7 @@ const ThirdStep = ({ handleNextStep, handlePrevStep }) => {
 
           <Form.Item
             name="description"
+            initialValue={data?.description}
             rules={[
               {
                 required: true,
@@ -132,6 +136,7 @@ const ThirdStep = ({ handleNextStep, handlePrevStep }) => {
             name="images"
             valuePropName="fileList"
             getValueFromEvent={normFile}
+            initialValue={data?.images}
             rules={[
               () => ({
                 validator(_, value) {
