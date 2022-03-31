@@ -7,6 +7,8 @@ import {
   RadioBtn,
   SubTypeCat,
   SubTypeOption,
+  CheckboxGroup,
+  CustomCheckBox,
 } from "./Elements";
 import Schema from "async-validator";
 import { StepperTransition } from "../../../../../utils/StepperAnimationConfiguration";
@@ -15,6 +17,8 @@ import "../styles.scss";
 import { Form } from "antd";
 import { HotKeys } from "react-hotkeys";
 import { stepFormMap } from "../../../../../utils/Hotkeys";
+import { Row, Col } from "antd";
+import { FeatureOptions, UtilityOptions } from "../../../../../helpers/PostAd";
 Schema.warning = function () {};
 
 const FirstStep = ({ data, handleNextStep }) => {
@@ -65,6 +69,7 @@ const FirstStep = ({ data, handleNextStep }) => {
             rules={[
               {
                 required: true,
+                message: "Title is required",
               },
               {
                 min: 5,
@@ -125,6 +130,46 @@ const FirstStep = ({ data, handleNextStep }) => {
               <SubTypeOption value="Hostel">Hostel</SubTypeOption>
               <SubTypeOption value="Other">Other</SubTypeOption>
             </SubTypeCat>
+          </Form.Item>
+          <Form.Item
+            name="features"
+            label="Property Features"
+            rules={[{ required: true, message: "Please Select A Feature" }]}
+            initialValue={data?.features}
+          >
+            <CheckboxGroup>
+              <Row>
+                {FeatureOptions.map((Feature, i) => {
+                  return (
+                    <Col key={i} xs={{ span: 12 }} md={{ span: 6 }}>
+                      <CustomCheckBox value={Feature.feature}>
+                        {Feature.feature}
+                      </CustomCheckBox>
+                    </Col>
+                  );
+                })}
+              </Row>
+            </CheckboxGroup>
+          </Form.Item>
+          <Form.Item
+            name="utilities"
+            label="Utilities"
+            rules={[{ required: true, message: "Please Select an utility" }]}
+            initialValue={data?.utilities}
+          >
+            <CheckboxGroup>
+              <Row>
+                {UtilityOptions.map((Utility, i) => {
+                  return (
+                    <Col key={i} xs={{ span: 12 }} md={{ span: 6 }}>
+                      <CustomCheckBox value={Utility.utility}>
+                        {Utility.utility}
+                      </CustomCheckBox>
+                    </Col>
+                  );
+                })}
+              </Row>
+            </CheckboxGroup>
           </Form.Item>
           <MoveContainer>
             <MoveBtn

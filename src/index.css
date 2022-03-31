@@ -17,3 +17,6 @@
 .site-back-top-basic {
   color: rgba(255, 0, 0, 0.6) !important;
 }
+html {
+  scroll-behavior: smooth;
+}

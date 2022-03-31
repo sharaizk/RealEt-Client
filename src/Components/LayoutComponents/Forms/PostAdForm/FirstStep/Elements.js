@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Input, Radio, Select } from "antd";
+import { Input, Radio, Select, Checkbox } from "antd";
 const { Option } = Select;
 export const StepContainer = styled(motion.div)`
   width: 100%;
@@ -96,4 +96,15 @@ export const SubTypeCat = styled(Select)`
 
 export const SubTypeOption = styled(Option)`
   background-color: #fff !important;
+`;
+
+export const CheckboxGroup = styled(Checkbox.Group)`
+  width: 100%;
+`;
+export const CustomCheckBox = styled(Checkbox)`
+  color: #545454;
+  & .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #fc6e20;
+    border-color: #fc6e20;
+  }
 `;
