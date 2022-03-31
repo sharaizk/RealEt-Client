@@ -99,7 +99,7 @@ const FirstStep = ({ data, handleNextStep }) => {
           </Form.Item>
           <Form.Item
             label="Sub Type"
-            name="subtype"
+            name="propertySubType"
             rules={[
               {
                 required: true,

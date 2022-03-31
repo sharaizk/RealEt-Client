@@ -15,7 +15,6 @@ import { useForm } from "antd/lib/form/Form";
 import { HotKeys } from "react-hotkeys";
 import { stepFormMap } from "../../../../../utils/Hotkeys";
 const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
-  console.log(data);
   const [form] = useForm();
   const sizeRef = useRef(null);
   useEffect(() => {
@@ -79,7 +78,7 @@ const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
             <Col xs={24} sm={12}>
               <Form.Item
                 name="size"
-                initialValue={data?.size}
+                initialValue={data?.size || "Select Unit"}
                 rules={[
                   {
                     required: true,
@@ -87,7 +86,11 @@ const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
                   },
                 ]}
               >
-                <GroupTextField ref={sizeRef} addonAfter={selectAfter} />
+                <GroupTextField
+                  type={"number"}
+                  ref={sizeRef}
+                  addonAfter={selectAfter}
+                />
               </Form.Item>
             </Col>
             <Col xs={24} sm={12}>

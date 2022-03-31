@@ -18,10 +18,8 @@ const PostAdForm = () => {
         ...data,
         ...formData,
       });
-      if (step < 3) {
+      if (step < 4) {
         setStep(step + 1);
-      } else {
-        console.log(data);
       }
     },
     [data, step]

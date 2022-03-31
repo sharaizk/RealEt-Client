@@ -4,8 +4,12 @@ import { StepperTransition } from "../../../../../utils/StepperAnimationConfigur
 import { Tooltip } from "antd";
 import VTour from "../../../../CustomComponents/VTourBuilder";
 import { MoveContainer, MoveBtn } from "../PAFElements";
-const FourthStep = ({ handlePrevStep }) => {
+import { useMutation } from "react-query";
+const FourthStep = ({ data, handlePrevStep }) => {
   const [virtualTour, setVirtualTour] = useState(false);
+  const handleAddPost = useMutation(async () => {
+    console.log(data);
+  });
   return (
     <StepContainer {...StepperTransition}>
       {!virtualTour ? (
@@ -25,6 +29,7 @@ const FourthStep = ({ handlePrevStep }) => {
                 backgroundcolor="#FFF"
                 textcolor="#545454"
                 bordercolor={"rgba(66, 66, 6,0.25)"}
+                onClick={handleAddPost.mutate}
               >
                 No
               </Btn>

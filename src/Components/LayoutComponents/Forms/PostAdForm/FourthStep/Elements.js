@@ -5,6 +5,7 @@ import { Button } from "antd";
 export const StepContainer = styled(motion.div)`
   width: 100%;
   height: 100%;
+  min-height: 70vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
