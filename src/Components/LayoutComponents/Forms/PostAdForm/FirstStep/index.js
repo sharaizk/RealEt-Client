@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import {
   StepContainer,
   BuyRentButton,
@@ -38,11 +38,6 @@ const FirstStep = ({ data, handleNextStep }) => {
     },
   };
 
-  useEffect(() => {
-    if (btnRef) {
-      btnRef.current.focus();
-    }
-  }, [btnRef]);
   return (
     <StepContainer {...StepperTransition}>
       <HotKeys keyMap={stepFormMap} handlers={handlers}>
@@ -54,7 +49,7 @@ const FirstStep = ({ data, handleNextStep }) => {
           requiredMark="optional"
         >
           <Form.Item
-            name="buyrent"
+            name="propertyIntent"
             rules={[{ required: true, message: "Buy or Rent is Required" }]}
             initialValue={data.buyrent ? data.buyrent : "Rent"}
           >

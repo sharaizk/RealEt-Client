@@ -2,8 +2,11 @@
   height: 25vh !important;
   max-height: 25vh !important;
   margin-bottom: 5vh;
-  max-width: 800px !important;
+  max-width: 1200px !important;
   @media screen and (max-width: 480px) {
     margin-bottom: 8vh;
+  }
+  @media screen and (max-width: 280px) {
+    margin-bottom: 12vh;
   }
 }

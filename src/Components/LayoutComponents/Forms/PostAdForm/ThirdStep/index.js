@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   StepContainer,
   UnitCat,
@@ -14,15 +14,22 @@ import TextEditor from "../../../../CustomComponents/TextEditor";
 import { useForm } from "antd/lib/form/Form";
 import { HotKeys } from "react-hotkeys";
 import { stepFormMap } from "../../../../../utils/Hotkeys";
+import { PriceConvertor } from "../../../../../helpers/PriceHelpers";
 const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
   const [form] = useForm();
   const sizeRef = useRef(null);
+  const [price, setPrice] = useState(data?.price || "");
   useEffect(() => {
     sizeRef.current.focus();
   }, [sizeRef]);
 
+  const PriceArrow = () => {
+    const f = PriceConvertor(price);
+    return <p>{f}</p>;
+  };
+
   const selectAfter = (
-    <Form.Item name="sunit" initialValue={data?.sunit} noStyle>
+    <Form.Item name="unit" initialValue={data?.unit || "Marla"} noStyle>
       <UnitCat placeholder="Unit">
         <UnitOption value="Kanal">Kanal</UnitOption>
         <UnitOption value="Marla">Marla</UnitOption>
@@ -73,12 +80,17 @@ const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
           layout="vertical"
           requiredMark="optional"
           name="detail-info"
+          onValuesChange={(v) => {
+            if (v.price) {
+              setPrice(v.price);
+            }
+          }}
         >
           <Row gutter={{ xs: 0, md: 16 }}>
             <Col xs={24} sm={12}>
               <Form.Item
                 name="size"
-                initialValue={data?.size || "Select Unit"}
+                initialValue={data?.size}
                 rules={[
                   {
                     required: true,
@@ -104,7 +116,11 @@ const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
                   },
                 ]}
               >
-                <TextField placeholder="Price" />
+                <TextField
+                  placeholder="Price"
+                  type="number"
+                  addonAfter={<PriceArrow />}
+                />
               </Form.Item>
             </Col>
           </Row>

@@ -1,9 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StepContainer, LocationCat, LocationOption } from "./Elements";
+import {
+  StepContainer,
+  LocationCat,
+  LocationOption,
+  TextField,
+} from "./Elements";
 import { StepperTransition } from "../../../../../utils/StepperAnimationConfiguration";
 import { MoveContainer, MoveBtn } from "../PAFElements";
 import { HotKeys } from "react-hotkeys";
-import { Form, Spin } from "antd";
+import { Form, Spin, Row, Col } from "antd";
 import Schema from "async-validator";
 import server from "../../../../../Axios";
 import Map from "../../../../CustomComponents/Map";
@@ -23,7 +28,6 @@ const SecondStep = ({ data, handleNextStep, handlePrevStep }) => {
   useEffect(() => {
     citySelectRef.current.focus();
   }, [citySelectRef]);
-
   // ================================== || Fetching The Cities and Locations || ============
   const { data: cities, isLoading: isCityLoading } = useQuery(
     "Cities",
@@ -95,6 +99,9 @@ const SecondStep = ({ data, handleNextStep, handlePrevStep }) => {
                 placeholder="Select your City"
                 onChange={(v) => {
                   setSelectedCity(v);
+                  form.setFieldsValue({
+                    city: v,
+                  });
                 }}
                 filterOption={(input, option) =>
                   option.children.toLowerCase().indexOf(input.toLowerCase()) >=
@@ -155,6 +162,20 @@ const SecondStep = ({ data, handleNextStep, handlePrevStep }) => {
               </LocationCat>
             </Form.Item>
           </Spin>
+
+          <Row gutter={{ xs: 0, md: 16 }}>
+            <Col xs={24} sm={12}>
+              <Form.Item name="sector" label="Sector">
+                <TextField placeholder="Property Phase or Sector" />
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={12}>
+              <Form.Item name="block" label="Block">
+                <TextField placeholder="Property Block" />
+              </Form.Item>
+            </Col>
+          </Row>
+
           <Form.Item>
             <Map />
           </Form.Item>

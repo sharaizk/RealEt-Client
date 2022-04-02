@@ -44,17 +44,43 @@ export const GroupTextField = styled(Input)`
   }
 `;
 export const TextField = styled(Input)`
-  border-radius: 10px;
-  padding: 10px;
-  width: 100%;
-  box-shadow: none;
-  &:focus,
-  :active {
-    box-shadow: none;
-    border: 1px solid #d9d9d9;
+  & .ant-input-wrapper {
+    & input {
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: none;
+      width: 100%;
+
+      &:focus,
+      :active {
+        box-shadow: none;
+        border: 1px solid #d9d9d9;
+      }
+      &:hover {
+        border: 1px solid #d9d9d9;
+      }
+    }
   }
-  &:hover {
-    border: 1px solid #d9d9d9;
+  & .ant-input-group-addon {
+    border-radius: 0 10px 10px 0;
+    background-color: #42ba96;
+    position: relative;
+    text-align: center;
+    & > p {
+      margin-bottom: 0;
+      color: #fff;
+    }
+    :before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 0;
+      right: 100%;
+      top: 0;
+      z-index: 1;
+      border: 20px solid transparent;
+      border-right: 20px solid #42ba96;
+    }
   }
 `;
 
@@ -66,6 +92,7 @@ export const CustomUpload = styled(Upload.Dragger)`
   border-radius: 10px !important;
   background-color: #fff !important;
   border: 2px dashed #d9d9d9 !important;
+
   &:hover {
     border-color: #fc6e20 !important ;
   }

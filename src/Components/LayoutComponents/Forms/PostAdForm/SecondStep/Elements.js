@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Select } from "antd";
+import { Select, Input } from "antd";
 const { Option } = Select;
 export const StepContainer = styled(motion.div)`
   width: 100%;
@@ -40,4 +40,18 @@ export const LocationOption = styled(Option)`
 export const MapContainer = styled.div`
   height: 100%;
   width: 100%;
+`;
+
+export const TextField = styled(Input)`
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: none;
+  &:focus,
+  :active {
+    box-shadow: none;
+    border: 1px solid #d9d9d9;
+  }
+  &:hover {
+    border: 1px solid #d9d9d9;
+  }
 `;

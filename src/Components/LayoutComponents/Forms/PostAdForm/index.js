@@ -84,6 +84,8 @@ const PostAdForm = () => {
             data={data}
             handlePrevStep={handlePrevStep}
             handleNextStep={handleNextStep}
+            setData={setData}
+            setStep={setStep}
           />
         )}
       </AnimatePresence>
