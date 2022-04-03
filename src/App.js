@@ -27,6 +27,7 @@ function App() {
   const LazySignUp = lazy(() => import("./Screens/SignUpScreen"));
   const LazyCalculator = lazy(() => import("./Screens/CostScreen"));
   const LazyPostAdd = lazy(() => import("./Screens/PostAd"));
+  const LazyListing = lazy(() => import("./Screens/PropertyListing"));
   return (
     <Suspense fallback={<Loading />}>
       <div className="App">
@@ -60,6 +61,7 @@ function App() {
                 </LoggedIn>
               }
             />
+            <Route path="/property-list" element={<LazyListing />} />
             <Route path="/costcalculator" element={<LazyCalculator />} />
             <Route
               path="/dashboard/*"

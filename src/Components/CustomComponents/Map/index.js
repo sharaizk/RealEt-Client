@@ -1,9 +1,11 @@
 import React from "react";
-import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
+import ReactMapboxGl, { Marker } from "react-mapbox-gl";
+
+import { GiPositionMarker } from "react-icons/gi";
 const Map = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MBMAPKEY,
 });
-const GMap = ({ longitute, lattitude }) => {
+const GMap = ({ coordinates }) => {
   return (
     <Map
       style={`mapbox://styles/mapbox/light-v10`}
@@ -12,11 +14,12 @@ const GMap = ({ longitute, lattitude }) => {
         width: "100%",
         borderRadius: 10,
       }}
-      center={[74.358749, 31.52037]}
+      center={[coordinates.lng, coordinates.lat]}
+      zoom={[coordinates.zoom]}
     >
-      <Layer type="symbol" id="marker" layout={{ "icon-image": "marker-15" }}>
-        <Feature coordinates={[74.358749, 31.52037]} />
-      </Layer>
+      <Marker coordinates={[coordinates.lng, coordinates.lat]}>
+        <GiPositionMarker size={30} color="#FC6E20" />
+      </Marker>
     </Map>
   );
 };

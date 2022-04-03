@@ -82,16 +82,6 @@ const Nav = ({
         </MobileIcon>
         <NavMenu>
           <NavItem scrollNav={scrollNav}>
-            <NavLinks $scrollNav={scrollNav} color={linksColor} to="/signup">
-              Buy a Property
-            </NavLinks>
-          </NavItem>
-          <NavItem scrollNav={scrollNav}>
-            <NavLinks $scrollNav={scrollNav} color={linksColor} to="/signup">
-              Rent a Property
-            </NavLinks>
-          </NavItem>
-          <NavItem scrollNav={scrollNav}>
             <NavLinks
               $scrollNav={scrollNav}
               color={linksColor}

@@ -24,6 +24,11 @@ const SecondStep = ({ data, handleNextStep, handlePrevStep }) => {
   const btnRef = useRef(null);
   const [form] = Form.useForm();
   const [selectedCity, setSelectedCity] = useState("");
+  const [coordinates, setCoordinates] = useState({
+    lng: 69.345116,
+    lat: 30.37532,
+    zoom: 3,
+  });
 
   useEffect(() => {
     citySelectRef.current.focus();
@@ -147,6 +152,17 @@ const SecondStep = ({ data, handleNextStep, handlePrevStep }) => {
                     0
                 }
                 allowClear
+                onChange={(v) => {
+                  const loc = locations.find((location) => location.key === v);
+                  setCoordinates({
+                    lng: loc?.longitude,
+                    lat: loc?.latitude,
+                    zoom: 11,
+                  });
+                  form.setFieldsValue({
+                    location: v,
+                  });
+                }}
               >
                 {locations?.map((location) => {
                   return (
@@ -177,7 +193,7 @@ const SecondStep = ({ data, handleNextStep, handlePrevStep }) => {
           </Row>
 
           <Form.Item>
-            <Map />
+            <Map coordinates={coordinates} />
           </Form.Item>
           <MoveContainer>
             <MoveBtn onClick={handlePrevStep}>Prev</MoveBtn>

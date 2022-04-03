@@ -52,8 +52,6 @@ const Sidebar = ({
       </Icon>
       <SidebarWrapper>
         <SidebarMenu>
-          <SidebarLink to="/signup">Buy a Property</SidebarLink>
-          <SidebarLink to="/signup">Rent a Property</SidebarLink>
           <SidebarLink to="/costcalculator" onClick={toggle}>
             Cost Calculator
           </SidebarLink>

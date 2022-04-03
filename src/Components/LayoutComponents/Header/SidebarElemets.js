@@ -43,7 +43,7 @@ export const SidebarWrapper = styled.div`
 export const SidebarMenu = styled.ul`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 70px);
+  grid-template-rows: repeat(4, 70px);
   text-align: center;
   font-family: "Poppins", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
     sans-serif;
