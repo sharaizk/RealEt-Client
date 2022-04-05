@@ -11,53 +11,52 @@ export const SearchFieldContainer = styled.div`
   background-color: #fff;
   border-radius: 10px;
   padding: 10px 15px 15px 15px;
-  @media screen and (max-width:550px){
-      flex-direction: column;
-      height: auto;
+  @media screen and (max-width: 550px) {
+    flex-direction: column;
+    height: auto;
   }
 `;
-export const OptionsContainer=styled.div`
+export const OptionsContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  @media screen and (max-width:550px){
-      flex-direction: column;
-      height: auto;
+  @media screen and (max-width: 550px) {
+    flex-direction: column;
+    height: auto;
   }
-`
+`;
 
 export const CityDropDown = styled(Select)`
   flex: 0.2;
-  @media screen and (max-width:550px){
-      width: 100%;
-      margin-bottom: 5px;
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    margin-bottom: 5px;
   }
 `;
 export const COption = styled(Option)``;
 
 export const AreaDropDown = styled(Select)`
   flex: 0.4;
-  @media screen and (max-width:550px){
-      width: 100%;
-      margin-bottom: 5px;
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    margin-bottom: 5px;
   }
 `;
 
 export const CategoryDropDown = styled(Select)`
   flex: 0.25;
-  @media screen and (max-width:550px){
-      width: 100%;
-      margin-bottom: 5px;
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    margin-bottom: 5px;
   }
 `;
 
-export const ButtonContainer=styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-`
+`;
 
 export const BuyRentBtn = styled.button`
   font-size: 18px;
@@ -69,27 +68,28 @@ export const BuyRentBtn = styled.button`
   margin-right: 12px;
   background-color: transparent;
   transition: all 0.2s ease-in;
-  &:disabled{
+  &:disabled {
     opacity: 0.5;
   }
-`
+`;
 
 export const SearchButton = styled(Button)`
   flex: 0.125;
   background-color: #fc6e20;
-  color: #FFF;
+  color: #fff;
   border-radius: 5px;
   box-shadow: none;
   border: none;
-  :hover{
-    color: #FFF;
-      background-color: #fc6e20;
+  :hover {
+    color: #fff;
+    background-color: #fc6e20;
   }
-  :focus,:active{
-      color: #FFF;
-      background-color: #fc6e20;
+  :focus,
+  :active {
+    color: #fff;
+    background-color: #fc6e20;
   }
-  @media screen and (max-width:550px){
-      width: 100%;
+  @media screen and (max-width: 550px) {
+    width: 100%;
   }
 `;

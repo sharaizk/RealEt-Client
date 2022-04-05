@@ -42,7 +42,6 @@ const Nav = ({
       setScrollNav(false);
     }
   };
-
   useEffect(() => {
     window.addEventListener("scroll", changeNav);
   }, []);
@@ -83,16 +82,6 @@ const Nav = ({
         </MobileIcon>
         <NavMenu>
           <NavItem scrollNav={scrollNav}>
-            <NavLinks $scrollNav={scrollNav} color={linksColor} to="/signup">
-              Buy a Property
-            </NavLinks>
-          </NavItem>
-          <NavItem scrollNav={scrollNav}>
-            <NavLinks $scrollNav={scrollNav} color={linksColor} to="/signup">
-              Rent a Property
-            </NavLinks>
-          </NavItem>
-          <NavItem scrollNav={scrollNav}>
             <NavLinks
               $scrollNav={scrollNav}
               color={linksColor}
@@ -107,7 +96,11 @@ const Nav = ({
             </NavLinks>
           </NavItem>
           <NavBtn>
-            <PostAddbtn $scrollNav={scrollNav} color={linksColor} to="/signup">
+            <PostAddbtn
+              $scrollNav={scrollNav}
+              color={linksColor}
+              to="/post-add"
+            >
               Post Ad
             </PostAddbtn>
             {isSignedIn ? (

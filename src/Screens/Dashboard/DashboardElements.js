@@ -45,3 +45,25 @@ export const LinkBtn = styled(NavLink)`
     border-radius: 8px 0 0 0;
   }
 `;
+
+export const DrawerTrigger = styled.div`
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  width: 41px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 0;
+  text-align: center;
+  line-height: 40px;
+  font-size: 16px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #545454;
+  color: #fff;
+  border-radius: 5px;
+`;

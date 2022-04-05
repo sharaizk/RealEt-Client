@@ -1,18 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
 @font-face {
-  font-family: 'ABeatByKaiRegular';
-  src: local('ABeatByKaiRegular'), url(./assets/fonts/ABeatByKai/ABEAKRG.TTF) format('truetype');
+  font-family: "ABeatByKaiRegular";
+  src: local("ABeatByKaiRegular"),
+    url(./assets/fonts/ABeatByKai/ABEAKRG.TTF) format("truetype");
 }
-*{
+* {
   margin: 0;
-  padding:0 ;
+  padding: 0;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none; /* Safari */        
--moz-user-select: none; /* Firefox */
--ms-user-select: none; /* IE10+/Edge */
-user-select: none; /* Standard */
-  font-family: "Poppins",'Gill Sans',Calibri, 'Trebuchet MS', sans-serif;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+  font-family: "Poppins", "Gill Sans", Calibri, "Trebuchet MS", sans-serif;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield !;
 }
 .site-back-top-basic {
   color: rgba(255, 0, 0, 0.6) !important;
+}
+html {
+  scroll-behavior: smooth;
 }

@@ -6,6 +6,7 @@ export const Navbar = styled.nav`
   height: ${({ scrollNav }) => (!scrollNav ? "80px" : "70px")};
   display: flex;
   justify-content: center;
+  overflow: hidden;
   align-items: center;
   font-size: 1rem;
   position: fixed;

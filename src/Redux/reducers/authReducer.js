@@ -7,7 +7,9 @@ const INITIAL_STATE = {
   profileImage: "",
   socialId: "",
   role: ["Consumer"],
-  otp: {},
+  otp: {
+    status: false,
+  },
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
