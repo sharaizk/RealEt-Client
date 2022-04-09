@@ -10,6 +10,19 @@ import {
   CustomSelect,
   SelectOptions,
   SearchButton,
+  ListContainer,
+  List,
+  ListImage,
+  ListTitle,
+  DescContainer,
+  ListLocation,
+  ImageContainer,
+  ListDesc,
+  PriceTag,
+  InfoContainer,
+  InfoRow,
+  InfoTitle,
+  InfoDetail,
 } from "./Elements";
 import { Breadcrumb, Divider, Row, Col, Form } from "antd";
 import { NavLink } from "react-router-dom";
@@ -131,6 +144,56 @@ const SideBar = () => {
   );
 };
 
+export const SingleProperty = () => {
+  return (
+    <>
+      {[1, 2, 3, 4, 5, 6].map((list, i) => {
+        return (
+          <>
+            <List key={i}>
+              <ImageContainer>
+                <ListImage
+                  src="http://themestarz.net/html/zoner/assets/img/properties/property-01.jpg"
+                  alt="property-thumb."
+                />
+              </ImageContainer>
+              <DescContainer>
+                <ListTitle>4862 Palmer Road</ListTitle>
+                <ListLocation>Worthington, OH 43085</ListLocation>
+                <PriceTag>PKR 1 Crore</PriceTag>
+                <ListDesc>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
+                  et dui vestibulum, bibendum purus sit amet, vulputate mauris.
+                  Ut adipiscing gravida tincidunt...
+                </ListDesc>
+              </DescContainer>
+              <InfoContainer>
+                <InfoRow>
+                  <InfoTitle>Status:</InfoTitle>
+                  <InfoDetail>Sell</InfoDetail>
+                </InfoRow>
+                <InfoRow>
+                  <InfoTitle>Size:</InfoTitle>
+                  <InfoDetail>10 Marla</InfoDetail>
+                </InfoRow>
+                <InfoRow>
+                  <InfoTitle>Type:</InfoTitle>
+                  <InfoDetail>Residential</InfoDetail>
+                </InfoRow>
+                <InfoRow>
+                  <InfoTitle>Virtual Tour:</InfoTitle>
+                  <InfoDetail>N/A</InfoDetail>
+                </InfoRow>
+              </InfoContainer>
+            </List>
+            <Divider />
+          </>
+        );
+      })}
+    </>
+  );
+};
+
 const PropertyListing = () => {
   return (
     <PropertyListContainer>
@@ -157,11 +220,13 @@ const PropertyListing = () => {
               <CustomSelect placeholder="Sort By" allowClear>
                 <SelectOptions value="1">Lowest Price First</SelectOptions>
                 <SelectOptions value="-1">Heighest Price First</SelectOptions>
-
                 <SelectOptions value="date">Date added</SelectOptions>
               </CustomSelect>
             </Col>
           </Row>
+          <ListContainer>
+            <SingleProperty />
+          </ListContainer>
         </ListingSection>
         <SideBar />
       </PropertySection>
