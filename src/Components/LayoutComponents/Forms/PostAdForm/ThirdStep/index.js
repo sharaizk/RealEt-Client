@@ -171,6 +171,7 @@ const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
           >
             <CustomUpload
               accept="image/*"
+              multiple={true}
               name="files"
               getValueFromEvent={normFile}
               beforeUpload={(file) => {

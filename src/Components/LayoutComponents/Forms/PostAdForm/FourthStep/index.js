@@ -14,6 +14,7 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
   const handleAddPost = useMutation(
     async () => {
       hide = message.loading("Publishing your add...", 0);
+      console.log(data);
       const info = {
         price: data?.price,
         coords: {
@@ -32,6 +33,7 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
       formData.append("description", data?.description);
       formData.append("type", data?.type);
       formData.append("propertySubType", data?.propertySubType);
+      formData.append("propertyIntent", data?.propertyIntent);
       formData.append("city", data?.city);
       formData.append("location", data?.location);
       formData.append("info", JSON.stringify(info));
