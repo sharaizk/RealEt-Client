@@ -15,6 +15,13 @@ export const PropertyListContainer = styled.div`
   @media screen and (max-height: 700px) {
     height: 100%;
   }
+  @media screen and (max-width: 1024px) {
+    padding: 80px 5vw 0 5vw;
+  }
+  @media screen and (max-width: 768px) {
+    flex: 1;
+    padding: 80px 6vw 0 6vw;
+  }
 `;
 
 export const CrumbContainer = styled.div`
@@ -37,10 +44,20 @@ export const PropertySection = styled.div`
 export const ListingSection = styled.div`
   flex: 0.65;
   height: 100%;
+  @media screen and (max-width: 768px) {
+    flex: 1;
+  }
 `;
 export const FilterProperty = styled.div`
   flex: 0.3;
   height: 100%;
+  position: sticky;
+  top: 0;
+  padding-top: ${({ scrollNav }) => (!scrollNav ? 0 : "80px")};
+  transition: all 0.2s;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const SectionTitle = styled.h5`
@@ -50,7 +67,7 @@ export const SectionTitle = styled.h5`
 `;
 export const SectionTitle2 = styled.h5`
   font-size: 1.2rem;
-  line-height: 2.6rem;
+  line-height: 2.8rem;
   color: #545454;
   font-weight: 300;
 `;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   PropertyListContainer,
   CrumbContainer,
@@ -18,13 +18,24 @@ import { useQuery } from "react-query";
 import server from "../../Axios";
 
 const SideBar = () => {
+  const [scrollNav, setScrollNav] = useState(false);
+  const changeNav = () => {
+    if (window.scrollY >= 100) {
+      setScrollNav(true);
+    } else {
+      setScrollNav(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", changeNav);
+  }, []);
   const { data: cities } = useQuery("Cities", async () => {
     const cityDataResponse = await server.get("/geography/cities");
 
     return cityDataResponse.data.data;
   });
   return (
-    <FilterProperty>
+    <FilterProperty scrollNav={scrollNav}>
       <SectionTitle2>Search Properties</SectionTitle2>
       <Divider />
       <Form name="search-form" layout="vertical">
@@ -51,7 +62,15 @@ const SideBar = () => {
             },
           ]}
         >
-          <CustomSelect placeholder="City" showSearch allowClear>
+          <CustomSelect
+            placeholder="City"
+            showSearch
+            filterOption={(input, option) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+            allowClear
+          >
             {cities?.map((city) => {
               return (
                 <SelectOptions name="city" key={city._id} value={city.key}>
@@ -127,12 +146,14 @@ const PropertyListing = () => {
         <ListingSection>
           <SectionTitle>Properties Listing</SectionTitle>
           <Divider />
-          <Row>
-            <Col span={1}>
+          <Row align="flex-end" justify="space-between">
+            <Col xs={2} sm={1} md={1}>
               <GrFormSearch size={27} />
             </Col>
-            <Col span={17}>Search Results: 28</Col>
-            <Col span={6}>
+            <Col xs={11} sm={18} md={18}>
+              Search Results: 28
+            </Col>
+            <Col span={10} sm={5}>
               <CustomSelect placeholder="Sort By" allowClear>
                 <SelectOptions value="1">Lowest Price First</SelectOptions>
                 <SelectOptions value="-1">Heighest Price First</SelectOptions>

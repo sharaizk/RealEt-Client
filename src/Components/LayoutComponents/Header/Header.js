@@ -32,9 +32,9 @@ const Nav = ({
   profilePicture,
   onSignOut,
 }) => {
-  const [scrollNav, setScrollNav] = useState(false);
   const location = useLocation();
   const linksColor = location.pathname !== "/" ? "#424242" : "#FFF";
+  const [scrollNav, setScrollNav] = useState(false);
   const changeNav = () => {
     if (window.scrollY >= 80) {
       setScrollNav(true);
