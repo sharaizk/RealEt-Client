@@ -9,6 +9,7 @@ import reduxThunk from "redux-thunk";
 import { BrowserRouter } from "react-router-dom";
 import History from "./History";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -21,6 +22,7 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter history={History}>
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools />
         <App />
       </QueryClientProvider>
     </BrowserRouter>

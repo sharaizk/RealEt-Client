@@ -8,9 +8,13 @@ import {
   SearchButton,
 } from "./Elements";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import server from "../../../Axios";
 const ListSideBar = () => {
   const [scrollNav, setScrollNav] = useState(false);
+  const [selectedCity, setSelectedCity] = useState("");
+  const navigate = useNavigate();
+  const [form] = Form.useForm();
   const changeNav = () => {
     if (window.scrollY >= 100) {
       setScrollNav(true);
@@ -26,11 +30,37 @@ const ListSideBar = () => {
 
     return cityDataResponse.data.data;
   });
+
+  const isCitySelected = selectedCity ? true : false;
+  const { data: locations, isLoading: isLocationLoading } = useQuery(
+    ["Location", selectedCity],
+    async () => {
+      const locationDataResponse = await server.get("/geography/locations", {
+        params: {
+          city_id: selectedCity,
+        },
+      });
+      return locationDataResponse.data.data;
+    },
+    {
+      enabled: isCitySelected,
+    }
+  );
+
   return (
     <FilterProperty scrollNav={scrollNav}>
       <SectionTitle2>Search Properties</SectionTitle2>
       <Divider />
-      <Form name="search-form" layout="vertical">
+      <Form
+        form={form}
+        name="search-form"
+        layout="vertical"
+        onFinish={(v) => {
+          navigate(
+            `/property-list/${v.city}/${v.location}/${v.category}/${v.propertyIntent}`
+          );
+        }}
+      >
         <Form.Item
           name="propertyIntent"
           rules={[
@@ -41,8 +71,8 @@ const ListSideBar = () => {
           ]}
         >
           <CustomSelect placeholder="Status" allowClear>
-            <SelectOptions value="1">Buy</SelectOptions>
-            <SelectOptions value="-1">Rent</SelectOptions>
+            <SelectOptions value="Sell">Sell</SelectOptions>
+            <SelectOptions value="Rent">Rent</SelectOptions>
           </CustomSelect>
         </Form.Item>
         <Form.Item
@@ -61,7 +91,12 @@ const ListSideBar = () => {
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
-            allowClear
+            onChange={(v) => {
+              setSelectedCity(v);
+              form.setFieldsValue({
+                city: v,
+              });
+            }}
           >
             {cities?.map((city) => {
               return (
@@ -73,7 +108,7 @@ const ListSideBar = () => {
           </CustomSelect>
         </Form.Item>
         <Form.Item
-          name="Location"
+          name="location"
           rules={[
             {
               required: true,
@@ -81,9 +116,25 @@ const ListSideBar = () => {
             },
           ]}
         >
-          <CustomSelect placeholder="Location" allowClear>
-            <SelectOptions value="1">Lowest Price First</SelectOptions>
-            <SelectOptions value="-1">Heighest Price First</SelectOptions>
+          <CustomSelect
+            placeholder="Location"
+            showSearch
+            filterOption={(input, option) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            {locations?.map((location) => {
+              return (
+                <SelectOptions
+                  name="location"
+                  key={location._id}
+                  value={location.key}
+                >
+                  {location.name}
+                </SelectOptions>
+              );
+            })}
           </CustomSelect>
         </Form.Item>
 

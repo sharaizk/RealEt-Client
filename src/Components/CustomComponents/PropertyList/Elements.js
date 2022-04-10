@@ -11,6 +11,7 @@ export const DescContainer = styled.div`
   @media screen and (max-width: 480px) {
     margin-left: 0;
     margin-top: 15px;
+    width: 100%;
   }
 `;
 
@@ -54,15 +55,19 @@ export const InfoRow = styled.div`
 
 export const InfoTitle = styled.label`
   font-size: 0.8rem;
+  line-height: 0.8rem;
   font-weight: 600;
 `;
 
-export const ListDesc = styled.p`
+export const ListDesc = styled.div`
   font-size: 0.8rem;
   text-align: left;
   color: #5a5a5a;
   margin: 0;
   margin-top: auto;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ListImage = styled.img`
@@ -102,7 +107,7 @@ export const List = styled(motion.div)`
   align-items: center;
 
   @media screen and (max-width: 1280px) {
-    height: 18vh;
+    height: 20vh;
   }
   @media screen and (max-width: 480px) {
     flex-direction: column;

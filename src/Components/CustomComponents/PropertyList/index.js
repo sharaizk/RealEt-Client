@@ -14,12 +14,16 @@ import {
   List,
 } from "./Elements";
 import { Divider } from "antd";
+
+import { PriceConvertor } from "../../../helpers/PriceHelpers";
+import ReactHtmlParser from "react-html-parser";
+
 const PropertyList = ({ propertyData }) => {
   return (
     <>
       {propertyData.map((property, i) => {
         return (
-          <>
+          <React.Fragment key={i}>
             <List
               variants={{
                 hidden: { y: 20, opacity: 0 },
@@ -28,36 +32,30 @@ const PropertyList = ({ propertyData }) => {
                   opacity: 1,
                 },
               }}
-              key={i}
             >
               <ImageContainer>
-                <ListImage
-                  src="http://themestarz.net/html/zoner/assets/img/properties/property-01.jpg"
-                  alt="property-thumb."
-                />
+                <ListImage src={property.photos[0]} alt="property-thumb." />
               </ImageContainer>
               <DescContainer>
                 <ListTitle>{property.title}</ListTitle>
                 <ListLocation>Worthington, OH 43085</ListLocation>
-                <PriceTag>PKR 1 Crore</PriceTag>
-                <ListDesc>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-                  et dui vestibulum, bibendum purus sit amet, vulputate mauris.
-                  Ut adipiscing gravida tincidunt...
-                </ListDesc>
+                <PriceTag>
+                  PKR {property && PriceConvertor(property?.info?.price)}
+                </PriceTag>
+                <ListDesc>{ReactHtmlParser(property?.description)}</ListDesc>
               </DescContainer>
               <InfoContainer>
                 <InfoRow>
                   <InfoTitle>Status:</InfoTitle>
-                  <InfoDetail>Sell</InfoDetail>
+                  <InfoDetail>{property?.propertyIntent}</InfoDetail>
                 </InfoRow>
                 <InfoRow>
                   <InfoTitle>Size:</InfoTitle>
-                  <InfoDetail>10 Marla</InfoDetail>
+                  <InfoDetail>{`${property?.info.size} ${property?.info.unit}`}</InfoDetail>
                 </InfoRow>
                 <InfoRow>
                   <InfoTitle>Type:</InfoTitle>
-                  <InfoDetail>Residential</InfoDetail>
+                  <InfoDetail>{property?.type}</InfoDetail>
                 </InfoRow>
                 <InfoRow>
                   <InfoTitle>Virtual Tour:</InfoTitle>
@@ -66,7 +64,7 @@ const PropertyList = ({ propertyData }) => {
               </InfoContainer>
             </List>
             <Divider />
-          </>
+          </React.Fragment>
         );
       })}
     </>

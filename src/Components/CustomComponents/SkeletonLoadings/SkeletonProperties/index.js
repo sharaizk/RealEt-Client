@@ -16,9 +16,9 @@ import { Divider } from "antd";
 const SkeletonProperties = () => {
   return (
     <>
-      {[1, 2, 3, 4, 5, 6].map((list, i) => {
+      {[1, 2, 3].map((list, i) => {
         return (
-          <>
+          <React.Fragment key={i}>
             <List
               variants={{
                 hidden: { y: 20, opacity: 0 },
@@ -27,7 +27,6 @@ const SkeletonProperties = () => {
                   opacity: 1,
                 },
               }}
-              key={i}
             >
               <ImageContainer />
               <DescContainer>
@@ -51,7 +50,7 @@ const SkeletonProperties = () => {
               </ShimmerWrapper>
             </List>
             <Divider />
-          </>
+          </React.Fragment>
         );
       })}
     </>

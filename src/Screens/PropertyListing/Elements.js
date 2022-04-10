@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Select } from "antd";
+import { Select, Pagination } from "antd";
 import { motion } from "framer-motion";
 const { Option } = Select;
 export const PropertyListContainer = styled.div`
@@ -72,7 +72,7 @@ export const SelectOptions = styled(Option)``;
 export const ListContainer = styled(motion.div)`
   display: flex;
   width: 100%;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
   flex-direction: column;
   margin-top: 3vh;
@@ -84,5 +84,14 @@ export const ListingSection = styled.div`
   margin-bottom: 30px;
   @media screen and (max-width: 768px) {
     flex: 1;
+  }
+`;
+export const CustomPagination = styled(Pagination)`
+  justify-self: flex-end;
+  & .ant-pagination-item-active {
+    border-color: #fc6e20;
+    & a {
+      color: #fc6e20;
+    }
   }
 `;

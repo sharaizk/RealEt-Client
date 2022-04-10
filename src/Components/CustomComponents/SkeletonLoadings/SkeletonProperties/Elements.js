@@ -18,9 +18,6 @@ export const ImageContainer = styled.div`
   flex: 0.3;
   height: 100%;
   background-color: #ddd;
-  /* @media screen and (max-width: 1280px) {
-    flex: 0.4;
-  } */
 `;
 
 export const InfoContainer = styled.div`
@@ -57,6 +54,9 @@ export const ListDesc = styled.div`
   color: #ddd;
   margin: 0;
   margin-top: auto;
+  @media screen and (max-width: 1400px) {
+    margin-top: 0.2rem;
+  }
 `;
 
 export const ListLocation = styled.div`
@@ -74,12 +74,14 @@ export const ListTitle = styled.div`
 `;
 export const PriceTag = styled.div`
   background-color: #ddd;
-
   color: #ddd;
   padding: 4px 8px;
   border-radius: 5px;
   margin-top: auto;
   font-size: 0.8rem;
+  @media screen and (max-width: 1400px) {
+    margin-top: 0.2rem;
+  }
 `;
 
 export const List = styled(motion.div)`

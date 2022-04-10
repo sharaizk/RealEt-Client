@@ -8,8 +8,9 @@ import {
   CustomSelect,
   SelectOptions,
   ListContainer,
+  CustomPagination,
 } from "./Elements";
-import { Breadcrumb, Divider, Row, Col, Pagination } from "antd";
+import { Breadcrumb, Divider, Row, Col } from "antd";
 import { NavLink } from "react-router-dom";
 import { GrFormSearch } from "react-icons/gr";
 import ListSideBar from "../../Components/CustomComponents/ListSideBar";
@@ -24,9 +25,8 @@ const PropertyListing = () => {
   const [sortBy, setSortBy] = useState("createdAt");
   const { city, location, propertySubType, propertyIntent } = useParams();
   const { data: propertyData, isLoading: properttLoading } = useQuery(
-    ["Properties", city, location, propertySubType, pageNumber],
+    ["Properties", city, location, propertySubType, pageNumber, sortBy],
     async () => {
-      console.log(city, location, propertySubType, propertyIntent);
       const propertyResponse = await server.get("/ads/list", {
         params: {
           city: city,
@@ -39,9 +39,11 @@ const PropertyListing = () => {
         },
       });
       return propertyResponse.data;
+    },
+    {
+      refetchOnWindowFocus: false,
     }
   );
-  console.log(propertyData);
   return (
     <PropertyListContainer>
       <CrumbContainer>
@@ -61,7 +63,7 @@ const PropertyListing = () => {
               <GrFormSearch size={27} />
             </Col>
             <Col xs={11} sm={18} md={18}>
-              Search Results: 28
+              Search Results: {propertyData?.data?.length || 0}
             </Col>
             <Col span={10} sm={5}>
               <CustomSelect
@@ -70,10 +72,10 @@ const PropertyListing = () => {
                 placeholder="Sort By"
                 allowClear
               >
-                <SelectOptions value="-info.price">
+                <SelectOptions value="info.price">
                   Lowest Price First
                 </SelectOptions>
-                <SelectOptions value="info.price">
+                <SelectOptions value="-info.price">
                   Heighest Price First
                 </SelectOptions>
                 <SelectOptions value="createdAt">Date added</SelectOptions>
@@ -101,9 +103,9 @@ const PropertyListing = () => {
               <PropertyList propertyData={propertyData?.data} />
             )}
           </ListContainer>
-          <Pagination
+          <CustomPagination
             defaultCurrent={pageNumber}
-            total={50}
+            total={propertyData?.count || 1}
             onChange={(v) => setPageNumber(v)}
           />
         </ListingSection>
