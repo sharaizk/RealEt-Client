@@ -1,200 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   PropertyListContainer,
   CrumbContainer,
   PropertySection,
-  FilterProperty,
   ListingSection,
   SectionTitle,
-  SectionTitle2,
   CustomSelect,
   SelectOptions,
-  SearchButton,
   ListContainer,
-  List,
-  ListImage,
-  ListTitle,
-  DescContainer,
-  ListLocation,
-  ImageContainer,
-  ListDesc,
-  PriceTag,
-  InfoContainer,
-  InfoRow,
-  InfoTitle,
-  InfoDetail,
 } from "./Elements";
-import { Breadcrumb, Divider, Row, Col, Form } from "antd";
+import { Breadcrumb, Divider, Row, Col, Pagination } from "antd";
 import { NavLink } from "react-router-dom";
 import { GrFormSearch } from "react-icons/gr";
-import { useQuery } from "react-query";
+import ListSideBar from "../../Components/CustomComponents/ListSideBar";
+import PropertyList from "../../Components/CustomComponents/PropertyList";
+import { useQueryClient, useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 import server from "../../Axios";
-
-const SideBar = () => {
-  const [scrollNav, setScrollNav] = useState(false);
-  const changeNav = () => {
-    if (window.scrollY >= 100) {
-      setScrollNav(true);
-    } else {
-      setScrollNav(false);
-    }
-  };
-  useEffect(() => {
-    window.addEventListener("scroll", changeNav);
-  }, []);
-  const { data: cities } = useQuery("Cities", async () => {
-    const cityDataResponse = await server.get("/geography/cities");
-
-    return cityDataResponse.data.data;
-  });
-  return (
-    <FilterProperty scrollNav={scrollNav}>
-      <SectionTitle2>Search Properties</SectionTitle2>
-      <Divider />
-      <Form name="search-form" layout="vertical">
-        <Form.Item
-          name="propertyIntent"
-          rules={[
-            {
-              required: true,
-              message: "Please select the status",
-            },
-          ]}
-        >
-          <CustomSelect placeholder="Status" allowClear>
-            <SelectOptions value="1">Buy</SelectOptions>
-            <SelectOptions value="-1">Rent</SelectOptions>
-          </CustomSelect>
-        </Form.Item>
-        <Form.Item
-          name="city"
-          rules={[
-            {
-              required: true,
-              message: "Please select the city",
-            },
-          ]}
-        >
-          <CustomSelect
-            placeholder="City"
-            showSearch
-            filterOption={(input, option) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-            allowClear
-          >
-            {cities?.map((city) => {
-              return (
-                <SelectOptions name="city" key={city._id} value={city.key}>
-                  {city.name}
-                </SelectOptions>
-              );
-            })}
-          </CustomSelect>
-        </Form.Item>
-        <Form.Item
-          name="Location"
-          rules={[
-            {
-              required: true,
-              message: "Please select the location",
-            },
-          ]}
-        >
-          <CustomSelect placeholder="Location" allowClear>
-            <SelectOptions value="1">Lowest Price First</SelectOptions>
-            <SelectOptions value="-1">Heighest Price First</SelectOptions>
-          </CustomSelect>
-        </Form.Item>
-
-        <Form.Item
-          name="category"
-          rules={[
-            {
-              required: true,
-              message: "Please select the category",
-            },
-          ]}
-        >
-          <CustomSelect placeholder="Category" allowClear>
-            <SelectOptions value="House">House</SelectOptions>
-            <SelectOptions value="Green House">Green House</SelectOptions>
-            <SelectOptions value="Apartment">Apartment</SelectOptions>
-            <SelectOptions value="Upper Portion">Upper Portion</SelectOptions>
-            <SelectOptions value="Lower Portion">Lower Portion</SelectOptions>
-            <SelectOptions value="Farm House">Farm House</SelectOptions>
-            <SelectOptions value="Room">Room</SelectOptions>
-            <SelectOptions value="Penthouse">Penthouse</SelectOptions>
-            <SelectOptions value="Hotel Suites">Hotel Suites</SelectOptions>
-            <SelectOptions value="Basement">Basement</SelectOptions>
-            <SelectOptions value="Anexxe">Anexxe</SelectOptions>
-            <SelectOptions value="Hostel">Hostel</SelectOptions>
-            <SelectOptions value="Other">Other</SelectOptions>
-          </CustomSelect>
-        </Form.Item>
-
-        <Form.Item>
-          <SearchButton type="primary" htmlType="submit">
-            Search Now
-          </SearchButton>
-        </Form.Item>
-      </Form>
-    </FilterProperty>
-  );
-};
-
-export const SingleProperty = () => {
-  return (
-    <>
-      {[1, 2, 3, 4, 5, 6].map((list, i) => {
-        return (
-          <>
-            <List key={i}>
-              <ImageContainer>
-                <ListImage
-                  src="http://themestarz.net/html/zoner/assets/img/properties/property-01.jpg"
-                  alt="property-thumb."
-                />
-              </ImageContainer>
-              <DescContainer>
-                <ListTitle>4862 Palmer Road</ListTitle>
-                <ListLocation>Worthington, OH 43085</ListLocation>
-                <PriceTag>PKR 1 Crore</PriceTag>
-                <ListDesc>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-                  et dui vestibulum, bibendum purus sit amet, vulputate mauris.
-                  Ut adipiscing gravida tincidunt...
-                </ListDesc>
-              </DescContainer>
-              <InfoContainer>
-                <InfoRow>
-                  <InfoTitle>Status:</InfoTitle>
-                  <InfoDetail>Sell</InfoDetail>
-                </InfoRow>
-                <InfoRow>
-                  <InfoTitle>Size:</InfoTitle>
-                  <InfoDetail>10 Marla</InfoDetail>
-                </InfoRow>
-                <InfoRow>
-                  <InfoTitle>Type:</InfoTitle>
-                  <InfoDetail>Residential</InfoDetail>
-                </InfoRow>
-                <InfoRow>
-                  <InfoTitle>Virtual Tour:</InfoTitle>
-                  <InfoDetail>N/A</InfoDetail>
-                </InfoRow>
-              </InfoContainer>
-            </List>
-            <Divider />
-          </>
-        );
-      })}
-    </>
-  );
-};
-
+import SkeletonProperties from "../../Components/CustomComponents/SkeletonLoadings/SkeletonProperties";
 const PropertyListing = () => {
+  const queryClient = useQueryClient();
+  const [pageNumber, setPageNumber] = useState(1);
+  const [sortBy, setSortBy] = useState("createdAt");
+  const { city, location, propertySubType, propertyIntent } = useParams();
+  const { data: propertyData, isLoading: properttLoading } = useQuery(
+    ["Properties", city, location, propertySubType, pageNumber],
+    async () => {
+      console.log(city, location, propertySubType, propertyIntent);
+      const propertyResponse = await server.get("/ads/list", {
+        params: {
+          city: city,
+          propertyIntent: propertyIntent,
+          location: location,
+          propertySubType: propertySubType,
+          page: pageNumber,
+          limit: 10,
+          sortBy: sortBy,
+        },
+      });
+      return propertyResponse.data;
+    }
+  );
+  console.log(propertyData);
   return (
     <PropertyListContainer>
       <CrumbContainer>
@@ -217,18 +64,50 @@ const PropertyListing = () => {
               Search Results: 28
             </Col>
             <Col span={10} sm={5}>
-              <CustomSelect placeholder="Sort By" allowClear>
-                <SelectOptions value="1">Lowest Price First</SelectOptions>
-                <SelectOptions value="-1">Heighest Price First</SelectOptions>
-                <SelectOptions value="date">Date added</SelectOptions>
+              <CustomSelect
+                value={sortBy}
+                onChange={(v) => setSortBy(v)}
+                placeholder="Sort By"
+                allowClear
+              >
+                <SelectOptions value="-info.price">
+                  Lowest Price First
+                </SelectOptions>
+                <SelectOptions value="info.price">
+                  Heighest Price First
+                </SelectOptions>
+                <SelectOptions value="createdAt">Date added</SelectOptions>
               </CustomSelect>
             </Col>
           </Row>
-          <ListContainer>
-            <SingleProperty />
+          <ListContainer
+            variants={{
+              hidden: { opacity: 1, scale: 0 },
+              visible: {
+                opacity: 1,
+                scale: 1,
+                transition: {
+                  delayChildren: 0.3,
+                  staggerChildren: 0.2,
+                },
+              },
+            }}
+            initial="hidden"
+            animate="visible"
+          >
+            {properttLoading ? (
+              <SkeletonProperties />
+            ) : (
+              <PropertyList propertyData={propertyData?.data} />
+            )}
           </ListContainer>
+          <Pagination
+            defaultCurrent={pageNumber}
+            total={50}
+            onChange={(v) => setPageNumber(v)}
+          />
         </ListingSection>
-        <SideBar />
+        <ListSideBar />
       </PropertySection>
     </PropertyListContainer>
   );

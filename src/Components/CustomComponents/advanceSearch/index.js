@@ -14,44 +14,34 @@ import "./style.css";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { SearchOutlined } from "@ant-design/icons";
 import { message } from "antd";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 import server from "../../../Axios";
 
 const AdvanceSearchField = () => {
-  const [loading, setLoading] = useState(false);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [searchParam, setSearchParam] = useState({
-    buyActive: true,
-    rentActive: false,
+    propertyIntent: "Sell",
     city: null,
     location: null,
     category: "",
   });
   const onSubmit = () => {
-    setLoading(!loading);
     if (!searchParam.city || !searchParam.location || !searchParam.category) {
       message.error("Please fill the form");
     } else {
-      console.log(searchParam);
+      navigate(
+        `/property-list/${searchParam.city}/${searchParam.location}/${searchParam.category}/${searchParam.propertyIntent}`
+      );
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
   };
 
   const toggleBtn = (type) => {
-    if (type === "buy") {
-      setSearchParam({
-        ...searchParam,
-        buyActive: true,
-        rentActive: false,
-      });
-    } else {
-      setSearchParam({
-        ...searchParam,
-        buyActive: false,
-        rentActive: true,
-      });
-    }
+    setSearchParam({
+      ...searchParam,
+      propertyIntent: type,
+    });
   };
 
   const { data: cities } = useQuery("Cities", async () => {
@@ -80,17 +70,15 @@ const AdvanceSearchField = () => {
     <SearchFieldContainer>
       <ButtonContainer>
         <BuyRentBtn
-          onClick={() => toggleBtn("buy")}
-          disabled={loading}
-          isActive={searchParam.buyActive}
+          onClick={() => toggleBtn("Sell")}
+          isActive={searchParam.propertyIntent === "Sell"}
           type="text"
         >
-          Buy
+          Sell
         </BuyRentBtn>
         <BuyRentBtn
-          onClick={() => toggleBtn("rent")}
-          disabled={loading}
-          isActive={searchParam.rentActive}
+          onClick={() => toggleBtn("Rent")}
+          isActive={searchParam.propertyIntent === "Rent"}
           type="text"
         >
           Rent
@@ -98,7 +86,6 @@ const AdvanceSearchField = () => {
       </ButtonContainer>
       <OptionsContainer>
         <CityDropDown
-          disabled={loading}
           placeholder={"Select a City"}
           bordered={false}
           suffixIcon={<MdKeyboardArrowDown />}
@@ -124,7 +111,6 @@ const AdvanceSearchField = () => {
           })}
         </CityDropDown>
         <AreaDropDown
-          disabled={loading}
           placeholder={"Select Area"}
           bordered={false}
           suffixIcon={<MdKeyboardArrowDown />}
@@ -132,6 +118,10 @@ const AdvanceSearchField = () => {
           onChange={(values) => {
             setSearchParam({ ...searchParam, location: values });
           }}
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
           defaultValue={searchParam.city && searchParam.location}
         >
           {locations?.map((location) => {
@@ -144,7 +134,6 @@ const AdvanceSearchField = () => {
         </AreaDropDown>
 
         <CategoryDropDown
-          disabled={loading}
           placeholder={"Category"}
           bordered={false}
           suffixIcon={<MdKeyboardArrowDown />}
@@ -152,6 +141,10 @@ const AdvanceSearchField = () => {
           onChange={(values) => {
             setSearchParam({ ...searchParam, category: values });
           }}
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
         >
           <COption value="House">House</COption>
           <COption value="Green House">Green House</COption>
@@ -167,11 +160,7 @@ const AdvanceSearchField = () => {
           <COption value="Hostel">Hostel</COption>
           <COption value="Other">Other</COption>
         </CategoryDropDown>
-        <SearchButton
-          loading={loading}
-          onClick={onSubmit}
-          icon={<SearchOutlined />}
-        >
+        <SearchButton onClick={onSubmit} icon={<SearchOutlined />}>
           Search
         </SearchButton>
       </OptionsContainer>

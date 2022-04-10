@@ -61,7 +61,10 @@ function App() {
                 </LoggedIn>
               }
             />
-            <Route path="/property-list" element={<LazyListing />} />
+            <Route
+              path="/property-list/:city/:location/:propertySubType/:propertyIntent"
+              element={<LazyListing />}
+            />
             <Route path="/costcalculator" element={<LazyCalculator />} />
             <Route
               path="/dashboard/*"
