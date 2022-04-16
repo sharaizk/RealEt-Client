@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Divider, Form } from "antd";
+import { Divider, Form, Spin } from "antd";
 import {
   FilterProperty,
   SectionTitle2,
@@ -116,26 +116,34 @@ const ListSideBar = () => {
             },
           ]}
         >
-          <CustomSelect
-            placeholder="Location"
-            showSearch
-            filterOption={(input, option) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            {locations?.map((location) => {
-              return (
-                <SelectOptions
-                  name="location"
-                  key={location._id}
-                  value={location.key}
-                >
-                  {location.name}
-                </SelectOptions>
-              );
-            })}
-          </CustomSelect>
+          <Spin spinning={isLocationLoading}>
+            <CustomSelect
+              placeholder="Location"
+              showSearch
+              filterOption={(input, option) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0 ||
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+              onChange={(v) => {
+                form.setFieldsValue({
+                  location: v,
+                });
+              }}
+            >
+              {locations?.map((location) => {
+                return (
+                  <SelectOptions
+                    name="location"
+                    key={location._id}
+                    value={location.key}
+                  >
+                    {location.name}
+                  </SelectOptions>
+                );
+              })}
+            </CustomSelect>
+          </Spin>
         </Form.Item>
 
         <Form.Item

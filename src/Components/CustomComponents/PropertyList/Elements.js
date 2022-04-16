@@ -114,3 +114,8 @@ export const List = styled(motion.div)`
     height: 100%;
   }
 `;
+
+export const NotFound = styled.h5`
+  color: #424242;
+  font-size: 1rem;
+`;

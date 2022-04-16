@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback } from "react";
-import Agent from "./Agent";
-import Consumer from "./Consumer";
+import MainDashboard from "./MainDashboard";
 import { Routes, Route } from "react-router-dom";
 import { loadProfile } from "../../Redux/actions/authActions";
 import { getToken } from "../../Redux/localstorage";
@@ -20,8 +19,7 @@ const Dashboard = () => {
 
   return (
     <Routes>
-      <Route path="/*" element={<Consumer />} />
-      <Route path="/agent/*" element={<Agent />} />
+      <Route path="/*" element={<MainDashboard />} />
     </Routes>
   );
 };

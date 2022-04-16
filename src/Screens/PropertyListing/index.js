@@ -15,12 +15,11 @@ import { NavLink } from "react-router-dom";
 import { GrFormSearch } from "react-icons/gr";
 import ListSideBar from "../../Components/CustomComponents/ListSideBar";
 import PropertyList from "../../Components/CustomComponents/PropertyList";
-import { useQueryClient, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import server from "../../Axios";
 import SkeletonProperties from "../../Components/CustomComponents/SkeletonLoadings/SkeletonProperties";
 const PropertyListing = () => {
-  const queryClient = useQueryClient();
   const [pageNumber, setPageNumber] = useState(1);
   const [sortBy, setSortBy] = useState("createdAt");
   const { city, location, propertySubType, propertyIntent } = useParams();

@@ -14,12 +14,11 @@ import "./style.css";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { SearchOutlined } from "@ant-design/icons";
 import { message } from "antd";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import server from "../../../Axios";
 
 const AdvanceSearchField = () => {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [searchParam, setSearchParam] = useState({
     propertyIntent: "Sell",

@@ -3,8 +3,8 @@ import { Select, Pagination } from "antd";
 import { motion } from "framer-motion";
 const { Option } = Select;
 export const PropertyListContainer = styled.div`
-  min-height: 100vh;
   height: 100%;
+  min-height: 100vh;
   max-height: 100%;
   display: flex;
   justify-content: flex-start;

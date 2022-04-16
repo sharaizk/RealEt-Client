@@ -10,6 +10,7 @@ import {
 import ProfileCard from "../../CustomComponents/ProfileCard";
 import { Row, Col } from "antd";
 import DashboardBar from "../../../Components/CustomComponents/DashboardBar";
+// import { useQuery } from "react-query";
 import "./styles.scss";
 const ProfileSection = () => {
   return (

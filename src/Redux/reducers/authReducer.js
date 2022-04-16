@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   otp: {
     status: false,
   },
+  activeRole: "",
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -34,6 +35,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         profileImage: profileImage,
         email: email,
         role: [role],
+        activeRole: role[0],
       };
     case SIGN_OUT:
       return {
@@ -57,6 +59,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         profileImage: action.payload.profileImage,
         email: action.payload.email,
         role: [action.payload.role],
+        activeRole: action.payload.role,
       };
     default:
       return { ...state };
