@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback } from "react";
 import MainDashboard from "./MainDashboard";
 import { Routes, Route } from "react-router-dom";
-import { loadProfile } from "../../Redux/actions/authActions";
-import { getToken } from "../../Redux/localstorage";
+import { loadProfile } from "Redux/actions/authActions";
+import { getToken } from "Redux/localstorage";
 import { useDispatch, useSelector } from "react-redux";
 const Dashboard = () => {
   const authState = useSelector((state) => state.auth);

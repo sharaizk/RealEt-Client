@@ -4,7 +4,7 @@ import { SiHomeadvisor } from "react-icons/si";
 import { MdPending } from "react-icons/md";
 import { GoSettings } from "react-icons/go";
 import { GiUpgrade } from "react-icons/gi";
-import ProfileSection from "../Components/LayoutComponents/ProfileSection";
+import ProfileSection from "Components/LayoutComponents/ProfileSection";
 export const ConsumerLinks = [
   {
     key: 1,

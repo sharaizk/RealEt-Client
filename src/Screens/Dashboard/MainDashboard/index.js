@@ -9,7 +9,7 @@ import {
 } from "../DashboardElements";
 import "../styles.scss";
 
-import { ConsumerLinks, ConsumerRoutes } from "../../../helpers/Dashboard";
+import { ConsumerLinks, ConsumerRoutes } from "helpers/Dashboard";
 import { useSelector } from "react-redux";
 const MainDashboard = () => {
   const { Content, Sider } = Layout;

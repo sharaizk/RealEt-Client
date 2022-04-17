@@ -105,6 +105,7 @@ export const List = styled(motion.div)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
 
   @media screen and (max-width: 1280px) {
     height: 20vh;

@@ -2,13 +2,13 @@ import React, { lazy, Suspense } from "react";
 import "antd/dist/antd.css";
 import "./index.css";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Header from "./Components/LayoutComponents/Header";
-import Loading from "./Components/CustomComponents/Loading";
+import Header from "Components/LayoutComponents/Header";
+import Loading from "Components/CustomComponents/Loading";
 import { AnimatePresence } from "framer-motion";
-import Footer from "./Components/LayoutComponents/Footer";
-import { getToken } from "./Redux/localstorage";
+import Footer from "Components/LayoutComponents/Footer";
+import { getToken } from "Redux/localstorage";
 import { Navigate } from "react-router-dom";
-import Dashboard from "./Screens/Dashboard";
+import Dashboard from "Screens/Dashboard";
 
 function RequireAuth({ children, redirectTo }) {
   let isAuthenticated = getToken();
@@ -22,12 +22,13 @@ function LoggedIn({ children, redirectTo }) {
 
 function App() {
   const location = useLocation();
-  const LazyLanding = lazy(() => import("./Screens/LandingScreen"));
-  const LazyLogin = lazy(() => import("./Screens/LoginScreen"));
-  const LazySignUp = lazy(() => import("./Screens/SignUpScreen"));
-  const LazyCalculator = lazy(() => import("./Screens/CostScreen"));
-  const LazyPostAdd = lazy(() => import("./Screens/PostAd"));
-  const LazyListing = lazy(() => import("./Screens/PropertyListing"));
+  const LazyLanding = lazy(() => import("Screens/LandingScreen"));
+  const LazyLogin = lazy(() => import("Screens/LoginScreen"));
+  const LazySignUp = lazy(() => import("Screens/SignUpScreen"));
+  const LazyCalculator = lazy(() => import("Screens/CostScreen"));
+  const LazyPostAdd = lazy(() => import("Screens/PostAd"));
+  const LazyListing = lazy(() => import("Screens/PropertyListing"));
+  const LazyDetail = lazy(() => import("Screens/SingleProperty"));
   return (
     <Suspense fallback={<Loading />}>
       <div className="App">
@@ -64,6 +65,10 @@ function App() {
             <Route
               path="/property-list/:city/:location/:propertySubType/:propertyIntent"
               element={<LazyListing />}
+            />
+            <Route
+              path="/property-detail/:propertyid"
+              element={<LazyDetail />}
             />
             <Route path="/costcalculator" element={<LazyCalculator />} />
             <Route

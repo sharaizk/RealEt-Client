@@ -15,18 +15,20 @@ import {
   NotFound,
 } from "./Elements";
 import { Divider } from "antd";
+import { useNavigate } from "react-router-dom";
 import Lottie from "react-lottie-player";
 
-import { PriceConvertor } from "../../../helpers/PriceHelpers";
+import { PriceConvertor } from "helpers/PriceHelpers";
 import ReactHtmlParser from "react-html-parser";
-import NotFoundAnimation from "../../../assets/animations/NotFound.json";
+import NotFoundAnimation from "assets/animations/NotFound.json";
 const PropertyList = ({ propertyData }) => {
+  const navigate = useNavigate();
   return (
     <>
       {propertyData.length > 0 ? (
         propertyData.map((property, i) => {
           return (
-            <React.Fragment key={i}>
+            <React.Fragment>
               <List
                 variants={{
                   hidden: { y: 20, opacity: 0 },
@@ -35,6 +37,10 @@ const PropertyList = ({ propertyData }) => {
                     opacity: 1,
                   },
                 }}
+                onClick={() => {
+                  navigate(`/property-detail/${property._id}`);
+                }}
+                key={i}
               >
                 <ImageContainer>
                   <ListImage src={property.photos[0]} alt="property-thumb." />

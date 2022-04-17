@@ -13,12 +13,12 @@ import {
 import { Breadcrumb, Divider, Row, Col } from "antd";
 import { NavLink } from "react-router-dom";
 import { GrFormSearch } from "react-icons/gr";
-import ListSideBar from "../../Components/CustomComponents/ListSideBar";
-import PropertyList from "../../Components/CustomComponents/PropertyList";
+import ListSideBar from "Components/CustomComponents/ListSideBar";
+import PropertyList from "Components/CustomComponents/PropertyList";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import server from "../../Axios";
-import SkeletonProperties from "../../Components/CustomComponents/SkeletonLoadings/SkeletonProperties";
+import SkeletonProperties from "Components/CustomComponents/SkeletonLoadings/SkeletonProperties";
 const PropertyListing = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [sortBy, setSortBy] = useState("createdAt");
