@@ -71,8 +71,8 @@ const ListSideBar = () => {
           ]}
         >
           <CustomSelect placeholder="Status" allowClear>
-            <SelectOptions value="Sell">Sell</SelectOptions>
-            <SelectOptions value="Rent">Rent</SelectOptions>
+            <SelectOptions value="sell">Sell</SelectOptions>
+            <SelectOptions value="rent">Rent</SelectOptions>
           </CustomSelect>
         </Form.Item>
         <Form.Item

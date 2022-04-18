@@ -54,8 +54,8 @@ const FirstStep = ({ data, handleNextStep }) => {
             initialValue={data.buyrent ? data.buyrent : "Rent"}
           >
             <RadioButtonsContainer>
-              <BuyRentButton value="Rent">Rent</BuyRentButton>
-              <BuyRentButton value="Sell">Sell</BuyRentButton>
+              <BuyRentButton value="rent">Rent</BuyRentButton>
+              <BuyRentButton value="sell">Sell</BuyRentButton>
             </RadioButtonsContainer>
           </Form.Item>
           <Form.Item

@@ -21,7 +21,7 @@ import server from "../../../Axios";
 const AdvanceSearchField = () => {
   const navigate = useNavigate();
   const [searchParam, setSearchParam] = useState({
-    propertyIntent: "Sell",
+    propertyIntent: "sell",
     city: null,
     location: null,
     category: "",
@@ -69,15 +69,15 @@ const AdvanceSearchField = () => {
     <SearchFieldContainer>
       <ButtonContainer>
         <BuyRentBtn
-          onClick={() => toggleBtn("Sell")}
-          isActive={searchParam.propertyIntent === "Sell"}
+          onClick={() => toggleBtn("sell")}
+          isActive={searchParam.propertyIntent === "sell"}
           type="text"
         >
           Sell
         </BuyRentBtn>
         <BuyRentBtn
-          onClick={() => toggleBtn("Rent")}
-          isActive={searchParam.propertyIntent === "Rent"}
+          onClick={() => toggleBtn("rent")}
+          isActive={searchParam.propertyIntent === "rent"}
           type="text"
         >
           Rent

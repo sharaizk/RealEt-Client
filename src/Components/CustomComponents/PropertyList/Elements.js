@@ -65,6 +65,7 @@ export const ListDesc = styled.div`
   color: #5a5a5a;
   margin: 0;
   margin-top: auto;
+  height: 11ch;
   /* white-space: nowrap; */
   overflow: hidden;
   text-overflow: ellipsis;

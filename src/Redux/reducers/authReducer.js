@@ -35,7 +35,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         profileImage: profileImage,
         email: email,
         role: [role],
-        activeRole: role[0],
+        activeRole: role,
       };
     case SIGN_OUT:
       return {
