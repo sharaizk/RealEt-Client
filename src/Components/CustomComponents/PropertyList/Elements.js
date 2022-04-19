@@ -18,10 +18,6 @@ export const DescContainer = styled.div`
 export const ImageContainer = styled.div`
   flex: 0.3;
   height: 100%;
-
-  /* @media screen and (max-width: 1280px) {
-    flex: 0.4;
-  } */
 `;
 
 export const InfoContainer = styled.div`
@@ -102,7 +98,7 @@ export const PriceTag = styled.div`
 
 export const List = styled(motion.div)`
   width: 100%;
-  height: 22.5vh;
+  height: 25vh;
   display: flex;
   justify-content: flex-start;
   align-items: center;

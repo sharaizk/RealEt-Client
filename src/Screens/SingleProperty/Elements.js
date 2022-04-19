@@ -154,6 +154,7 @@ export const StyledLoader = styled(LoadingOverlay)`
 export const PosterContainer = styled.div`
   height: 100%;
   display: flex;
+  justify-content: space-between;
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
@@ -167,7 +168,7 @@ export const ProfileImage = styled.div`
 `;
 
 export const ProfileDetail = styled.div`
-  flex: 0.4;
+  flex: 0.6;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
