@@ -5,6 +5,8 @@ import { MdPending } from "react-icons/md";
 import { GoSettings } from "react-icons/go";
 import { GiUpgrade } from "react-icons/gi";
 import ProfileSection from "Components/LayoutComponents/ProfileSection";
+import PostedAds from "Components/LayoutComponents/PostedAds";
+import PendingAds from "Components/LayoutComponents/PendingAds";
 export const ConsumerLinks = [
   {
     key: 1,
@@ -58,12 +60,12 @@ export const ConsumerRoutes = [
   {
     key: 3,
     path: "postedads",
-    element: <p>Posted Ads</p>,
+    element: <PostedAds />,
   },
   {
     key: 4,
     path: "pendingads",
-    element: <p>Pending Ads</p>,
+    element: <PendingAds />,
   },
   {
     key: 5,
@@ -74,5 +76,78 @@ export const ConsumerRoutes = [
     key: 6,
     path: "upgrade-account",
     element: <p>Upgrade</p>,
+  },
+];
+
+export const adsPostColumn = [
+  {
+    title: "Property Name",
+    dataIndex: "title",
+    key: "title",
+    render: (text) => <p>{text}</p>,
+  },
+  {
+    title: "Type",
+    dataIndex: "type",
+    key: "type",
+  },
+  {
+    title: "Intent",
+    dataIndex: "propertyIntent",
+    key: "propertyIntent",
+  },
+  {
+    title: "Location",
+    dataIndex: ["location_data", "name"],
+    key: "location",
+  },
+  {
+    title: "City",
+    dataIndex: ["city_data", "name"],
+    key: "city",
+  },
+  {
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
+  },
+  {
+    title: "View",
+    dataIndex: "view",
+    key: "view",
+  },
+];
+
+export const pendingAdsColumn = [
+  {
+    title: "Property Name",
+    dataIndex: "title",
+    key: "title",
+    render: (text) => <p>{text}</p>,
+  },
+  {
+    title: "Type",
+    dataIndex: "type",
+    key: "type",
+  },
+  {
+    title: "Intent",
+    dataIndex: "propertyIntent",
+    key: "propertyIntent",
+  },
+  {
+    title: "Location",
+    dataIndex: ["location_data", "name"],
+    key: "location",
+  },
+  {
+    title: "City",
+    dataIndex: ["city_data", "name"],
+    key: "city",
+  },
+  {
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
   },
 ];

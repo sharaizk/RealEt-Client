@@ -1,11 +1,10 @@
 import React from "react";
-import './style.css'
 import LandSection1 from "../../Components/LayoutComponents/LandSection/LandSection1";
 import LandSection2 from "../../Components/LayoutComponents/LandSection/LandSection2";
 import LandSection3 from "../../Components/LayoutComponents/LandSection/LandSection3";
-import { BackTop } from 'antd';
+import { BackTop } from "antd";
 import { BackToTopElement } from "./LandingScreenElements";
-import {ArrowUpOutlined} from '@ant-design/icons'
+import { ArrowUpOutlined } from "@ant-design/icons";
 const LandingScreen = () => {
   return (
     <>
@@ -14,7 +13,7 @@ const LandingScreen = () => {
       <LandSection3 />
       <BackTop>
         <BackToTopElement>
-        <ArrowUpOutlined />
+          <ArrowUpOutlined />
         </BackToTopElement>
       </BackTop>
     </>

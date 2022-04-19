@@ -31,3 +31,13 @@ input[type="number"] {
 html {
   scroll-behavior: smooth;
 }
+.ant-spin-dot-item {
+  background-color: #fc6e20 !important;
+}
+.ant-pagination-item-active {
+  border-color: #fc6e20 !important;
+}
+
+.ant-pagination-item-active a {
+  color: #fc6e20 !important;
+}

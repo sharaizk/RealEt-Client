@@ -23,9 +23,10 @@ import ReactHtmlParser from "react-html-parser";
 import NotFoundAnimation from "assets/animations/NotFound.json";
 const PropertyList = ({ propertyData }) => {
   const navigate = useNavigate();
+  console.log(propertyData);
   return (
     <>
-      {propertyData.length > 0 ? (
+      {propertyData?.length > 0 ? (
         propertyData.map((property, i) => {
           return (
             <React.Fragment>
@@ -47,7 +48,7 @@ const PropertyList = ({ propertyData }) => {
                 </ImageContainer>
                 <DescContainer>
                   <ListTitle>{property.title}</ListTitle>
-                  <ListLocation>Worthington, OH 43085</ListLocation>
+                  <ListLocation>{property?.location_data?.name}</ListLocation>
                   <PriceTag>
                     PKR {property && PriceConvertor(property?.info?.price)}
                   </PriceTag>

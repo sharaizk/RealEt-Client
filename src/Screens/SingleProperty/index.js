@@ -76,7 +76,7 @@ const SingleProperty = () => {
       <PropertySection>
         <ListSection>
           <SectionTitle>{propertyData?.title}</SectionTitle>
-          <TitleSubtitle>Golden Valley, MN 55427</TitleSubtitle>
+          <TitleSubtitle>{propertyData?.location_data?.name}</TitleSubtitle>
           <Divider />
           <ImageGallery
             autoPlay={false}
@@ -148,9 +148,9 @@ const SingleProperty = () => {
               <SectionTitle>Map</SectionTitle>
               <Map
                 coordinates={{
-                  lng: 69.345116,
-                  lat: 30.37532,
-                  zoom: 3,
+                  lng: propertyData?.location_data?.longitude,
+                  lat: propertyData?.location_data?.latitude,
+                  zoom: 12,
                 }}
               />
               <Divider />
