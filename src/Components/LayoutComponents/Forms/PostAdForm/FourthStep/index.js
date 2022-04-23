@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { StepContainer, Question, Btn, BtnContainer } from "./Elements";
-import { StepperTransition } from "../../../../../utils/StepperAnimationConfiguration";
+import { StepperTransition } from "utils/StepperAnimationConfiguration";
 import { Tooltip, message } from "antd";
-import VTour from "../../../../CustomComponents/VTourBuilder";
+import VTour from "Components/CustomComponents/VTourBuilder";
 import { MoveContainer, MoveBtn } from "../PAFElements";
 import { useMutation } from "react-query";
 import server from "../../../../../Axios/";
-import { getToken } from "../../../../../Redux/localstorage";
+import { getToken } from "Redux/localstorage";
 const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
   const [virtualTour, setVirtualTour] = useState(false);
   const token = getToken();

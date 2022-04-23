@@ -7,14 +7,14 @@ import {
   TextField,
   CustomUpload,
 } from "./Elements";
-import { StepperTransition } from "../../../../../utils/StepperAnimationConfiguration";
+import { StepperTransition } from "utils/StepperAnimationConfiguration";
 import { MoveContainer, MoveBtn } from "../PAFElements";
 import { Col, Form, Row } from "antd";
-import TextEditor from "../../../../CustomComponents/TextEditor";
+import TextEditor from "Components/CustomComponents/TextEditor";
 import { useForm } from "antd/lib/form/Form";
 import { HotKeys } from "react-hotkeys";
-import { stepFormMap } from "../../../../../utils/Hotkeys";
-import { PriceConvertor } from "../../../../../helpers/PriceHelpers";
+import { stepFormMap } from "utils/Hotkeys";
+import { PriceConvertor } from "helpers/PriceHelpers";
 const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
   const [form] = useForm();
   const sizeRef = useRef(null);
