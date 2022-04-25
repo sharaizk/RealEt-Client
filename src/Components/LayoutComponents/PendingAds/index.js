@@ -17,7 +17,7 @@ const PendingAds = () => {
         },
         params: {
           count: false,
-          status: "unapproved",
+          status: "pending",
         },
       });
       return postedAdsResponse.data;
