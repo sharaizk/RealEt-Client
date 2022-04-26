@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ReactPannellum from "react-pannellum";
-import { Upload, Button, Input } from "antd";
+import { Upload, Button, Input, Select } from "antd";
+const { Option } = Select;
 export const TourContainer = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -34,7 +35,7 @@ export const Scenes = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 export const SingleScene = styled.div`
@@ -81,6 +82,22 @@ export const TextField = styled(Input)`
   }
   &:hover {
     border: 1px solid #d9d9d9;
+  }
+`;
+
+export const AddHotspot = styled(Button)`
+  background-color: #fc6e20;
+  color: #fff;
+  margin-bottom: 0.75vh;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  &:hover,
+  :active,
+  :focus {
+    background-color: #fc6e20;
+    color: #fff;
+    box-shadow: none;
   }
 `;
 
@@ -141,4 +158,32 @@ export const SubmitButton = styled(Button)`
     background-color: #fc6e20;
     color: #fff;
   }
+`;
+
+export const ScenesCat = styled(Select)`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: transparent;
+  outline: none;
+  & .ant-select-selector {
+    padding: 10px !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    &:hover {
+      border-color: #fc6e20 !important;
+    }
+  }
+
+  &.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+    .ant-select-selector {
+    border-color: #fc6e20;
+    box-shadow: none;
+  }
+`;
+
+export const ScencesOpt = styled(Option)`
+  background-color: #fff !important;
 `;

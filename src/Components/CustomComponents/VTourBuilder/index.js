@@ -12,7 +12,10 @@ import {
   SceneTitle,
   SingleScene,
   SubmitButton,
-  DelIcon
+  DelIcon,
+  AddHotspot,
+  ScenesCat,
+  ScencesOpt
 } from "./Elements";
 import {  } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -26,7 +29,8 @@ import {
   removeScene,
   getViewer,
   mouseEventToCoords,
-  isLoaded
+  isLoaded,
+  addHotSpot
 } from "react-pannellum";
 // import img from "../../../assets/images/download2.png";
 
@@ -59,16 +63,14 @@ const VTour = () => {
   const [sceneAdOpen, setSceneAdOpen] = useState(false);
   const [scenePhoto, setScenePhoto] = useState({});
   const [rerender, setRerender] = useState(false);
+  const [addHotspot,setAddHotspot]=useState(false)
+  const [enableSpot,setEnableSpot]=useState(false)
+  const [hotspotConfig,setHotSpotConfig]=useState({
+    pitch: 0,
+    yaw: 0,
+  })
   const [form] = Form.useForm();
-
-
-  // if(isLoaded){
-  //   getViewer().on('mousedown',(e)=>{
-  //     // mouseEventToCoords(e)
-  //     console.log(e)
-  // })
-  // }
-  
+  const [form2]=Form.useForm()
   const sceneBuilder = async (title) => {
     const reader = new FileReader();
     reader.readAsDataURL(scenePhoto);
@@ -97,12 +99,25 @@ const VTour = () => {
       };
     };
   };
-  if(isLoaded()){
+  if(isLoaded() && enableSpot){
     getViewer().on('mousedown',(e)=>{
-      console.log(mouseEventToCoords(e))
+      setAddHotspot(true)
+      setHotSpotConfig({
+        ...hotspotConfig,
+        pitch:mouseEventToCoords(e)[0],
+        yaw:mouseEventToCoords(e)[1]
+
+      })
     })
   }
+
   const AllScenes = getAllScenes();
+  const checkIfDisabled=()=>{
+    if(AllScenes){
+      return AllScenes.length === 1 || getCurrentScene()==="NOTVALID" ? true : false
+    }
+    return true
+  }
   return (
     <TourContainer>
       <Modal
@@ -153,6 +168,113 @@ const VTour = () => {
           </Form.Item>
         </Form>
       </Modal>
+
+      <Modal
+        footer={null}
+        title="Add Hotspot"
+        centered
+        visible={addHotspot}
+        onOk={()=>setAddHotspot(false)}
+        onCancel={()=>setAddHotspot(false)}
+      >
+        <Form
+          name="hotspot-adder"
+          requiredMark="optional"
+          form={form2}
+          layout="vertical"
+          autoComplete="off"
+          onFinish={(val)=>{
+            addHotSpot({
+              pitch:hotspotConfig.pitch,
+              yaw:hotspotConfig.yaw,
+              type:val.type,
+              text:val.text,
+              sceneId:val.sceneId
+            })
+            form2.resetFields()
+            setEnableSpot(false)
+            setAddHotspot(false)
+            setHotSpotConfig({
+              pitch: 0,
+              yaw: 0,
+            })
+
+            getViewer().off('mousedown')
+          }}
+        >
+          <Form.Item
+            label="Hotspot Title"
+            name="text"
+            rules={[{required:true,message:"Please add hotspot title"}]}
+          >
+            <TextField />
+          </Form.Item>
+
+          <Form.Item
+          name="sceneId"
+          label="Scene"
+          rules={[
+            {
+              required: true,
+              message: "Please select target scene",
+            },
+          ]}
+          >
+            <ScenesCat
+            placeholder="Select Scene"
+            allowClear
+            >
+            {AllScenes?.map((scene, i) => {
+                if (Object.keys(scene)[0] !== "NOTVALID" && Object.keys(scene)[0] !== getCurrentScene()){
+                  return (
+                    <ScencesOpt
+                      key={i}
+                      value={Object.keys(scene)[0]}
+                    >
+                      {Object.keys(scene)[0]}
+                    </ScencesOpt>
+                  );
+                };
+                return <></>
+            })}
+            </ScenesCat>
+          </Form.Item>
+          
+          <Form.Item
+            name="type"
+            label="Hotspot Type"
+            rules={[
+              {
+                required: true,
+                message: "Please select Hotspot type",
+              },
+            ]}
+          >
+            <ScenesCat
+            placeholder="Select Scene"
+            allowClear
+            >
+                    <ScencesOpt
+                      value={"info"}
+                    >
+                      Informative
+                    </ScencesOpt>
+                    <ScencesOpt
+                      value={"scene"}
+                    >
+                      Navigation
+                    </ScencesOpt>
+            </ScenesCat>
+          </Form.Item>
+          <Form.Item>
+            <SubmitButton type="primary" htmlType="submit">
+              Create Hotspot
+            </SubmitButton>
+          </Form.Item>
+        </Form>
+
+      </Modal>
+
       <Row>
         <Col span={5}>
           <ScenesContainer>
@@ -170,8 +292,19 @@ const VTour = () => {
                 );
               })}
             </Scenes>
+            <AddHotspot disabled={checkIfDisabled()}
+            onClick={()=>{
+              if(!enableSpot){
+                setEnableSpot(true)
+              }
+              else{
+                setEnableSpot(false)
+                getViewer().off('mousedown')
+              }
+            }}
+            >{!enableSpot?"Add Hotspot":"Cancel Hotspot"}</AddHotspot>
             <UploadSceneContainer>
-              <AddBtn onClick={() => setSceneAdOpen(true)}>Add</AddBtn>
+              <AddBtn onClick={() => setSceneAdOpen(true)}>Add Scene</AddBtn>
             </UploadSceneContainer>
           </ScenesContainer>
         </Col>
