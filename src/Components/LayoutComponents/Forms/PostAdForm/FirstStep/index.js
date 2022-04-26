@@ -51,7 +51,7 @@ const FirstStep = ({ data, handleNextStep }) => {
           <Form.Item
             name="propertyIntent"
             rules={[{ required: true, message: "Buy or Rent is Required" }]}
-            initialValue={data.buyrent ? data.buyrent : "Rent"}
+            initialValue={data.buyrent ? data.buyrent : "rent"}
           >
             <RadioButtonsContainer>
               <BuyRentButton value="rent">Rent</BuyRentButton>

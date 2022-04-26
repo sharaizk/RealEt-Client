@@ -8,10 +8,17 @@ export const TourContainer = styled.div`
   align-items: center;
   height: 50vh;
   width: 100%;
+
+  @media screen and (max-width:1400px){
+    height:65vh ;
+  }
 `;
 export const Panellum = styled(ReactPannellum)`
   width: 44vw !important;
   height: 400px !important;
+  @media screen and (max-width:1400px){
+    width:45.5vw !important;
+  }
 `;
 
 export const ScenesContainer = styled.div`
