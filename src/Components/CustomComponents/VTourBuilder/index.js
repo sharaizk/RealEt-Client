@@ -15,12 +15,11 @@ import {
   DelIcon,
   AddHotspot,
   ScenesCat,
-  ScencesOpt
+  ScencesOpt,
 } from "./Elements";
-import {  } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
 
-import { Row, Col, Modal, Form,message } from "antd";
+import { Row, Col, Modal, Form, message } from "antd";
 import {
   addScene,
   loadScene,
@@ -30,31 +29,35 @@ import {
   getViewer,
   mouseEventToCoords,
   isLoaded,
-  addHotSpot
+  addHotSpot,
 } from "react-pannellum";
 // import img from "../../../assets/images/download2.png";
 
-const RenderScene = ({ title, image,rerender,setRerender }) => {
+const RenderScene = ({ title, image, rerender, setRerender }) => {
   return (
-    <SingleScene onClick={()=>{
-      loadScene(title)
-      setTimeout(()=>{
-        setRerender(!rerender)
-      },1000)
-    }}>
-    <SceneImage src={image}/>
-    <SceneTitle>{title}</SceneTitle>
-    <DelIcon
-    onClick={(e)=>{
-      e.stopPropagation()
-      if(getCurrentScene()===title){
-        message.error('Please! Select a different Scene before deleting');
-      }
-      removeScene(title,()=>{
-        setRerender(!rerender)
-      })
-    }}
-    ><AiOutlineDelete size={16} color="#ffff"/></DelIcon>
+    <SingleScene
+      onClick={() => {
+        loadScene(title);
+        setTimeout(() => {
+          setRerender(!rerender);
+        }, 1000);
+      }}
+    >
+      <SceneImage src={image} />
+      <SceneTitle>{title}</SceneTitle>
+      <DelIcon
+        onClick={(e) => {
+          e.stopPropagation();
+          if (getCurrentScene() === title) {
+            message.error("Please! Select a different Scene before deleting");
+          }
+          removeScene(title, () => {
+            setRerender(!rerender);
+          });
+        }}
+      >
+        <AiOutlineDelete size={16} color="#ffff" />
+      </DelIcon>
     </SingleScene>
   );
 };
@@ -63,14 +66,14 @@ const VTour = () => {
   const [sceneAdOpen, setSceneAdOpen] = useState(false);
   const [scenePhoto, setScenePhoto] = useState({});
   const [rerender, setRerender] = useState(false);
-  const [addHotspot,setAddHotspot]=useState(false)
-  const [enableSpot,setEnableSpot]=useState(false)
-  const [hotspotConfig,setHotSpotConfig]=useState({
+  const [addHotspot, setAddHotspot] = useState(false);
+  const [enableSpot, setEnableSpot] = useState(false);
+  const [hotspotConfig, setHotSpotConfig] = useState({
     pitch: 0,
     yaw: 0,
-  })
+  });
   const [form] = Form.useForm();
-  const [form2]=Form.useForm()
+  const [form2] = Form.useForm();
   const sceneBuilder = async (title) => {
     const reader = new FileReader();
     reader.readAsDataURL(scenePhoto);
@@ -99,25 +102,26 @@ const VTour = () => {
       };
     };
   };
-  if(isLoaded() && enableSpot){
-    getViewer().on('mousedown',(e)=>{
-      setAddHotspot(true)
+  if (isLoaded() && enableSpot) {
+    getViewer().on("mousedown", (e) => {
+      setAddHotspot(true);
       setHotSpotConfig({
         ...hotspotConfig,
-        pitch:mouseEventToCoords(e)[0],
-        yaw:mouseEventToCoords(e)[1]
-
-      })
-    })
+        pitch: mouseEventToCoords(e)[0],
+        yaw: mouseEventToCoords(e)[1],
+      });
+    });
   }
 
   const AllScenes = getAllScenes();
-  const checkIfDisabled=()=>{
-    if(AllScenes){
-      return AllScenes.length === 1 || getCurrentScene()==="NOTVALID" ? true : false
+  const checkIfDisabled = () => {
+    if (AllScenes) {
+      return AllScenes.length === 1 || getCurrentScene() === "NOTVALID"
+        ? true
+        : false;
     }
-    return true
-  }
+    return true;
+  };
   return (
     <TourContainer>
       <Modal
@@ -174,8 +178,8 @@ const VTour = () => {
         title="Add Hotspot"
         centered
         visible={addHotspot}
-        onOk={()=>setAddHotspot(false)}
-        onCancel={()=>setAddHotspot(false)}
+        onOk={() => setAddHotspot(false)}
+        onCancel={() => setAddHotspot(false)}
       >
         <Form
           name="hotspot-adder"
@@ -183,63 +187,60 @@ const VTour = () => {
           form={form2}
           layout="vertical"
           autoComplete="off"
-          onFinish={(val)=>{
+          onFinish={(val) => {
             addHotSpot({
-              pitch:hotspotConfig.pitch,
-              yaw:hotspotConfig.yaw,
-              type:val.type,
-              text:val.text,
-              sceneId:val.sceneId
-            })
-            form2.resetFields()
-            setEnableSpot(false)
-            setAddHotspot(false)
+              pitch: hotspotConfig.pitch,
+              yaw: hotspotConfig.yaw,
+              type: val.type,
+              text: val.text,
+              sceneId: val.sceneId,
+            });
+            form2.resetFields();
+            setEnableSpot(false);
+            setAddHotspot(false);
             setHotSpotConfig({
               pitch: 0,
               yaw: 0,
-            })
+            });
 
-            getViewer().off('mousedown')
+            getViewer().off("mousedown");
           }}
         >
           <Form.Item
             label="Hotspot Title"
             name="text"
-            rules={[{required:true,message:"Please add hotspot title"}]}
+            rules={[{ required: true, message: "Please add hotspot title" }]}
           >
             <TextField />
           </Form.Item>
 
           <Form.Item
-          name="sceneId"
-          label="Scene"
-          rules={[
-            {
-              required: true,
-              message: "Please select target scene",
-            },
-          ]}
+            name="sceneId"
+            label="Scene"
+            rules={[
+              {
+                required: true,
+                message: "Please select target scene",
+              },
+            ]}
           >
-            <ScenesCat
-            placeholder="Select Scene"
-            allowClear
-            >
-            {AllScenes?.map((scene, i) => {
-                if (Object.keys(scene)[0] !== "NOTVALID" && Object.keys(scene)[0] !== getCurrentScene()){
+            <ScenesCat placeholder="Select Scene" allowClear>
+              {AllScenes?.map((scene, i) => {
+                if (
+                  Object.keys(scene)[0] !== "NOTVALID" &&
+                  Object.keys(scene)[0] !== getCurrentScene()
+                ) {
                   return (
-                    <ScencesOpt
-                      key={i}
-                      value={Object.keys(scene)[0]}
-                    >
+                    <ScencesOpt key={i} value={Object.keys(scene)[0]}>
                       {Object.keys(scene)[0]}
                     </ScencesOpt>
                   );
-                };
-                return <></>
-            })}
+                }
+                return <></>;
+              })}
             </ScenesCat>
           </Form.Item>
-          
+
           <Form.Item
             name="type"
             label="Hotspot Type"
@@ -250,20 +251,9 @@ const VTour = () => {
               },
             ]}
           >
-            <ScenesCat
-            placeholder="Select Scene"
-            allowClear
-            >
-                    <ScencesOpt
-                      value={"info"}
-                    >
-                      Informative
-                    </ScencesOpt>
-                    <ScencesOpt
-                      value={"scene"}
-                    >
-                      Navigation
-                    </ScencesOpt>
+            <ScenesCat placeholder="Select Scene" allowClear>
+              <ScencesOpt value={"info"}>Informative</ScencesOpt>
+              <ScencesOpt value={"scene"}>Navigation</ScencesOpt>
             </ScenesCat>
           </Form.Item>
           <Form.Item>
@@ -272,7 +262,6 @@ const VTour = () => {
             </SubmitButton>
           </Form.Item>
         </Form>
-
       </Modal>
 
       <Row>
@@ -285,24 +274,26 @@ const VTour = () => {
                   <RenderScene
                     key={i}
                     title={Object.keys(scene)[0]}
-                    image={scene.[Object.keys(scene)[0]].imageSource}
+                    image={scene[Object.keys(scene)[0]].imageSource}
                     rerender={rerender}
                     setRerender={setRerender}
                   />
                 );
               })}
             </Scenes>
-            <AddHotspot disabled={checkIfDisabled()}
-            onClick={()=>{
-              if(!enableSpot){
-                setEnableSpot(true)
-              }
-              else{
-                setEnableSpot(false)
-                getViewer().off('mousedown')
-              }
-            }}
-            >{!enableSpot?"Add Hotspot":"Cancel Hotspot"}</AddHotspot>
+            <AddHotspot
+              disabled={checkIfDisabled()}
+              onClick={() => {
+                if (!enableSpot) {
+                  setEnableSpot(true);
+                } else {
+                  setEnableSpot(false);
+                  getViewer().off("mousedown");
+                }
+              }}
+            >
+              {!enableSpot ? "Add Hotspot" : "Cancel Hotspot"}
+            </AddHotspot>
             <UploadSceneContainer>
               <AddBtn onClick={() => setSceneAdOpen(true)}>Add Scene</AddBtn>
             </UploadSceneContainer>

@@ -7,14 +7,14 @@ import { MoveContainer, MoveBtn } from "../PAFElements";
 import { useMutation } from "react-query";
 import server from "../../../../../Axios/";
 import { getToken } from "Redux/localstorage";
+import { getConfig } from "react-pannellum";
 const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
   const [virtualTour, setVirtualTour] = useState(false);
   const token = getToken();
   let hide;
   const handleAddPost = useMutation(
-    async () => {
+    async (virtualTour = {}) => {
       hide = message.loading("Publishing your add...", 0);
-      console.log(data);
       const info = {
         price: data?.price,
         coords: {
@@ -37,6 +37,7 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
       formData.append("city", data?.city);
       formData.append("location", data?.location);
       formData.append("info", JSON.stringify(info));
+      formData.append("virtualTour", JSON.stringify(virtualTour));
       for (let i = 0; i < data?.images.length; i++) {
         let image = data?.images[i].originFileObj;
         formData.append("photos", image);
@@ -84,7 +85,7 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
                 textcolor="#545454"
                 bordercolor={"rgba(66, 66, 6,0.25)"}
                 loading={handleAddPost.isLoading}
-                onClick={handleAddPost.mutate}
+                onClick={() => handleAddPost.mutate()}
               >
                 Publish
               </Btn>
@@ -108,7 +109,26 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
             <MoveBtn onClick={() => setVirtualTour(false)}>
               Cancel VTour
             </MoveBtn>
-            <MoveBtn>Publish</MoveBtn>
+            <MoveBtn
+              onClick={() => {
+                const scenes = getConfig().scenes;
+                let virtualTourConfig = [];
+                Object.keys(scenes).map((scene, i) => {
+                  if (scene !== "NOTVALID") {
+                    // console.log(scenes[Object.keys(scenes)[i]]);
+                    virtualTourConfig = [
+                      ...virtualTourConfig,
+                      { [scene]: scenes[Object.keys(scenes)[i]] },
+                    ];
+                  }
+                  return null;
+                });
+
+                handleAddPost.mutate(virtualTourConfig);
+              }}
+            >
+              Publish
+            </MoveBtn>
           </MoveContainer>
         </>
       )}
