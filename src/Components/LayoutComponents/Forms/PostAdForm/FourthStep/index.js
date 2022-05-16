@@ -13,7 +13,7 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
   const token = getToken();
   let hide;
   const handleAddPost = useMutation(
-    async (virtualTour = {}) => {
+    async (cvirtualTour = {}) => {
       hide = message.loading("Publishing your add...", 0);
       const info = {
         price: data?.price,
@@ -42,13 +42,13 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
         let image = data?.images[i].originFileObj;
         formData.append("photos", image);
       }
-
-      const postAddResponse = await server.post("/ads/post", formData, {
-        headers: {
-          "x-access-token": token,
-        },
-      });
-      return postAddResponse.data;
+      console.log(cvirtualTour)
+      // const postAddResponse = await server.post("/ads/post", formData, {
+      //   headers: {
+      //     "x-access-token": token,
+      //   },
+      // });
+      // return postAddResponse.data;
     },
     {
       onSuccess: () => {
