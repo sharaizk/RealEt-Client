@@ -73,16 +73,12 @@ const VTour = () => {
     yaw: 0,
   });
   const [form] = Form.useForm();
-<<<<<<< Updated upstream
-  const [form2] = Form.useForm();
-=======
   const [form2] = Form.useForm()
   
   const config = {
     sceneFadeDuration: 10000,
   }
 
->>>>>>> Stashed changes
   const sceneBuilder = async (title) => {
     const reader = new FileReader();
     reader.readAsDataURL(scenePhoto);

@@ -42,22 +42,12 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
         let image = data?.images[i].originFileObj;
         formData.append("photos", image);
       }
-<<<<<<< Updated upstream
       const postAddResponse = await server.post("/ads/post", formData, {
         headers: {
           "x-access-token": token,
         },
       });
       return postAddResponse.data;
-=======
-      console.log(virtualTour)
-      // const postAddResponse = await server.post("/ads/post", formData, {
-      //   headers: {
-      //     "x-access-token": token,
-      //   },
-      // });
-      // return postAddResponse.data;
->>>>>>> Stashed changes
     },
     {
       onSuccess: () => {
