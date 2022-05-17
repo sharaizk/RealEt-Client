@@ -37,18 +37,27 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
       formData.append("city", data?.city);
       formData.append("location", data?.location);
       formData.append("info", JSON.stringify(info));
-      formData.append("virtualTour", JSON.stringify(virtualTour));
+      formData.append("virtualTour", JSON.stringify(cvirtualTour));
       for (let i = 0; i < data?.images.length; i++) {
         let image = data?.images[i].originFileObj;
         formData.append("photos", image);
       }
-      console.log(cvirtualTour)
+<<<<<<< Updated upstream
+      const postAddResponse = await server.post("/ads/post", formData, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      return postAddResponse.data;
+=======
+      console.log(virtualTour)
       // const postAddResponse = await server.post("/ads/post", formData, {
       //   headers: {
       //     "x-access-token": token,
       //   },
       // });
       // return postAddResponse.data;
+>>>>>>> Stashed changes
     },
     {
       onSuccess: () => {
@@ -59,7 +68,8 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
         setData({});
         setStep(0);
       },
-      onError: () => {
+      onError: (error) => {
+        console.log(error)
         hide();
         message.error("Something went wrong");
       },
