@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   LoadingContainer,
   MainContainer,
@@ -21,18 +21,22 @@ import {
   ProfileImage,
   ProfileDetail,
   ContactBtn,
+  ViewTourBtn,
+  TourModal,
 } from "./Elements";
 import Map from "Components/CustomComponents/Map";
-import { Breadcrumb, Divider, Image } from "antd";
+import { Breadcrumb, Divider, Image, Modal } from "antd";
 import { NavLink, useParams } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import ListSideBar from "Components/CustomComponents/ListSideBar";
 import { useQuery } from "react-query";
 import { PriceConvertor } from "helpers/PriceHelpers";
+import {AiOutlineClose} from 'react-icons/ai'
 import ReactHtmlParser from "react-html-parser";
 import server from "../../Axios";
 
 const SingleProperty = () => {
+  const [viewTour, setViewTour] = useState(false);
   const { propertyid } = useParams();
 
   const { data: propertyData, isLoading: propertyLoading } = useQuery(
@@ -54,7 +58,7 @@ const SingleProperty = () => {
       </LoadingContainer>
     );
   }
-  console.log(propertyData);
+
   const images = propertyData.photos.map((photo) => {
     return {
       original: photo,
@@ -63,8 +67,25 @@ const SingleProperty = () => {
     };
   });
 
+  // const ViewTourModal = () => {
+  //   return (
+
+  //   )
+  // }
+
   return (
     <MainContainer>
+      <Modal
+        footer={null}
+        maskStyle={{ backgroundColor: "rgba(0,0,0,0.9)" }}
+        centered
+        visible={viewTour}
+        bodyStyle={{padding:0,margin:0}}
+        onCancel={() => setViewTour(false)}
+        closeIcon={<AiOutlineClose color="#fff" size={20}/>}
+      >
+        <TourModal>S</TourModal>
+      </Modal>
       <CrumbContainer>
         <Breadcrumb>
           <Breadcrumb.Item>
@@ -122,6 +143,13 @@ const SingleProperty = () => {
                 <InfoTitle>Status:</InfoTitle>
                 <InfoDetail>Verified</InfoDetail>
               </InfoRow>
+              <Divider />
+
+              {propertyData?.virtualTour.length <= 0 && (
+                <ViewTourBtn onClick={() => setViewTour(true)}>
+                  View Virtual Tour
+                </ViewTourBtn>
+              )}
             </SummarySection>
             <DescriptionSection>
               <SectionTitle>Property Description</SectionTitle>

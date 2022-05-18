@@ -175,6 +175,29 @@ export const ProfileDetail = styled.div`
   flex-direction: column;
 `;
 
+export const ViewTourBtn = styled.button`
+  outline: none;
+  border: 1px solid #fc6e20;
+  width: 100%;
+  margin: auto;
+  padding: 0.5rem;
+  color: #fc6e20;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.4s;
+  &:hover{
+    background-color: #fc6e20;
+    color: #fff;
+  }
+`;
+
+export const TourModal = styled.div`
+  height: 85vh;
+  width: 100%;
+  background-color: rgba(0,0,0,0.9);
+`
+
 export const ContactBtn = styled.button`
   outline: none;
   border: none;
