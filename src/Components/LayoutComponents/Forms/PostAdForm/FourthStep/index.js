@@ -7,7 +7,7 @@ import { MoveContainer, MoveBtn } from "../PAFElements";
 import { useMutation } from "react-query";
 import server from "../../../../../Axios/";
 import { getToken } from "Redux/localstorage";
-import { getConfig } from "react-pannellum";
+import { getConfig,destroy } from "react-pannellum";
 const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
   const [virtualTour, setVirtualTour] = useState(false);
   const token = getToken();
@@ -47,6 +47,7 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
           "x-access-token": token,
         },
       });
+      if(virtualTour) destroy()
       return postAddResponse.data;
     },
     {
@@ -111,7 +112,8 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
             </MoveBtn>
             <MoveBtn
               onClick={() => {
-                const scenes = getConfig().scenes;
+                  const scenes = getConfig().scenes;
+                  console.log(scenes)
                 let virtualTourConfig = [];
                 Object.keys(scenes).map((scene, i) => {
                   if (scene !== "NOTVALID") {

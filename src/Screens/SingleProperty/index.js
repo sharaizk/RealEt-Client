@@ -23,6 +23,9 @@ import {
   ContactBtn,
   ViewTourBtn,
   TourModal,
+  StyledPannellum,
+  CustomModal,
+  ModalContent,
 } from "./Elements";
 import Map from "Components/CustomComponents/Map";
 import { Breadcrumb, Divider, Image, Modal } from "antd";
@@ -31,9 +34,10 @@ import ImageGallery from "react-image-gallery";
 import ListSideBar from "Components/CustomComponents/ListSideBar";
 import { useQuery } from "react-query";
 import { PriceConvertor } from "helpers/PriceHelpers";
-import {AiOutlineClose} from 'react-icons/ai'
+import { AiOutlineClose } from "react-icons/ai";
 import ReactHtmlParser from "react-html-parser";
 import server from "../../Axios";
+import ReactPannellum from "react-pannellum";
 
 const SingleProperty = () => {
   const [viewTour, setViewTour] = useState(false);
@@ -72,20 +76,48 @@ const SingleProperty = () => {
 
   //   )
   // }
+  const RenderVirtualTour = () => {
+    let virtualTourObject = {};
+    propertyData.virtualTour
+      .map((item) => {
+        virtualTourObject = {
+          ...virtualTourObject,
+          [item.sceneName]: {
+            imageSource: item.imageSource,
+            hotSpots: item.hotSpots,
+          },
+        };
+      })
+      .reverse();
+    const config = {
+      scenes: virtualTourObject,
+    };
+    return (
+      <ReactPannellum
+      imageSource={config.scenes.Exterior.imageSource}
+        id="1"
+        config={config}
+      />
+    );
+  };
 
   return (
     <MainContainer>
-      <Modal
-        footer={null}
-        maskStyle={{ backgroundColor: "rgba(0,0,0,0.9)" }}
-        centered
-        visible={viewTour}
-        bodyStyle={{padding:0,margin:0}}
-        onCancel={() => setViewTour(false)}
-        closeIcon={<AiOutlineClose color="#fff" size={20}/>}
-      >
-        <TourModal>S</TourModal>
-      </Modal>
+      {viewTour && (
+        <CustomModal>
+          <ModalContent>
+            <AiOutlineClose
+              color="#fff"
+              size={24}
+              cursor="pointer"
+              onClick={() => setViewTour(false)}
+            />
+            <TourModal>
+              <RenderVirtualTour />
+            </TourModal>
+          </ModalContent>
+        </CustomModal>
+      )}
       <CrumbContainer>
         <Breadcrumb>
           <Breadcrumb.Item>
@@ -137,7 +169,9 @@ const SingleProperty = () => {
               </InfoRow>
               <InfoRow>
                 <InfoTitle>Virtual Tour:</InfoTitle>
-                <InfoDetail>NA</InfoDetail>
+                <InfoDetail>
+                  {propertyData?.virtualTour.length > 0 ? "Available" : "NA"}
+                </InfoDetail>
               </InfoRow>
               <InfoRow>
                 <InfoTitle>Status:</InfoTitle>
@@ -145,7 +179,7 @@ const SingleProperty = () => {
               </InfoRow>
               <Divider />
 
-              {propertyData?.virtualTour.length <= 0 && (
+              {propertyData?.virtualTour.length > 0 && (
                 <ViewTourBtn onClick={() => setViewTour(true)}>
                   View Virtual Tour
                 </ViewTourBtn>

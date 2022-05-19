@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import LoadingOverlay from "react-loading-overlay";
-
+import ReactPannellum from 'react-pannellum'
 export const MainContainer = styled.div`
   height: 100%;
   min-height: 100vh;
@@ -8,7 +8,6 @@ export const MainContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
   flex-direction: column;
   background-color: #fff;
   padding: 80px 17vw 0 17vw;
@@ -209,3 +208,28 @@ export const ContactBtn = styled.button`
   cursor: pointer;
   border-radius: 5px;
 `;
+
+export const StyledPannellum = styled(ReactPannellum)`
+  width: 90vw !important;
+  height: 90vh !important;
+`
+export const CustomModal = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+`
+
+export const ModalContent = styled.div`
+  position: absolute;
+  top: 2%;
+  display: flex;
+  flex-direction: column;
+  left: 5%;
+
+`
