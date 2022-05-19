@@ -28,7 +28,7 @@ import {
   ModalContent,
 } from "./Elements";
 import Map from "Components/CustomComponents/Map";
-import { Breadcrumb, Divider, Image, Modal } from "antd";
+import { Breadcrumb, Divider, Image } from "antd";
 import { NavLink, useParams } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import ListSideBar from "Components/CustomComponents/ListSideBar";
@@ -37,7 +37,6 @@ import { PriceConvertor } from "helpers/PriceHelpers";
 import { AiOutlineClose } from "react-icons/ai";
 import ReactHtmlParser from "react-html-parser";
 import server from "../../Axios";
-import ReactPannellum from "react-pannellum";
 
 const SingleProperty = () => {
   const [viewTour, setViewTour] = useState(false);
@@ -48,6 +47,9 @@ const SingleProperty = () => {
     async () => {
       const adDetail = await server.get(`/ads/single-property/${propertyid}`);
       return adDetail.data.data;
+    },
+    {
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -87,15 +89,20 @@ const SingleProperty = () => {
             hotSpots: item.hotSpots,
           },
         };
+        return null;
       })
       .reverse();
     const config = {
       scenes: virtualTourObject,
     };
+    console.log(config.scenes);
     return (
-      <ReactPannellum
-      imageSource={config.scenes.Exterior.imageSource}
+      <StyledPannellum
+        imageSource={
+          "https://real-register.s3.me-south-1.amazonaws.com/test2-imageSource"
+        }
         id="1"
+        sceneId="firstScene"
         config={config}
       />
     );
