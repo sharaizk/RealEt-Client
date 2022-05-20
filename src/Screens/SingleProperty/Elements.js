@@ -212,6 +212,8 @@ export const ContactBtn = styled.button`
 export const StyledPannellum = styled(ReactPannellum)`
   width: 90vw !important;
   height: 90vh !important;
+  visibility: ${({ isReady }) => (isReady ? "visible" : "hidden")};
+
 `
 export const CustomModal = styled.div`
   height: 100vh;

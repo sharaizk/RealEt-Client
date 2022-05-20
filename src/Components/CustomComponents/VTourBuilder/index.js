@@ -31,7 +31,6 @@ import {
   isLoaded,
   addHotSpot,
 } from "react-pannellum";
-// import img from "../../../assets/images/download2.png";
 
 const RenderScene = ({ title, image, rerender, setRerender }) => {
   return (

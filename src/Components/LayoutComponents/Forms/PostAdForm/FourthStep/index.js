@@ -56,8 +56,8 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
         message.success(
           "Ad published successfully, waiting for admin to approve it"
         );
-        // setData({});
-        // setStep(0);
+        setData({});
+        setStep(0);
       },
       onError: (error) => {
         console.log(error);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   LoadingContainer,
   MainContainer,
@@ -37,6 +37,32 @@ import { PriceConvertor } from "helpers/PriceHelpers";
 import { AiOutlineClose } from "react-icons/ai";
 import ReactHtmlParser from "react-html-parser";
 import server from "../../Axios";
+import { addScene, loadScene} from "react-pannellum";
+
+const RenderVirtualTour = ({ scenes }) => {
+  const [isReady, setReady] = useState(false);
+  useEffect(() => {
+    const addAllScenes = async () => {
+      await Promise.all(
+        scenes.map((scene) => {
+          addScene(scene.sceneName, {
+            imageSource: scene.imageSource,
+            hotSpots: scene.hotSpots,
+          });
+        return null
+
+        })
+      );
+      loadScene(scenes[0].sceneName);
+      setReady(true)
+    };
+    addAllScenes();
+  });
+  const config = {
+    scenesFadeDuration: 1000,
+  };
+  return <><StyledPannellum id="1" isReady={isReady} sceneId="firstScene" config={ config}/></>;
+};
 
 const SingleProperty = () => {
   const [viewTour, setViewTour] = useState(false);
@@ -73,41 +99,6 @@ const SingleProperty = () => {
     };
   });
 
-  // const ViewTourModal = () => {
-  //   return (
-
-  //   )
-  // }
-  const RenderVirtualTour = () => {
-    let virtualTourObject = {};
-    propertyData.virtualTour
-      .map((item) => {
-        virtualTourObject = {
-          ...virtualTourObject,
-          [item.sceneName]: {
-            imageSource: item.imageSource,
-            hotSpots: item.hotSpots,
-          },
-        };
-        return null;
-      })
-      .reverse();
-    const config = {
-      scenes: virtualTourObject,
-    };
-    console.log(config.scenes);
-    return (
-      <StyledPannellum
-        imageSource={
-          "https://real-register.s3.me-south-1.amazonaws.com/test2-imageSource"
-        }
-        id="1"
-        sceneId="firstScene"
-        config={config}
-      />
-    );
-  };
-
   return (
     <MainContainer>
       {viewTour && (
@@ -120,7 +111,7 @@ const SingleProperty = () => {
               onClick={() => setViewTour(false)}
             />
             <TourModal>
-              <RenderVirtualTour />
+              <RenderVirtualTour scenes={propertyData?.virtualTour} />
             </TourModal>
           </ModalContent>
         </CustomModal>
