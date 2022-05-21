@@ -1,4 +1,4 @@
-import { SIGN_OUT, SIGN_UP, SIGN_IN, LOAD_PROF } from "../types";
+import { SIGN_OUT, SIGN_UP, SIGN_IN, LOAD_PROF,SWITCH_ROLE } from "../types";
 const INITIAL_STATE = {
   isSignedIn: false,
   userId: "",
@@ -6,11 +6,12 @@ const INITIAL_STATE = {
   email: "",
   profileImage: "",
   socialId: "",
-  role: ["Consumer"],
+  role: "consumer",
   otp: {
     status: false,
   },
   activeRole: "",
+  secondaryRole:""
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -25,6 +26,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         email,
         profileImage,
         role,
+        secondaryRole
       } = action.payload;
       return {
         ...state,
@@ -34,8 +36,9 @@ const authReducer = (state = INITIAL_STATE, action) => {
         fullName: fullName,
         profileImage: profileImage,
         email: email,
-        role: [role],
+        role: role,
         activeRole: role,
+        secondaryRole:secondaryRole || ''
       };
     case SIGN_OUT:
       return {
@@ -46,7 +49,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         email: "",
         profileImage: "",
         socialId: "",
-        role: ["Consumer"],
+        role: "consumer",
         otp: {},
       };
     case LOAD_PROF:
@@ -58,9 +61,15 @@ const authReducer = (state = INITIAL_STATE, action) => {
         fullName: action.payload.fullName,
         profileImage: action.payload.profileImage,
         email: action.payload.email,
-        role: [action.payload.role],
+        role: action.payload.role,
         activeRole: action.payload.role,
+        secondaryRole:action.payload.secondaryRole || ''
       };
+    case SWITCH_ROLE:
+      return {
+        ...state,
+        activeRole:action.payload
+      }
     default:
       return { ...state };
   }

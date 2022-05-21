@@ -17,13 +17,15 @@ import { Form, Upload, Divider, message, Modal } from "antd";
 import { FaUser, FaPhone, FaKey } from "react-icons/fa";
 import { UploadOutlined } from "@ant-design/icons";
 import { MdEmail } from "react-icons/md";
-import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
+import { GoogleOutlined } from "@ant-design/icons";
 import { NumberRegEx } from "../../../../helpers/regex";
 import ImgCrop from "antd-img-crop";
 import "./style.scss";
 import { signUp } from "../../../../Redux/actions/authActions";
 import { useDispatch } from "react-redux";
+import { GoogleLogin } from "react-google-login";
 import OTPContainer from "../../../CustomComponents/OtpInput";
+import { useNavigate } from "react-router-dom";
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const [isEmail, setEmail] = useState(true);
@@ -31,6 +33,7 @@ const SignUpForm = () => {
   const [visible, setVisible] = useState(false);
   const [login, setTempLogin] = useState("");
   const [profilePhoto, setPhoto] = useState({});
+  const navigate=useNavigate()
   const BtnRef = useRef(null);
   const [form] = Form.useForm();
 
@@ -54,6 +57,20 @@ const SignUpForm = () => {
   const onFinishFailed = () => {
     BtnRef.current.blur();
     message.error("Please fill out the form");
+  };
+
+  const onGoogleSignUp = async (response) => {
+    const res = await dispatch(
+      signUp({
+        fullName: response.profileObj.name,
+        login: response.profileObj.email,
+        socialId: response.profileObj.googleId,
+        socialImage: response.profileObj.imageUrl,
+      })
+    );
+    if (!res) {
+      navigate('/signin')
+    }
   };
 
   return (
@@ -280,12 +297,20 @@ const SignUpForm = () => {
       </Form>
       <BtnLink to="/signin">Already have an account?</BtnLink>
       <Divider />
-      <OSignUpBtn color="#4267B2" icon={<FacebookFilled />}>
-        Sign Up
-      </OSignUpBtn>
-      <OSignUpBtn color="#DB4437" icon={<GoogleOutlined />}>
-        Sign Up
-      </OSignUpBtn>
+      <GoogleLogin
+        clientId={`${process.env.REACT_APP_GAUTHKEY}`}
+        render={(renderProps) => (
+          <OSignUpBtn
+            onClick={renderProps.onClick}
+            disabled={renderProps.disabled}
+            color="#DB4437"
+            icon={<GoogleOutlined />}
+          >
+            Sign Up
+          </OSignUpBtn>
+        )}
+        onSuccess={onGoogleSignUp}
+      />
     </SignUpFormContainer>
   );
 };

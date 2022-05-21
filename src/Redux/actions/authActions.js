@@ -1,4 +1,4 @@
-import { SIGN_UP, SIGN_IN, LOAD_PROF, SIGN_OUT } from "../types";
+import { SIGN_UP, SIGN_IN, LOAD_PROF, SIGN_OUT,SWITCH_ROLE } from "../types";
 import server from "../../Axios/index";
 import { notification } from "antd";
 import { saveToken, deleteToken } from "../localstorage";
@@ -24,7 +24,7 @@ export const loadProfile = (token) => {
 };
 
 export const signUp = (formValues, profilePhoto) => {
-  const { fullName, login, password } = formValues;
+  const { fullName, login, password="",socialId="",socialImage="" } = formValues;
   const formData = new FormData();
   formData.append("fullName", fullName);
   formData.append("login", login);
@@ -32,7 +32,7 @@ export const signUp = (formValues, profilePhoto) => {
   formData.append("photo", profilePhoto);
   return async (dispatch) => {
     try {
-      const res = await server.post("/auth/signup", formData);
+      const res = !socialId ? await server.post("/auth/signup", formData) : await server.post('/auth/oauth-signup',{fullName,email:login,socialId,socialImage});
       if (res.status === 200) {
         notification["success"]({
           message: "Sign Up Successfull",
@@ -41,10 +41,11 @@ export const signUp = (formValues, profilePhoto) => {
       }
       dispatch({ type: SIGN_UP });
     } catch (error) {
+      const message=error.response.data.message || "Something went wrong with the sign up, Hold up til we fix it"
       notification["error"]({
         message: "OH OH",
         description:
-          "Something went wrong with the sign up, Hold up til we fix it",
+         message
       });
       return error;
     }
@@ -52,7 +53,7 @@ export const signUp = (formValues, profilePhoto) => {
 };
 
 export const signIn = (formValues) => {
-  const { login, password } = formValues;
+  const { login, password="" } = formValues;
   return async (dispatch) => {
     try {
       const res = await server.post("/auth/login", { login, password });
@@ -62,6 +63,7 @@ export const signIn = (formValues) => {
           Authorization: `Basic ${res.data.token}`,
         },
       });
+      console.log(profileResponse)
       notification["success"]({
         message: "Welcome",
         description: `Welcome to RealEt ${profileResponse.data.user.fullName}`,
@@ -79,6 +81,10 @@ export const signIn = (formValues) => {
     }
   };
 };
+
+export const switchRole = (role) => {
+  return {type:SWITCH_ROLE,payload:role}
+}
 
 export const signOut = () => {
   deleteToken();

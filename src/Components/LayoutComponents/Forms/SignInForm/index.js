@@ -6,7 +6,6 @@ import {
   InputFieldPassword,
   SubmitButton,
   BtnLink,
-  FSignInButtom,
   GSignInButton,
   ForgotBTN,
   BTNContainer,
@@ -14,13 +13,12 @@ import {
 import Logo from "../../../../assets/images/logo2.png";
 import { Form, Divider, Tooltip, message, Modal } from "antd";
 import { FaUser, FaKey } from "react-icons/fa";
-import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
+import { GoogleOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import "./style.scss";
 import Schema from "async-validator";
 import { EmailRegEx, NumberRegEx } from "../../../../helpers/regex";
 import { GoogleLogin } from "react-google-login";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { useDispatch } from "react-redux";
 import { signIn } from "../../../../Redux/actions/authActions";
 import ForgotPassword from "../../../CustomComponents/ForgotPassword";
@@ -52,8 +50,13 @@ const SignInForm = () => {
     message.error("Please fill out the form");
   };
 
-  const onGoogleLogin = (response) => {
-    console.log(response);
+  const onGoogleLogin = async(response) => {
+
+    const googleLoginResponse = await dispatch(signIn({ login: response.profileObj.googleId }))
+    if (!googleLoginResponse) {
+      navigate("/");
+    }
+    
   };
 
   return (
@@ -158,23 +161,6 @@ const SignInForm = () => {
       </BTNContainer>
 
       <Divider />
-      <Tooltip title="Sign in with Facebook">
-        <FacebookLogin
-          appId={`${process.env.REACT_APP_FAUTHKEY}`}
-          callback={onGoogleLogin}
-          render={(renderProps) => (
-            <FSignInButtom
-              onClick={renderProps.onClick}
-              disabled={renderProps.disabled}
-              fields="name,email,picture"
-              type="primary"
-              icon={<FacebookFilled />}
-            >
-              Sign In
-            </FSignInButtom>
-          )}
-        />
-      </Tooltip>
       <Tooltip title="Sign in with Google" placement="bottom">
         <GoogleLogin
           clientId={`${process.env.REACT_APP_GAUTHKEY}`}
