@@ -13,7 +13,7 @@ To get started, follow these steps:
    `.env.production` to run in **Production Environtment**.
 
 4. Move to the project directory by:
-   `cd frontend`
+   `cd RealEt-Client`
 
 5. Install the dependencies by:  
    `yarn install`
