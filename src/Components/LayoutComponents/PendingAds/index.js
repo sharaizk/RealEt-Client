@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React, { useState } from "react";
 import { Table, Divider } from "antd";
 import { pendingAdsColumn } from "helpers/Dashboard";
 import { PostedAdsContainter, Title } from "./Elements";
@@ -8,10 +8,10 @@ import server from "../../../Axios";
 
 const PendingAds = () => {
   const token = getToken();
-  const [pageNumber, setPageNumber] = useState(1)
-  const limit =4
+  const [pageNumber, setPageNumber] = useState(1);
+  const limit = 4;
   const { data: propertyData, isLoading } = useQuery(
-    ["Pending Ads",pageNumber],
+    ["Pending Ads", pageNumber],
     async () => {
       const postedAdsResponse = await server.get("/ads/myAds", {
         headers: {
@@ -20,14 +20,15 @@ const PendingAds = () => {
         params: {
           count: false,
           status: "pending",
-          status2: 'flagged',
+          status2: "flagged",
           limit: limit,
-          page:pageNumber
+          page: pageNumber,
         },
       });
       return postedAdsResponse.data;
     }
   );
+
   return (
     <PostedAdsContainter>
       <Title>Pending Ads</Title>
@@ -43,7 +44,7 @@ const PendingAds = () => {
           pageSize: limit,
           defaultPageSize: limit,
           pageSizeOptions: [],
-          onChange:(val)=>setPageNumber(val)
+          onChange: (val) => setPageNumber(val),
         }}
       />
     </PostedAdsContainter>
