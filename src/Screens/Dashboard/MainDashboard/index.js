@@ -1,4 +1,4 @@
-import React , {useEffect} from "react";
+import React from "react";
 import { Layout } from "antd";
 import { Routes, Route } from "react-router-dom";
 import { ConsumerDashboardContainer, SwitchToText } from "./ConsumerElements";
@@ -27,14 +27,6 @@ const MainDashboard = () => {
   );
   const nonActiveRole = activeRole !== role ? role : secondaryRole;
 
-  useEffect(() => {
-    if (activeRole === 'consumer') {
-      navigate('')
-    }
-    else if (activeRole === 'builder') {
-      navigate('builder-profile')
-    }
-  },[activeRole,navigate])
 
   return (
     <DashboardContainer>
@@ -58,7 +50,15 @@ const MainDashboard = () => {
                 ))}
             </LinksContainer>
             {secondaryRole && (
-              <SwitchToText onClick={() => dispatch(switchRole(nonActiveRole))}>
+              <SwitchToText onClick={() => {
+                dispatch(switchRole(nonActiveRole))
+                if (nonActiveRole === 'consumer') {
+                  navigate('')
+                }
+                else if (nonActiveRole === 'builder') {
+                  navigate('builder-profile')
+                }
+              }}>
                 Switch To {nonActiveRole}
               </SwitchToText>
             )}

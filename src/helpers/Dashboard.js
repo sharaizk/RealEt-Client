@@ -7,6 +7,8 @@ import { GiUpgrade } from "react-icons/gi";
 import ProfileSection from "Components/LayoutComponents/ProfileSection";
 import PostedAds from "Components/LayoutComponents/PostedAds";
 import PendingAds from "Components/LayoutComponents/PendingAds";
+
+import UpgradeAccount from 'Components/CustomComponents/UpgradeAccount'
 export const ConsumerLinks = [
   {
     key: 1,
@@ -75,7 +77,7 @@ export const ConsumerRoutes = [
   {
     key: 6,
     path: "upgrade-account",
-    element: <p>Upgrade</p>,
+    element: <UpgradeAccount />,
   },
 ];
 
