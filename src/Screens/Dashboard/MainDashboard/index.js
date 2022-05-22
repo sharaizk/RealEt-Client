@@ -1,7 +1,7 @@
-import React from "react";
+import React , {useEffect} from "react";
 import { Layout } from "antd";
 import { Routes, Route } from "react-router-dom";
-import { ConsumerDashboardContainer,SwitchToText } from "./ConsumerElements";
+import { ConsumerDashboardContainer, SwitchToText } from "./ConsumerElements";
 import {
   DashboardContainer,
   LinksContainer,
@@ -9,16 +9,32 @@ import {
 } from "../DashboardElements";
 import "../styles.scss";
 
-import { ConsumerLinks, ConsumerRoutes } from "helpers/Dashboard";
-import { useSelector,useDispatch } from "react-redux";
+import {
+  ConsumerLinks,
+  ConsumerRoutes,
+  BuilderLinks,
+  BuilderRoutes,
+} from "helpers/Dashboard";
+import { useSelector, useDispatch } from "react-redux";
 import { switchRole } from "Redux/actions/authActions";
+import { useNavigate } from "react-router-dom";
 const MainDashboard = () => {
   const { Content, Sider } = Layout;
-  const dispatch=useDispatch()
-  const { activeRole,secondaryRole,role } = useSelector((state) => state.auth);
-  const nonActiveRole = activeRole !== role ? role : secondaryRole 
+  const navigate=useNavigate()
+  const dispatch = useDispatch();
+  const { activeRole, secondaryRole, role } = useSelector(
+    (state) => state.auth
+  );
+  const nonActiveRole = activeRole !== role ? role : secondaryRole;
 
-
+  useEffect(() => {
+    if (activeRole === 'consumer') {
+      navigate('')
+    }
+    else if (activeRole === 'builder') {
+      navigate('builder-profile')
+    }
+  },[activeRole,navigate])
 
   return (
     <DashboardContainer>
@@ -33,13 +49,32 @@ const MainDashboard = () => {
                     {link.title}
                   </LinkBtn>
                 ))}
+              {activeRole === "builder" &&
+                BuilderLinks.map((link) => (
+                  <LinkBtn key={link.key} to={link.to}>
+                    {link.icon}
+                    {link.title}
+                  </LinkBtn>
+                ))}
             </LinksContainer>
-            {secondaryRole &&<SwitchToText onClick={()=>dispatch(switchRole(nonActiveRole))}>Switch To {nonActiveRole}</SwitchToText> }
+            {secondaryRole && (
+              <SwitchToText onClick={() => dispatch(switchRole(nonActiveRole))}>
+                Switch To {nonActiveRole}
+              </SwitchToText>
+            )}
           </Sider>
           <Content>
             <Routes>
               {activeRole === "consumer" &&
                 ConsumerRoutes.map((route) => (
+                  <Route
+                    path={route.path}
+                    key={route.key}
+                    element={route.element}
+                  />
+                ))}
+              {activeRole === "builder" &&
+                BuilderRoutes.map((route) => (
                   <Route
                     path={route.path}
                     key={route.key}

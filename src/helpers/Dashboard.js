@@ -151,3 +151,54 @@ export const pendingAdsColumn = [
     key: "status",
   },
 ];
+
+
+export const BuilderLinks=[
+  {
+    key: 1,
+    title: "Builder Profile",
+    to: "builder-profile",
+    icon: <FaUser />,
+  },
+  {
+    key: 2,
+    title: "Chats",
+    to: "chats",
+    icon: <BsChatSquareDotsFill />,
+  },
+  {
+    key: 3,
+    title: "Manage Portfolio",
+    to: "manageportfolio",
+    icon: <MdPending />,
+  },
+  {
+    key: 4,
+    title: "Upgrade Account",
+    to: "upgrade-account",
+    icon: <GiUpgrade />,
+  },
+];
+
+export const BuilderRoutes = [
+  {
+    key: 1,
+    path: "builder-profile",
+    element: <p>Builder Profile</p>,
+  },
+  {
+    key: 2,
+    path: "chats",
+    element: <p>Chats</p>,
+  },
+  {
+    key: 3,
+    path: "manageportfolio",
+    element: <p>Portfolio</p>,
+  },
+  {
+    key: 4,
+    path: "upgrade-account",
+    element: <p>Upgrade</p>,
+  },
+];
