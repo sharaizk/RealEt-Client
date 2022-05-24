@@ -9,6 +9,10 @@ import Footer from "Components/LayoutComponents/Footer";
 import { getToken } from "Redux/localstorage";
 import { Navigate } from "react-router-dom";
 import Dashboard from "Screens/Dashboard";
+import Schema from "async-validator";
+
+Schema.warning = function () {};
+
 
 function RequireAuth({ children, redirectTo }) {
   let isAuthenticated = getToken();

@@ -9,6 +9,8 @@ import PostedAds from "Components/LayoutComponents/PostedAds";
 import PendingAds from "Components/LayoutComponents/PendingAds";
 
 import UpgradeAccount from 'Components/CustomComponents/UpgradeAccount'
+import ManagePortfolio from "Screens/ManagePortfolio";
+
 export const ConsumerLinks = [
   {
     key: 1,
@@ -154,6 +156,39 @@ export const pendingAdsColumn = [
   },
 ];
 
+export const portfolioColumn = [
+  {
+    title: "Title",
+    dataIndex: "title",
+    key:"title"
+  },
+  {
+    title: "Type",
+    dataIndex: "type",
+    key:"type"
+  },
+  {
+    title: "Sub Type",
+    dataIndex: "propertySubType",
+    key:"propertysubtype"
+  },
+  {
+    title: "Size",
+    dataIndex: "size",
+    key:"size"
+  },
+  {
+    title: "Year Built",
+    dataIndex: "yearBuilt",
+    key:"yearBuilt"
+  },
+  {
+    title: "City",
+    dataIndex: ["city_data","name"],
+    key:"cityname"
+  },
+]
+
 
 export const BuilderLinks=[
   {
@@ -196,11 +231,11 @@ export const BuilderRoutes = [
   {
     key: 3,
     path: "manageportfolio",
-    element: <p>Portfolio</p>,
+    element: <ManagePortfolio />,
   },
   {
     key: 4,
     path: "upgrade-account",
-    element: <p>Upgrade</p>,
+    element: <UpgradeAccount />,
   },
 ];

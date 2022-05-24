@@ -1,0 +1,32 @@
+.RFS-StepperContainer {
+  width: 100%;
+  transition: all 0.2s;
+}
+.ant-radio-inner {
+  box-shadow: none;
+}
+.ant-radio-checked .ant-radio-inner {
+  border-color: #fc6e20 !important ;
+}
+
+.ant-radio-checked .ant-radio-inner:after {
+  background-color: #fc6e20 !important;
+}
+
+.ant-radio:hover .ant-radio-inner {
+  border-color: #fc6e20 !important;
+}
+.ant-select-selection-search-input {
+  // padding: 100px 0 !important;
+  height: 100% !important;
+}
+
+.ant-spin-dot-item {
+  background-color: #fc6e20;
+}
+.ant-form-item-label >label{
+  font-size: 1rem;
+  line-height: 1rem;
+  color: #424242;
+  letter-spacing: 0.05rem;
+}
