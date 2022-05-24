@@ -9,7 +9,7 @@ import server from "../../../Axios";
 const PostedAds = () => {
   const token = getToken();
   const [pageNumber, setPageNumber] = useState(1)
-  const limit=5
+  const limit=4
   const { data: propertyData, isLoading } = useQuery(["Posted Ads",pageNumber], async () => {
     const postedAdsResponse = await server.get("/ads/myAds", {
       headers: {

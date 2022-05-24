@@ -32,7 +32,6 @@ const ProfileSection = () => {
       return adsCount.data;
     }
   );
-  console.log(adCountData);
   const total = role[0] === "Consumer" ? 3 : 100;
   const getPercentage = (value) => {
     return (100 * value) / total;

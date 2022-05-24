@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 export const ManagePortfolioContainer = styled.div`
     height: 100%;
     width: 100%;
@@ -38,3 +39,9 @@ export const AddPortfolioBtn = styled.button`
         padding:0.25rem 0.5rem;
     }
 `
+export const View = styled(Link)`
+  color: #fc6e20;
+  &:hover {
+    color: #fc6e20;
+  }
+`;

@@ -10,6 +10,7 @@ import PendingAds from "Components/LayoutComponents/PendingAds";
 
 import UpgradeAccount from 'Components/CustomComponents/UpgradeAccount'
 import ManagePortfolio from "Screens/ManagePortfolio";
+import BuilderProfile from "Screens/BuilderProfile";
 
 export const ConsumerLinks = [
   {
@@ -187,6 +188,15 @@ export const portfolioColumn = [
     dataIndex: ["city_data","name"],
     key:"cityname"
   },
+  {
+    title: "Location",
+    dataIndex: ["location_data","name"],
+    key:"location"
+  }, {
+    title: "View",
+    dataIndex: "view",
+    key:'view'
+  }
 ]
 
 
@@ -221,7 +231,7 @@ export const BuilderRoutes = [
   {
     key: 1,
     path: "builder-profile",
-    element: <p>Builder Profile</p>,
+    element: <BuilderProfile />,
   },
   {
     key: 2,

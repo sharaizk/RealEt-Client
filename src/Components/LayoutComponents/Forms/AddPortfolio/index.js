@@ -14,14 +14,21 @@ import {
 import "./styles.scss";
 import { Form, Spin, message } from "antd";
 import TextEditor from "Components/CustomComponents/TextEditor";
-
-import { useQuery, useMutation } from "react-query";
+import { useSelector } from "react-redux";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getToken } from "Redux/localstorage";
 import server from "../../../../Axios";
 
-const AddPortfolio = ({setModal}) => {
+const AddPortfolio = ({
+  setModal,
+  portfolioCurrentPage,
+  limit,
+  portfolioCount,
+}) => {
   const [form] = Form.useForm();
   const [selectedCity, setSelectedCity] = useState("");
+  const queryClient = useQueryClient();
+  const { userId } = useSelector((state) => state.auth);
   const { data: cities, isLoading: isCityLoading } = useQuery(
     "Cities",
     async () => {
@@ -54,38 +61,51 @@ const AddPortfolio = ({setModal}) => {
     return e && e.fileList;
   };
 
-
-  const { mutate, isLoading } = useMutation(async (values) => {
-    const formData = new FormData();
-    formData.append("title", values.title);
-    formData.append("city", values.city);
-    formData.append("description", values.description);
-    formData.append("location",values.location)
-    formData.append("propertySubType", values.propertySubType);
-    formData.append("size", values.size);
-    formData.append("type", values.type);
-    formData.append("yearBuilt", values.yearBuilt);
-    for (let i = 0; i < values.photos.length; i++) {
-      let image = values.photos[i].originFileObj;
-      formData.append("photos", image);
-    }
-    const savePortfolioResponse = await server.post(
-      "/portfolio/add",
-      formData,
-      {
-        headers: {
-          "Authorization": `Bearer ${getToken()}`,
-        },
+  const { mutate, isLoading } = useMutation(
+    async (values) => {
+      const formData = new FormData();
+      formData.append("title", values.title);
+      formData.append("city", values.city);
+      formData.append("description", values.description);
+      formData.append("location", values.location);
+      formData.append("propertySubType", values.propertySubType);
+      formData.append("size", values.size);
+      formData.append("type", values.type);
+      formData.append("yearBuilt", values.yearBuilt);
+      for (let i = 0; i < values.photos.length; i++) {
+        let image = values.photos[i].originFileObj;
+        formData.append("photos", image);
       }
-    );
-    return savePortfolioResponse.data
-  }, {
+      const savePortfolioResponse = await server.post(
+        "/portfolio/add",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        }
+      );
+      return savePortfolioResponse.data;
+    },
+    {
       onSuccess: (newValues) => {
-          form.resetFields()
-          message.success("Portfolio added successfully")
-          setModal(false)
-      }
-  });
+        form.resetFields();
+        message.success("Portfolio added successfully");
+        setModal(false);
+        // if (
+        //   portfolioCount < limit &&
+        //   portfolioCurrentPage === totalPages
+        // ) {
+        // }
+        if (portfolioCurrentPage === 1) {
+          queryClient.setQueryData(
+            ["Portfolio", userId, portfolioCurrentPage],
+            { data:newValues?.data,count:newValues?.count}
+          );
+        }
+      },
+    }
+  );
 
   return (
     <AddPortfolioFormContainer>
@@ -94,7 +114,7 @@ const AddPortfolio = ({setModal}) => {
         layout="vertical"
         requiredMark="optional"
         name="Add Portfolio"
-        onFinish={(values)=>mutate(values)}
+        onFinish={(values) => mutate(values)}
       >
         <Form.Item
           name="title"
