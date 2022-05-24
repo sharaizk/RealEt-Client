@@ -92,15 +92,10 @@ const AddPortfolio = ({
         form.resetFields();
         message.success("Portfolio added successfully");
         setModal(false);
-        // if (
-        //   portfolioCount < limit &&
-        //   portfolioCurrentPage === totalPages
-        // ) {
-        // }
         if (portfolioCurrentPage === 1) {
           queryClient.setQueryData(
             ["Portfolio", userId, portfolioCurrentPage],
-            { data:newValues?.data,count:newValues?.count}
+            { data: newValues?.data, count: newValues?.count }
           );
         }
       },
