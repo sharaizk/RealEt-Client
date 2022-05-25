@@ -27,3 +27,15 @@ export const View = styled(Link)`
     color: #fc6e20;
   }
 `;
+
+export const DelBtn = styled.button`
+  background-color: transparent;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ff3333;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

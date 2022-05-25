@@ -1,16 +1,22 @@
-import React , {useState} from "react";
-import { Table, Divider } from "antd";
+import React, { useState } from "react";
+import { Table, Divider, Modal } from "antd";
 import { adsPostColumn } from "helpers/Dashboard";
-import { PostedAdsContainter, Title, View } from "./Elements";
-import { useQuery } from "react-query";
+import { PostedAdsContainter, Title, View, DelBtn } from "./Elements";
+import { useMutation, useQuery } from "react-query";
 import { getToken } from "Redux/localstorage";
+import { MdDelete } from "react-icons/md";
 import server from "../../../Axios";
 
 const PostedAds = () => {
   const token = getToken();
-  const [pageNumber, setPageNumber] = useState(1)
-  const limit=4
-  const { data: propertyData, isLoading } = useQuery(["Posted Ads",pageNumber], async () => {
+  const [pageNumber, setPageNumber] = useState(1);
+  const [adDelete, setAdDelete] = useState("");
+  const limit = 4;
+  const {
+    data: propertyData,
+    isLoading,
+    refetch,
+  } = useQuery(["Posted Ads", pageNumber], async () => {
     const postedAdsResponse = await server.get("/ads/myAds", {
       headers: {
         "x-access-token": token,
@@ -19,16 +25,53 @@ const PostedAds = () => {
         count: false,
         status: "approved",
         page: pageNumber,
-        limit:limit
+        limit: limit,
       },
     });
     return postedAdsResponse.data;
   });
+
+  const { mutate, isLoading: deletionLoading } = useMutation(
+    async () => {
+      const deleteAdResponse = await server.put(
+        `/ads/update/${adDelete}`,
+        {
+          deleteFlag: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        }
+      );
+      return deleteAdResponse.data;
+    },
+    {
+      onSuccess: (values) => {
+        setAdDelete("");
+        refetch();
+      },
+    }
+  );
+
   const dataSource = propertyData
     ? propertyData.data?.map((property) => {
         return {
           ...property,
-          view: <View key={property._id} to={`/property-detail/${property._id}`}>View</View>,
+          view: (
+            <View key={property._id} to={`/property-detail/${property._id}`}>
+              View
+            </View>
+          ),
+          delete: (
+            <DelBtn>
+              <MdDelete
+                onClick={() => setAdDelete(property?._id)}
+                size={20}
+                color="#ff3333"
+              />
+            </DelBtn>
+          ),
         };
       })
     : [];
@@ -36,6 +79,13 @@ const PostedAds = () => {
     <PostedAdsContainter>
       <Title>Posted Ads</Title>
       <Divider />
+      <Modal
+        title="Delete"
+        visible={adDelete ? true : false}
+        onCancel={() => setAdDelete("")}
+        onOk={mutate}
+        confirmLoading={deletionLoading}
+      />
       <Table
         loading={isLoading}
         columns={adsPostColumn}
@@ -47,7 +97,7 @@ const PostedAds = () => {
           pageSize: limit,
           defaultPageSize: limit,
           pageSizeOptions: [],
-          onChange:(val)=>setPageNumber(val)
+          onChange: (val) => setPageNumber(val),
         }}
       />
     </PostedAdsContainter>

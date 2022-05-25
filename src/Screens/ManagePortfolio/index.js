@@ -3,7 +3,8 @@ import {
   ManagePortfolioContainer,
   ScreenTitle,
   AddPortfolioBtn,
-  View
+  View,
+  DelBtn,
 } from "./PortfolioElements";
 import { Divider } from "antd";
 import { MdAdd } from "react-icons/md";
@@ -14,6 +15,8 @@ import { useQuery } from "react-query";
 import server from "../../Axios";
 import { getToken } from "Redux/localstorage";
 import { useSelector } from "react-redux";
+import { MdDelete } from "react-icons/md";
+
 const ManagePortfolio = () => {
   const [adPortfolio, setAdPortfolio] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
@@ -32,17 +35,33 @@ const ManagePortfolio = () => {
           limit: limit,
         },
       });
-      return {data:portfolioResponse.data.data,count:portfolioResponse.data.count};
+      return {
+        data: portfolioResponse.data.data,
+        count: portfolioResponse.data.count,
+      };
     }
   );
   const dataSource = portfolioData
-  ? portfolioData.data?.map((portfolio) => {
-      return {
-        ...portfolio,
-        view: <View key={portfolio._id} to={`/`}>View</View>,
-      };
-    })
-  : [];
+    ? portfolioData.data?.map((portfolio) => {
+        return {
+          ...portfolio,
+          view: (
+            <View key={portfolio._id} to={`/`}>
+              View
+            </View>
+          ),
+          delete: (
+            <DelBtn>
+              <MdDelete
+                // onClick={() => setAdDelete(property?._id)}
+                size={20}
+                color="#ff3333"
+              />
+            </DelBtn>
+          ),
+        };
+      })
+    : [];
   return (
     <ManagePortfolioContainer>
       <Modal
@@ -77,7 +96,7 @@ const ManagePortfolio = () => {
           pageSize: limit,
           defaultPageSize: limit,
           pageSizeOptions: [],
-          onChange:(val)=>setPageNumber(val)
+          onChange: (val) => setPageNumber(val),
         }}
       />
     </ManagePortfolioContainer>

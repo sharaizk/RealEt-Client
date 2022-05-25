@@ -2,13 +2,13 @@ import { FaUser } from "react-icons/fa";
 import { BsChatSquareDotsFill } from "react-icons/bs";
 import { SiHomeadvisor } from "react-icons/si";
 import { MdPending } from "react-icons/md";
-import { GoSettings } from "react-icons/go";
+// import { GoSettings } from "react-icons/go";
 import { GiUpgrade } from "react-icons/gi";
 import ProfileSection from "Components/LayoutComponents/ProfileSection";
 import PostedAds from "Components/LayoutComponents/PostedAds";
 import PendingAds from "Components/LayoutComponents/PendingAds";
 
-import UpgradeAccount from 'Components/CustomComponents/UpgradeAccount'
+import UpgradeAccount from "Components/CustomComponents/UpgradeAccount";
 import ManagePortfolio from "Screens/ManagePortfolio";
 import BuilderProfile from "Screens/BuilderProfile";
 
@@ -39,12 +39,6 @@ export const ConsumerLinks = [
   },
   {
     key: 5,
-    title: "Settings",
-    to: "settings",
-    icon: <GoSettings />,
-  },
-  {
-    key: 6,
     title: "Upgrade Account",
     to: "upgrade-account",
     icon: <GiUpgrade />,
@@ -121,6 +115,11 @@ export const adsPostColumn = [
     dataIndex: "view",
     key: "view",
   },
+  {
+    title: "Delete",
+    dataIndex: "delete",
+    key: "delete",
+  },
 ];
 
 export const pendingAdsColumn = [
@@ -161,46 +160,51 @@ export const portfolioColumn = [
   {
     title: "Title",
     dataIndex: "title",
-    key:"title"
+    key: "title",
   },
   {
     title: "Type",
     dataIndex: "type",
-    key:"type"
+    key: "type",
   },
   {
     title: "Sub Type",
     dataIndex: "propertySubType",
-    key:"propertysubtype"
+    key: "propertysubtype",
   },
   {
     title: "Size",
     dataIndex: "size",
-    key:"size"
+    key: "size",
   },
   {
     title: "Year Built",
     dataIndex: "yearBuilt",
-    key:"yearBuilt"
+    key: "yearBuilt",
   },
   {
     title: "City",
-    dataIndex: ["city_data","name"],
-    key:"cityname"
+    dataIndex: ["city_data", "name"],
+    key: "cityname",
   },
   {
     title: "Location",
-    dataIndex: ["location_data","name"],
-    key:"location"
-  }, {
+    dataIndex: ["location_data", "name"],
+    key: "location",
+  },
+  {
     title: "View",
     dataIndex: "view",
-    key:'view'
-  }
-]
+    key: "view",
+  },
+  {
+    title: "Delete",
+    dataIndex: "delete",
+    key: "view",
+  },
+];
 
-
-export const BuilderLinks=[
+export const BuilderLinks = [
   {
     key: 1,
     title: "Builder Profile",
