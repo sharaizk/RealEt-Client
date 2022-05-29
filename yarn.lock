@@ -9755,6 +9755,13 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.npmjs.org/punycode/-/punycode-2.1.1.tgz"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
+pusher-js@^7.1.0-beta:
+  version "7.1.0-beta"
+  resolved "https://registry.yarnpkg.com/pusher-js/-/pusher-js-7.1.0-beta.tgz#288ced24eef1e2c67606883f141d32ad860f6b56"
+  integrity sha512-vs9R5Guy2VW1O3nI0OTa9NQWHkfbEvmkyWDOC469WubhVFwQ5Pa38OgRQetQzA5Ege2SF3iErZBGzY/xXNiKyw==
+  dependencies:
+    tweetnacl "^1.0.3"
+
 q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.npmjs.org/q/-/q-1.5.1.tgz"
@@ -12208,6 +12215,11 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.5.tgz"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
+
+tweetnacl@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-1.0.3.tgz#ac0af71680458d8a6378d0d0d050ab1407d35596"
+  integrity sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"

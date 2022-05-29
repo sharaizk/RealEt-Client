@@ -11,6 +11,7 @@ import PendingAds from "Components/LayoutComponents/PendingAds";
 import UpgradeAccount from "Components/CustomComponents/UpgradeAccount";
 import ManagePortfolio from "Screens/ManagePortfolio";
 import BuilderProfile from "Screens/BuilderProfile";
+import ChatScreen from "Screens/ChatScreen";
 
 export const ConsumerLinks = [
   {
@@ -54,7 +55,7 @@ export const ConsumerRoutes = [
   {
     key: 2,
     path: "chats",
-    element: <p>Chats</p>,
+    element: <ChatScreen />,
   },
   {
     key: 3,
