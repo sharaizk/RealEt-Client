@@ -20,6 +20,8 @@ export const BuyRentButton = styled(Radio.Button)`
   min-width: 5vw;
   opacity: 0.5;
   text-align: center;
+  margin-bottom: 1vh;
+
   &.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
     background-color: #fc6e20;
     color: #fff;
@@ -42,6 +44,8 @@ export const TextField = styled(Input)`
   border-radius: 10px;
   padding: 10px;
   box-shadow: none;
+  margin-bottom: 1vh;
+
   &:focus,
   :active {
     box-shadow: none;
@@ -78,6 +82,8 @@ export const SubTypeCat = styled(Select)`
   align-items: flex-start;
   background: transparent;
   outline: none;
+  margin-bottom: 1vh;
+
   & .ant-select-selector {
     padding: 10px !important;
     height: auto !important;

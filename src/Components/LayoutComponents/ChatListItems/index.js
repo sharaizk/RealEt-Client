@@ -1,21 +1,25 @@
 import React from "react";
 import { ChatItemContainer, ChatTitle, ChatSubTitle, Badge } from "./Elements";
 import { Avatar, Row, Col } from "antd";
-const ChatListItem = () => {
+const ChatListItem = ({setOpen,chatRoomTitle,role,chatRoomImg,badge}) => {
   return (
-    <ChatItemContainer>
-      <Badge></Badge>
+    <ChatItemContainer onClick={() => {
+      setOpen(false)
+    }}>
+      {badge && (
+        <Badge></Badge>
+      )}
       <Row>
-        <Col span={5}>
-          <Avatar src="https://joeschmoe.io/api/v1/random" />
+        <Col span={6}>
+          <Avatar src={chatRoomImg} />
         </Col>
-        <Col span={17}>
+        <Col span={18}>
           <Row>
             <Col span={24}>
-              <ChatTitle>Sharaiz Khan</ChatTitle>
+              <ChatTitle>{chatRoomTitle}</ChatTitle>
             </Col>
             <Col span={24}>
-              <ChatSubTitle>Builder</ChatSubTitle>
+              <ChatSubTitle>{role}</ChatSubTitle>
             </Col>
           </Row>
         </Col>

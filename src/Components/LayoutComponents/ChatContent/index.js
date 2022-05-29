@@ -1,7 +1,7 @@
 import React from "react";
-
+import { ChatContentContainer } from "./ChatContentElements";
 const ChatContent = () => {
-  return <div>ChatContent</div>;
+  return <ChatContentContainer>ChatContent</ChatContentContainer>;
 };
 
 export default ChatContent;

@@ -23,7 +23,7 @@ export const SectionTitle2 = styled.h5`
 
 export const CustomSelect = styled(Select)`
   width: 100%;
-
+  margin-bottom: 1vh;
   & .ant-select-selector {
     &:hover {
       border-color: #fc6e20 !important;

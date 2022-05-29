@@ -23,5 +23,6 @@ export const OpenChatBar = styled.div`
     padding: 0.3rem 0.5rem;
     border-radius: 0 10px 10px 0;
     cursor: pointer;
+    z-index: 1;
   }
 `;

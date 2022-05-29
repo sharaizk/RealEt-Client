@@ -155,9 +155,9 @@ const SecondStep = ({ data, handleNextStep, handlePrevStep }) => {
                 onChange={(v) => {
                   const loc = locations.find((location) => location.key === v);
                   setCoordinates({
-                    lng: loc?.longitude,
-                    lat: loc?.latitude,
-                    zoom: 11,
+                    lng: loc?.longitude || 69.345116,
+                    lat: loc?.latitude || 30.37532,
+                    zoom: loc?.longitude ? 11 : 3,
                   });
                   form.setFieldsValue({
                     location: v,

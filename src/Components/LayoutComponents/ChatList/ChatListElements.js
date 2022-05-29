@@ -26,8 +26,28 @@ const animateOut = keyframes`
 export const ChatListContainer = styled.div`
   height: 100%;
   flex: 0.3;
-  border-right: 1px solid #ebe7fb;
   padding: 0 20px 0 0px;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #d6d6d6;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: gray;
+  }
 
   @media screen and (max-width: 768px) {
     flex: 1;
@@ -36,6 +56,7 @@ export const ChatListContainer = styled.div`
     animation-duration: 1s;
     animation-iteration-count: 1;
     display: ${({ $isOpen }) => (!$isOpen ? "none" : "flex")};
+    overflow: auto;
   }
   @media screen and (max-width: 480px) {
     padding: 0 10px 0 0px;

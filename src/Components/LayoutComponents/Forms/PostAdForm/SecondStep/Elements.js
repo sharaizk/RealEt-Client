@@ -17,6 +17,7 @@ export const LocationCat = styled(Select)`
   align-items: flex-start;
   background: transparent;
   outline: none;
+  margin-bottom: 1vh;
   & .ant-select-selector {
     padding: 10px !important;
     height: auto !important;
@@ -46,6 +47,7 @@ export const TextField = styled(Input)`
   border-radius: 10px;
   padding: 10px;
   box-shadow: none;
+  margin-bottom: 1vh;
   &:focus,
   :active {
     box-shadow: none;

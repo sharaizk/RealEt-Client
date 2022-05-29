@@ -19,6 +19,8 @@ export const UnitCat = styled(Select)`
 `;
 export const GroupTextField = styled(Input)`
   flex: 1;
+  margin-bottom: 1vh;
+
   & .ant-input-wrapper {
     & input {
       border-radius: 10px;
@@ -91,8 +93,8 @@ export const UnitOption = styled(Option)`
 export const CustomUpload = styled(Upload.Dragger)`
   border-radius: 10px !important;
   background-color: #fff !important;
+  margin-bottom: 1vh;
   border: 2px dashed #d9d9d9 !important;
-
   &:hover {
     border-color: #fc6e20 !important ;
   }

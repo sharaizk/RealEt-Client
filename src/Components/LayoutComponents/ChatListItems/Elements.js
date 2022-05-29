@@ -8,8 +8,9 @@ export const ChatItemContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   border-radius: 10px;
-  padding: 1rem 0.8rem;
+  padding: 0.6rem 0.8rem;
   position: relative;
+  cursor: pointer;
 `;
 
 export const ChatTitle = styled.h4`
