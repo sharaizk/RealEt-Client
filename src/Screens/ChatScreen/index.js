@@ -11,7 +11,7 @@ const ChatScreen = () => {
         <GrChatOption color="#fff" size={16} />
       </OpenChatBar>
       <ChatList isOpen={isOpen} setOpen={setOpen} />
-      <ChatContent />
+      {!isOpen && <ChatContent />}
     </ChatScreenContainer>
   );
 };

@@ -4,6 +4,7 @@ import {
   ChatListHeading,
   ChatListSearch,
 } from "./ChatListElements";
+import ChatListItem from "../ChatListItems.js";
 const ChatList = ({ isOpen, setOpen }) => {
   return (
     <ChatListContainer $isOpen={isOpen}>
@@ -13,6 +14,7 @@ const ChatList = ({ isOpen, setOpen }) => {
       <ChatListSearch>
         <input type="text" placeholder="search" />
       </ChatListSearch>
+      <ChatListItem onClick={() => {}} />
     </ChatListContainer>
   );
 };

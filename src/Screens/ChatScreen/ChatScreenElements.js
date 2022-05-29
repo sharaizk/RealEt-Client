@@ -7,6 +7,7 @@ export const ChatScreenContainer = styled.div`
   display: flex;
   height: 100%;
   position: relative;
+  overflow-y: hidden;
 `;
 
 export const OpenChatBar = styled.div`
