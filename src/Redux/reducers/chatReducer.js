@@ -14,10 +14,7 @@ const chatReducer = (state = INITIAL_STATE, action) => {
     case NEW_MESSAGES:
       return {
         ...state,
-        chatRoomMessages: [
-          ...state.chat.chatRoomMessages,
-          { ...action.payload },
-        ],
+        chatRoomMessages: [...state.chatRoomMessages, {...action.payload}],
       };
     case RELOAD_MESSAGES:
       return {

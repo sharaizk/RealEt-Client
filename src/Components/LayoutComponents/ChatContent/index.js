@@ -27,7 +27,7 @@ const ChatContent = () => {
     channel.bind("message-received", (data) => {
       dispatch(newMessages(data));
     });
-  }, [activeChatRoomId]);
+  }, [activeChatRoomId,dispatch]);
 
   return (
     <ChatContentContainer>

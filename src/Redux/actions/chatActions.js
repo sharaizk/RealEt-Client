@@ -8,7 +8,6 @@ export const activateChatRoom = (chatRoomId) => {
 };
 
 export const newMessages = (message) => {
-  console.log(message);
   return {
     type: NEW_MESSAGES,
     payload: {
