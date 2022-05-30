@@ -49,7 +49,7 @@ export const ChatListContainer = styled.div`
     background: gray;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     flex: 1;
     flex-direction: column;
     animation-name: ${({ $isOpen }) => (!$isOpen ? animateOut : animateIn)};
@@ -83,4 +83,13 @@ export const ChatListSearch = styled.div`
     width: 80%;
     padding-right: 0;
   }
+`;
+
+export const NoChatFound = styled.div`
+  color: #424242;
+  font-weight: 400;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

@@ -12,7 +12,7 @@ export const ChatScreenContainer = styled.div`
 
 export const OpenChatBar = styled.div`
   display: none;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     background-color: #fc6e20;
     position: absolute;
     top: 50%;

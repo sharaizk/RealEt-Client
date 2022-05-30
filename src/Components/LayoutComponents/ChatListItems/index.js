@@ -1,16 +1,36 @@
 import React from "react";
 import { ChatItemContainer, ChatTitle, ChatSubTitle, Badge } from "./Elements";
 import { Avatar, Row, Col } from "antd";
-const ChatListItem = ({setOpen,chatRoomTitle,role,chatRoomImg,badge}) => {
+import { ChatRoomAnimation } from "utils/StepperAnimationConfiguration";
+import { activateChatRoom } from "Redux/actions/chatActions";
+import { useDispatch } from "react-redux";
+const ChatListItem = ({
+  setOpen,
+  chatRoomTitle,
+  role,
+  secondaryRole,
+  chatRoomImg,
+  badge,
+  chatRoomId,
+}) => {
+  const dispatch = useDispatch();
   return (
-    <ChatItemContainer onClick={() => {
-      setOpen(false)
-    }}>
-      {badge && (
-        <Badge></Badge>
-      )}
-      <Row>
-        <Col span={6}>
+    <ChatItemContainer
+      onClick={() => {
+        setOpen(false);
+        dispatch(activateChatRoom(chatRoomId));
+      }}
+      {...ChatRoomAnimation}
+    >
+      {badge && <Badge></Badge>}
+      <Row style={{ width: "100%" }}>
+        <Col
+          span={6}
+          xs={{ span: 6 }}
+          sm={{ span: 2 }}
+          xl={{ span: 6 }}
+          xxl={{ span: 3 }}
+        >
           <Avatar src={chatRoomImg} />
         </Col>
         <Col span={18}>
@@ -19,7 +39,9 @@ const ChatListItem = ({setOpen,chatRoomTitle,role,chatRoomImg,badge}) => {
               <ChatTitle>{chatRoomTitle}</ChatTitle>
             </Col>
             <Col span={24}>
-              <ChatSubTitle>{role}</ChatSubTitle>
+              <ChatSubTitle>
+                {secondaryRole ? secondaryRole : role}
+              </ChatSubTitle>
             </Col>
           </Row>
         </Col>

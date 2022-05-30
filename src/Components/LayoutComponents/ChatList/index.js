@@ -3,9 +3,23 @@ import {
   ChatListContainer,
   ChatListHeading,
   ChatListSearch,
+  NoChatFound,
 } from "./ChatListElements";
 import ChatListItem from "../ChatListItems/index.js";
+import { useQuery } from "react-query";
+import server from "../../../Axios";
+import { useSelector } from "react-redux";
+import { getToken } from "Redux/localstorage";
 const ChatList = ({ isOpen, setOpen }) => {
+  const { userId } = useSelector((state) => state.auth);
+  const { data: roomData = [] } = useQuery(["Rooms", userId], async () => {
+    const roomsResponse = await server.get("/chatroom/my-rooms", {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+    return roomsResponse.data;
+  });
   return (
     <ChatListContainer $isOpen={isOpen}>
       <ChatListHeading>
@@ -14,41 +28,27 @@ const ChatList = ({ isOpen, setOpen }) => {
       <ChatListSearch>
         <input type="text" placeholder="search" />
       </ChatListSearch>
-      <ChatListItem
-        setOpen={setOpen}
-        chatRoomTitle="Sharaiz Khan"
-        role="Builder"
-        chatRoomImg="https://joeschmoe.io/api/v1/random"
-        badge={true}
-      />
-      <ChatListItem
-        setOpen={setOpen}
-        chatRoomTitle="Rehan Shakir"
-        role="Agent"
-        chatRoomImg="https://joeschmoe.io/api/v1/random"
-        badge={false}
-      />
-      <ChatListItem
-        setOpen={setOpen}
-        chatRoomTitle="Tapa Tap"
-        role="Agent"
-        chatRoomImg="https://joeschmoe.io/api/v1/random"
-        badge={false}
-      />
-      <ChatListItem
-        setOpen={setOpen}
-        chatRoomTitle="Hamza"
-        role="Consumer"
-        chatRoomImg="https://joeschmoe.io/api/v1/random"
-        badge={false}
-      />
-      <ChatListItem
-        setOpen={setOpen}
-        chatRoomTitle="Muhammad Soban"
-        role="Agent"
-        chatRoomImg="https://joeschmoe.io/api/v1/random"
-        badge={true}
-      />
+      {roomData ? (
+        roomData?.map((room) => {
+          return (
+            <ChatListItem
+              chatRoomId={room?._id}
+              key={room?._id}
+              setOpen={setOpen}
+              chatRoomTitle={room?.name}
+              role={room?.receiver?.role}
+              secondaryRole={room?.receiver?.secondaryRole}
+              chatRoomImg={
+                room?.receiver?.profileImage ||
+                "https://joeschmoe.io/api/v1/random"
+              }
+              badge={false}
+            />
+          );
+        })
+      ) : (
+        <NoChatFound>😕No Chat Available</NoChatFound>
+      )}
     </ChatListContainer>
   );
 };

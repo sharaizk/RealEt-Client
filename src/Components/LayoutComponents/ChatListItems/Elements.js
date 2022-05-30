@@ -1,6 +1,6 @@
 import styled from "styled-components";
-
-export const ChatItemContainer = styled.div`
+import { motion } from "framer-motion";
+export const ChatItemContainer = styled(motion.div)`
   width: 100%;
   background-color: #fff;
   margin-top: 1vh;
@@ -27,6 +27,7 @@ export const ChatSubTitle = styled.caption`
   margin-block-start: 0;
   padding-top: 0;
   padding-bottom: 0;
+  width: 100%;
 `;
 
 export const Badge = styled.div`

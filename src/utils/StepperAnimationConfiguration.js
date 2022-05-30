@@ -8,3 +8,14 @@ export const StepperTransition = {
     transition: { duration: 0.75, ease: "easeOut" },
   },
 };
+
+export const ChatRoomAnimation = {
+  initial: {
+    y: "10%",
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+  },
+};
