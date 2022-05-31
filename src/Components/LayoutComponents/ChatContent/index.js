@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   ChatContentContainer,
   ChatArea,
@@ -16,8 +16,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { newMessages } from "Redux/actions/chatActions";
 import Pusher from "pusher-js";
 const ChatContent = () => {
-  const { activeChatRoomId } = useSelector((state) => state.chat);
+  const { activeChatRoomId, chatRoomMessages } = useSelector(
+    (state) => state.chat
+  );
+  const { userId } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const saveMessage = useCallback(
+    (message) => {
+      dispatch(newMessages(message));
+    },
+    [dispatch]
+  );
   useEffect(() => {
     if (!activeChatRoomId) return;
     const pusher = new Pusher(process.env.REACT_APP_PUSHER_KEY, {
@@ -25,23 +34,27 @@ const ChatContent = () => {
     });
     const channel = pusher.subscribe(activeChatRoomId);
     channel.bind("message-received", (data) => {
-      dispatch(newMessages(data));
+      saveMessage(data);
     });
-  }, [activeChatRoomId,dispatch]);
-
+  }, [activeChatRoomId, saveMessage]);
   return (
     <ChatContentContainer>
       {activeChatRoomId ? (
         <>
           <ChatArea>
-            <SentMsg>
-              Hello I wanna buy this property
-              <TimeStamp $color="#424242">Wednesday 24,2022</TimeStamp>
-            </SentMsg>
-            <ReceivedMsg>
-              Hello
-              <TimeStamp $color="#fff">Wednesday 24,2022</TimeStamp>
-            </ReceivedMsg>
+            {chatRoomMessages?.map((message, i) =>
+              userId === message.sender ? (
+                <SentMsg>
+                  {message?.message}
+                  <TimeStamp>{message?.timeStamp}</TimeStamp>
+                </SentMsg>
+              ) : (
+                <ReceivedMsg>
+                  {message?.message}
+                  <TimeStamp>{message?.timeStamp}</TimeStamp>
+                </ReceivedMsg>
+              )
+            )}
           </ChatArea>
           <TypeArea>
             <TextField />

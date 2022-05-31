@@ -19,9 +19,20 @@ export const newMessages = (message) => {
   };
 };
 
-export const reloadMessages = (message) => {
-  return {
-    type: RELOAD_MESSAGES,
-    payload: message,
+// export const reloadMessages = (message) => {
+//   return {
+//     type: RELOAD_MESSAGES,
+//     payload: message,
+//   };
+// };
+
+export const reloadMessages = (chatRoomId) => {
+  return async (dispatch) => {
+    try {
+      const chatResponse = await server.get("/message/room-messages");
+      dispatch({ type: SIGN_IN, payload: profileResponse.data.user });
+    } catch (error) {
+      return error;
+    }
   };
 };
