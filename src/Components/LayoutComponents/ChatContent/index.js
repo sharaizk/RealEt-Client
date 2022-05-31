@@ -54,11 +54,6 @@ const ChatContent = () => {
     {
       onSuccess: () => {
         setMessage("");
-        chatRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "end",
-          inline: "nearest",
-        });
       },
     }
   );
@@ -66,7 +61,7 @@ const ChatContent = () => {
   useEffect(() => {
     if (!activeChatRoomId || !dispatch) return;
     dispatch(reloadMessages(activeChatRoomId));
-  }, [activeChatRoomId,dispatch]);
+  }, [activeChatRoomId, dispatch]);
 
   useEffect(() => {
     if (!activeChatRoomId) return;
@@ -77,7 +72,20 @@ const ChatContent = () => {
     channel.bind("message-received", (data) => {
       saveMessage(data);
     });
-  }, [activeChatRoomId,saveMessage]);
+
+    return () => {
+      pusher.unsubscribe(activeChatRoomId);
+    };
+  }, [activeChatRoomId, saveMessage]);
+
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.addEventListener("DOMNodeInserted", (event) => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+      });
+    }
+  }, []);
   const options = {
     weekday: "long",
     year: "numeric",

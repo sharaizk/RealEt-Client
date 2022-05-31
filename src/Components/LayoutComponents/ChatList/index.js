@@ -12,14 +12,20 @@ import { useSelector } from "react-redux";
 import { getToken } from "Redux/localstorage";
 const ChatList = ({ isOpen, setOpen }) => {
   const { userId } = useSelector((state) => state.auth);
-  const { data: roomData = [] } = useQuery(["Rooms", userId], async () => {
-    const roomsResponse = await server.get("/chatroom/my-rooms", {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
-    return roomsResponse.data;
-  });
+  const { data: roomData = [] } = useQuery(
+    ["Rooms", userId],
+    async () => {
+      const roomsResponse = await server.get("/chatroom/my-rooms", {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      return roomsResponse.data;
+    },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
   return (
     <ChatListContainer $isOpen={isOpen}>
       <ChatListHeading>
@@ -30,19 +36,31 @@ const ChatList = ({ isOpen, setOpen }) => {
       </ChatListSearch>
       {roomData ? (
         roomData?.map((room) => {
-          console.log(room)
           return (
             <ChatListItem
-              receiverId={room?.receiver?._id}
+              receiverId={
+                room?.sender?._id === userId
+                  ? room?.receiver?._id
+                  : room?.sender?._id
+              }
               chatRoomId={room?._id}
               key={room?._id}
               setOpen={setOpen}
               chatRoomTitle={room?.name}
-              role={room?.receiver?.role}
-              secondaryRole={room?.receiver?.secondaryRole}
+              role={
+                room?.sender?._id === userId
+                  ? room?.receiver?.role
+                  : room?.sender?.role
+              }
+              secondaryRole={
+                room?.sender?._id === userId
+                  ? room?.receiver?.secondaryRole
+                  : room?.sender?.secondaryRole
+              }
               chatRoomImg={
-                room?.receiver?.profileImage ||
-                "https://joeschmoe.io/api/v1/random"
+                room?.sender?._id === userId
+                  ? room?.receiver?.profileImage
+                  : room?.sender?.profileImage
               }
               badge={false}
             />
