@@ -12,13 +12,14 @@ const ChatListItem = ({
   chatRoomImg,
   badge,
   chatRoomId,
+  receiverId
 }) => {
   const dispatch = useDispatch();
   return (
     <ChatItemContainer
       onClick={() => {
         setOpen(false);
-        dispatch(activateChatRoom(chatRoomId));
+        dispatch(activateChatRoom(chatRoomId,receiverId));
       }}
       {...ChatRoomAnimation}
     >

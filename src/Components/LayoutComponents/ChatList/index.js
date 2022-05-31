@@ -30,8 +30,10 @@ const ChatList = ({ isOpen, setOpen }) => {
       </ChatListSearch>
       {roomData ? (
         roomData?.map((room) => {
+          console.log(room)
           return (
             <ChatListItem
+              receiverId={room?.receiver?._id}
               chatRoomId={room?._id}
               key={room?._id}
               setOpen={setOpen}

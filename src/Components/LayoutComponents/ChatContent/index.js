@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState, useRef } from "react";
 import {
   ChatContentContainer,
   ChatArea,
@@ -13,10 +13,15 @@ import {
 
 import { BiSend } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
-import { newMessages } from "Redux/actions/chatActions";
+import { newMessages, reloadMessages } from "Redux/actions/chatActions";
+import { useMutation } from "react-query";
+import { getToken } from "Redux/localstorage";
+import server from "../../../Axios";
 import Pusher from "pusher-js";
 const ChatContent = () => {
-  const { activeChatRoomId, chatRoomMessages } = useSelector(
+  const [message, setMessage] = useState("");
+  const chatRef = useRef(null);
+  const { activeChatRoomId, chatRoomMessages, receiver } = useSelector(
     (state) => state.chat
   );
   const { userId } = useSelector((state) => state.auth);
@@ -27,6 +32,42 @@ const ChatContent = () => {
     },
     [dispatch]
   );
+
+  const { mutate } = useMutation(
+    async () => {
+      const newMessageResponse = await server.post(
+        "/message/new-message",
+        {
+          chatRoom: activeChatRoomId,
+          message: message,
+          sender: userId,
+          receiver: receiver,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        }
+      );
+      return newMessageResponse;
+    },
+    {
+      onSuccess: () => {
+        setMessage("");
+        chatRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+          inline: "nearest",
+        });
+      },
+    }
+  );
+
+  useEffect(() => {
+    if (!activeChatRoomId || !dispatch) return;
+    dispatch(reloadMessages(activeChatRoomId));
+  }, [activeChatRoomId,dispatch]);
+
   useEffect(() => {
     if (!activeChatRoomId) return;
     const pusher = new Pusher(process.env.REACT_APP_PUSHER_KEY, {
@@ -36,30 +77,49 @@ const ChatContent = () => {
     channel.bind("message-received", (data) => {
       saveMessage(data);
     });
-  }, [activeChatRoomId, saveMessage]);
+  }, [activeChatRoomId,saveMessage]);
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
   return (
     <ChatContentContainer>
       {activeChatRoomId ? (
         <>
-          <ChatArea>
+          <ChatArea ref={chatRef}>
             {chatRoomMessages?.map((message, i) =>
               userId === message.sender ? (
                 <SentMsg>
                   {message?.message}
-                  <TimeStamp>{message?.timeStamp}</TimeStamp>
+                  <TimeStamp>
+                    {new Date(message?.timeStamp).toLocaleDateString(
+                      "en-US",
+                      options
+                    )}
+                  </TimeStamp>
                 </SentMsg>
               ) : (
                 <ReceivedMsg>
                   {message?.message}
-                  <TimeStamp>{message?.timeStamp}</TimeStamp>
+                  <TimeStamp>
+                    {new Date(message?.timeStamp).toLocaleDateString(
+                      "en-US",
+                      options
+                    )}
+                  </TimeStamp>
                 </ReceivedMsg>
               )
             )}
           </ChatArea>
           <TypeArea>
-            <TextField />
+            <TextField
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
             <SendBtn>
-              <BiSend size={24} color="#42ba96" />
+              <BiSend size={24} color="#42ba96" onClick={mutate} />
             </SendBtn>
           </TypeArea>
         </>

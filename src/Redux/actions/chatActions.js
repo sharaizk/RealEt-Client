@@ -1,9 +1,10 @@
 import { NEW_MESSAGES, RELOAD_MESSAGES, ACTIVE_CHAT_ROOM } from "../types";
-
-export const activateChatRoom = (chatRoomId) => {
+import server from "../../Axios";
+import { getToken } from "Redux/localstorage";
+export const activateChatRoom = (chatRoomId,receiver) => {
   return {
     type: ACTIVE_CHAT_ROOM,
-    payload: chatRoomId,
+    payload: {chatRoomId,receiver},
   };
 };
 
@@ -29,8 +30,15 @@ export const newMessages = (message) => {
 export const reloadMessages = (chatRoomId) => {
   return async (dispatch) => {
     try {
-      const chatResponse = await server.get("/message/room-messages");
-      dispatch({ type: SIGN_IN, payload: profileResponse.data.user });
+      const chatResponse = await server.get("/message/room-messages", {
+        params: {
+          chatRoom: chatRoomId,
+        },
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      dispatch({ type: RELOAD_MESSAGES, payload: chatResponse.data.messages });
     } catch (error) {
       return error;
     }
