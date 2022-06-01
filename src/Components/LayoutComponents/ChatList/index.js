@@ -21,9 +21,6 @@ const ChatList = ({ isOpen, setOpen }) => {
         },
       });
       return roomsResponse.data;
-    },
-    {
-      refetchOnWindowFocus: false,
     }
   );
   return (
@@ -36,6 +33,7 @@ const ChatList = ({ isOpen, setOpen }) => {
       </ChatListSearch>
       {roomData ? (
         roomData?.map((room) => {
+          console.log(room)
           return (
             <ChatListItem
               receiverId={
