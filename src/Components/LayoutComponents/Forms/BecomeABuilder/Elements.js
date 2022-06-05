@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { Button, Input, Upload } from "antd";
+import { Button, Input, Upload,Select } from "antd";
 
 const { Dragger } = Upload;
+const { Option } = Select;
+
 export const FormSubmissionBtn = styled(Button)`
   align-self: center;
   justify-self: center;
@@ -43,4 +45,33 @@ export const CustomDragger = styled(Dragger)`
   &:hover {
     border-color: #fc6e20 !important;
   }
+`;
+
+export const LocationCat = styled(Select)`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: transparent;
+  outline: none;
+  margin-bottom: 1vh;
+  & .ant-select-selector {
+    padding: 6px !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    &:hover {
+      border-color: #fc6e20 !important;
+    }
+  }
+
+  &.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+    .ant-select-selector {
+    border-color: #fc6e20;
+    box-shadow: none;
+  }
+`;
+
+export const LocationOption = styled(Option)`
+  background-color: #fff !important;
 `;

@@ -9,6 +9,7 @@ export const UpgradeAccountContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  overflow: auto;
 `;
 
 export const CustomTabs = styled(Tabs)`
