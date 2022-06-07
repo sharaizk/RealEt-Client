@@ -13,7 +13,6 @@ import Schema from "async-validator";
 
 Schema.warning = function () {};
 
-
 function RequireAuth({ children, redirectTo }) {
   let isAuthenticated = getToken();
   return isAuthenticated ? children : <Navigate to={redirectTo} />;
@@ -33,6 +32,7 @@ function App() {
   const LazyPostAdd = lazy(() => import("Screens/PostAd"));
   const LazyListing = lazy(() => import("Screens/PropertyListing"));
   const LazyDetail = lazy(() => import("Screens/SingleProperty"));
+  const LazyBookABuilder = lazy(() => import("Screens/BookABuilder"));
   return (
     <Suspense fallback={<Loading />}>
       <div className="App">
@@ -83,6 +83,7 @@ function App() {
                 </RequireAuth>
               }
             />
+            <Route path="/book-a-builder" element={<LazyBookABuilder />} />
           </Routes>
         </AnimatePresence>
         {location.pathname !== "/signup" && location.pathname !== "/signin" ? (

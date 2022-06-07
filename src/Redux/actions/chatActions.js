@@ -1,10 +1,10 @@
 import { NEW_MESSAGES, RELOAD_MESSAGES, ACTIVE_CHAT_ROOM } from "../types";
 import server from "../../Axios";
 import { getToken } from "Redux/localstorage";
-export const activateChatRoom = (chatRoomId,receiver) => {
+export const activateChatRoom = (chatRoomId,receiver,chatRoomTitle,chatRoomImg) => {
   return {
     type: ACTIVE_CHAT_ROOM,
-    payload: {chatRoomId,receiver},
+    payload: {chatRoomId,receiver,chatRoomTitle,chatRoomImg},
   };
 };
 

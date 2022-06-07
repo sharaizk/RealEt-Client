@@ -72,12 +72,14 @@ const BecomeABuilder = () => {
     }
   );
   const onFinish = (values) => {
-    console.log(cnic)
-    // mutate({
-    //   officeName: values.officeName,
-    //   officeContact: values.officeContact,
-    //   logo: officeLogo,
-    // });
+    mutate({
+      officeName: values.officeName,
+      officeContact: values.officeContact,
+      logo: officeLogo,
+      cnic: cnic,
+      city: values.city,
+      location: values.location,
+    });
   };
   return (
     <Form
@@ -214,7 +216,7 @@ const BecomeABuilder = () => {
               if (cnic.length > 2) {
                 return Promise.reject(
                   new Error("Please upload 2 images of CNIC only")
-                )
+                );
               }
               return Promise.resolve();
             },
@@ -236,8 +238,8 @@ const BecomeABuilder = () => {
               return false;
             }}
             onRemove={(i) => {
-              const removedArray = cnic.filter(file => file.name !== i.name)
-              setCnic(removedArray)
+              const removedArray = cnic.filter((file) => file.name !== i.name);
+              setCnic(removedArray);
             }}
           >
             <TiUploadOutline size={50} color="#fc6e20" />

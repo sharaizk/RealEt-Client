@@ -9,6 +9,8 @@ import {
   SentMsg,
   TimeStamp,
   InfoDiv,
+  ChatRoomBar,
+  ChatTitle
 } from "./ChatContentElements";
 
 import { BiSend } from "react-icons/bi";
@@ -16,12 +18,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { newMessages, reloadMessages } from "Redux/actions/chatActions";
 import { useMutation } from "react-query";
 import { getToken } from "Redux/localstorage";
+import { Row, Col, Avatar } from "antd";
 import server from "../../../Axios";
 import Pusher from "pusher-js";
 const ChatContent = () => {
   const [message, setMessage] = useState("");
   const chatRef = useRef(null);
-  const { activeChatRoomId, chatRoomMessages, receiver } = useSelector(
+  const { activeChatRoomId, chatRoomMessages, receiver,chatRoomTitle,chatRoomImg } = useSelector(
     (state) => state.chat
   );
   const { userId } = useSelector((state) => state.auth);
@@ -97,6 +100,26 @@ const ChatContent = () => {
       {activeChatRoomId ? (
         <>
           <ChatArea ref={chatRef}>
+            <ChatRoomBar>
+              <Row style={{ width: "100%" }}>
+                <Col
+                  span={6}
+                  xs={{ span: 6 }}
+                  sm={{ span: 2 }}
+                  xl={{ span: 2 }}
+                  xxl={{ span: 3 }}
+                >
+                  <Avatar src={chatRoomImg} />
+                </Col>
+                <Col span={18}>
+                  <Row>
+                    <Col span={24}>
+                      <ChatTitle>{chatRoomTitle}</ChatTitle>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </ChatRoomBar>
             {chatRoomMessages?.map((message, i) =>
               userId === message.sender ? (
                 <SentMsg>

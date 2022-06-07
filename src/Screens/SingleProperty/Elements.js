@@ -207,6 +207,11 @@ export const ContactBtn = styled.button`
   background-color: #fc6e20;
   cursor: pointer;
   border-radius: 5px;
+  :disabled{
+    background-color: gray;
+    opacity:50%;
+    cursor: default;
+  }
 `;
 
 export const StyledPannellum = styled(ReactPannellum)`

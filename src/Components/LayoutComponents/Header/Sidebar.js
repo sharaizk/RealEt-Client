@@ -55,7 +55,7 @@ const Sidebar = ({
           <SidebarLink to="/costcalculator" onClick={toggle}>
             Cost Calculator
           </SidebarLink>
-          <SidebarLink to="/signup">Book a Builder</SidebarLink>
+          <SidebarLink onClick={toggle} to="/book-a-builder">Book a Builder</SidebarLink>
           <SidebarBtn1 onClick={toggle} to="/post-add">
             Post Ad
           </SidebarBtn1>

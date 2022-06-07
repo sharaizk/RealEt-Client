@@ -1,14 +1,24 @@
 import React, { useState } from "react";
-import { Form, message } from "antd";
-import { FormSubmissionBtn, TextField, CustomDragger } from "./Elements";
+import { Form, message, Row, Col, Spin } from "antd";
+import {
+  FormSubmissionBtn,
+  TextField,
+  CustomDragger,
+  LocationCat,
+  LocationOption,
+} from "./Elements";
 import { NumberRegEx } from "helpers/regex";
 import { TiUploadOutline } from "react-icons/ti";
 import ImgCrop from "antd-img-crop";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import server from "../../../../Axios";
 import { getToken } from "Redux/localstorage";
+
 const BecomeAgent = () => {
   const [officeLogo, setOfficeLogo] = useState({});
+  const [cnic, setCnic] = useState([]);
+  const [selectedCity, setSelectedCity] = useState("");
+
   const [form] = Form.useForm();
 
   const { mutate, isLoading } = useMutation(
@@ -42,8 +52,34 @@ const BecomeAgent = () => {
       officeName: values.officeName,
       officeContact: values.officeContact,
       logo: officeLogo,
+      cnic: cnic,
+      city: values.city,
+      location:values.location
     });
   };
+  const { data: cities, isLoading: isCityLoading } = useQuery(
+    "Cities",
+    async () => {
+      const cityDataResponse = await server.get("/geography/cities");
+
+      return cityDataResponse.data.data;
+    }
+  );
+  const isCitySelected = selectedCity ? true : false;
+  const { data: locations, isLoading: isLocationLoading } = useQuery(
+    ["Location", selectedCity],
+    async () => {
+      const locationDataResponse = await server.get("/geography/locations", {
+        params: {
+          city_id: selectedCity,
+        },
+      });
+      return locationDataResponse.data.data;
+    },
+    {
+      enabled: isCitySelected,
+    }
+  );
   return (
     <Form
       name="become-a-builder"
@@ -82,6 +118,136 @@ const BecomeAgent = () => {
         ]}
       >
         <TextField placeholder="Enter your office phone number" />
+      </Form.Item>
+      <Row gutter={{ xs: 0, md: 16 }}>
+        <Col xs={24} sm={12}>
+          <Form.Item
+            name="city"
+            label="City"
+            rules={[
+              {
+                required: true,
+                message: "Please select your city",
+              },
+            ]}
+          >
+            <Spin spinning={isCityLoading}>
+              <LocationCat
+                showSearch
+                placeholder="Select your City"
+                onChange={(v) => {
+                  setSelectedCity(v);
+                  form.setFieldsValue({
+                    city: v,
+                  });
+                }}
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                    0 ||
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                    0
+                }
+                allowClear
+              >
+                {cities?.map((city) => {
+                  return (
+                    <LocationOption name="city" key={city._id} value={city.key}>
+                      {city.name}
+                    </LocationOption>
+                  );
+                })}
+              </LocationCat>
+            </Spin>
+          </Form.Item>
+        </Col>
+        <Col xs={24} sm={12}>
+          <Spin spinning={isLocationLoading}>
+            <Form.Item
+              name="location"
+              label="Location"
+              rules={[
+                {
+                  required: true,
+                  message: "Please select your location",
+                },
+              ]}
+            >
+              <LocationCat
+                showSearch
+                placeholder="Select Location"
+                disabled={!isCitySelected}
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                    0 ||
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                    0
+                }
+                allowClear
+              >
+                {locations?.map((location) => {
+                  return (
+                    <LocationOption
+                      name="location"
+                      key={location._id}
+                      value={location.key}
+                    >
+                      {location.name}
+                    </LocationOption>
+                  );
+                })}
+              </LocationCat>
+            </Form.Item>
+          </Spin>
+        </Col>
+      </Row>
+      <Form.Item
+        name="cnic"
+        label="CNIC (both sides)"
+        required="true"
+        rules={[
+          () => ({
+            validator(_, value) {
+              if (cnic.length === 0) {
+                return Promise.reject(
+                  new Error("Please upload both sides of CNIC")
+                );
+              }
+              if (cnic.length > 2) {
+                return Promise.reject(
+                  new Error("Please upload 2 images of CNIC only")
+                );
+              }
+              return Promise.resolve();
+            },
+          }),
+        ]}
+      >
+        <ImgCrop
+          quality={0.5}
+          grid={true}
+          zoom={true}
+          rotate
+          modalOk="Upload"
+          className="imgcropper"
+        >
+          <CustomDragger
+            multiple={true}
+            beforeUpload={(file) => {
+              setCnic([...cnic, file]);
+              return false;
+            }}
+            onRemove={(i) => {
+              const removedArray = cnic.filter((file) => file.name !== i.name);
+              setCnic(removedArray);
+            }}
+          >
+            <TiUploadOutline size={50} color="#fc6e20" />
+            <p className="ant-upload-text">
+              Click or drag file to this area to upload
+            </p>
+            <p className="ant-upload-hint">Please upload your CNIC here</p>
+          </CustomDragger>
+        </ImgCrop>
       </Form.Item>
       <Form.Item
         name="logo"

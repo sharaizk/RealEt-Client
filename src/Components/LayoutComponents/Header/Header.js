@@ -91,7 +91,7 @@ const Nav = ({
             </NavLinks>
           </NavItem>
           <NavItem scrollNav={scrollNav}>
-            <NavLinks $scrollNav={scrollNav} color={linksColor} to="/signup">
+            <NavLinks $scrollNav={scrollNav} color={linksColor} to="/book-a-builder">
               Book a Builder
             </NavLinks>
           </NavItem>

@@ -1,6 +1,8 @@
 import { ACTIVE_CHAT_ROOM, NEW_MESSAGES, RELOAD_MESSAGES } from "../types";
 const INITIAL_STATE = {
   activeChatRoomId: "",
+  chatRoomTitle: "",
+  chatRoomImg:"",
   chatRoomMessages: [],
   receiver:""
 };
@@ -11,7 +13,9 @@ const chatReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         activeChatRoomId: action.payload.chatRoomId,
-        receiver:action.payload.receiver
+        receiver: action.payload.receiver,
+        chatRoomTitle: action.payload.chatRoomTitle,
+        chatRoomImg:action.payload.chatRoomImg
       };
     case NEW_MESSAGES:
       return {

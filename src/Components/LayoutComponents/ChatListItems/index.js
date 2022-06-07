@@ -19,7 +19,7 @@ const ChatListItem = ({
     <ChatItemContainer
       onClick={() => {
         setOpen(false);
-        dispatch(activateChatRoom(chatRoomId,receiverId));
+        dispatch(activateChatRoom(chatRoomId,receiverId,chatRoomTitle,chatRoomImg));
       }}
       {...ChatRoomAnimation}
     >

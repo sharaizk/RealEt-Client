@@ -32,12 +32,15 @@ import { Breadcrumb, Divider, Image } from "antd";
 import { NavLink, useParams } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import ListSideBar from "Components/CustomComponents/ListSideBar";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { PriceConvertor } from "helpers/PriceHelpers";
 import { AiOutlineClose } from "react-icons/ai";
 import ReactHtmlParser from "react-html-parser";
 import server from "../../Axios";
-import { addScene, loadScene} from "react-pannellum";
+import { useSelector } from "react-redux";
+import { notification } from "antd";
+import { addScene, loadScene } from "react-pannellum";
+import { useNavigate } from "react-router-dom";
 
 const RenderVirtualTour = ({ scenes }) => {
   const [isReady, setReady] = useState(false);
@@ -49,25 +52,34 @@ const RenderVirtualTour = ({ scenes }) => {
             imageSource: scene.imageSource,
             hotSpots: scene.hotSpots,
           });
-        return null
-
+          return null;
         })
       );
       loadScene(scenes[0].sceneName);
-      setReady(true)
+      setReady(true);
     };
     addAllScenes();
   });
   const config = {
     scenesFadeDuration: 1000,
   };
-  return <><StyledPannellum id="1" isReady={isReady} sceneId="firstScene" config={ config}/></>;
+  return (
+    <>
+      <StyledPannellum
+        id="1"
+        isReady={isReady}
+        sceneId="firstScene"
+        config={config}
+      />
+    </>
+  );
 };
 
 const SingleProperty = () => {
   const [viewTour, setViewTour] = useState(false);
   const { propertyid } = useParams();
-
+  const { userId } = useSelector((state) => state.auth);
+  const navigate=useNavigate()
   const { data: propertyData, isLoading: propertyLoading } = useQuery(
     ["Ad Detail", propertyid],
     async () => {
@@ -76,6 +88,28 @@ const SingleProperty = () => {
     },
     {
       refetchOnWindowFocus: false,
+    }
+  );
+  const { mutate: chatMutate } = useMutation(
+    async () => {
+      if (!userId) {
+        notification["error"]({
+          message: "Can't chat right now",
+          description: "Please login to chat with the seller",
+        });
+        return Promise.reject("FAILED");
+      }
+      const chatRoomResponse = await server.post("/chatroom/new-chatroom", {
+        name: propertyData?.title,
+        sender: userId,
+        receiver: propertyData?.userId._id,
+      });
+      return chatRoomResponse.data;
+    },
+    {
+      onSuccess: () => {
+          navigate('/dashboard/chats')
+      },
     }
   );
 
@@ -241,7 +275,9 @@ const SingleProperty = () => {
                         : "N/A"}
                     </InfoDetail>
                   </InfoRow>
-                  <ContactBtn>Contact Poster</ContactBtn>
+                  <ContactBtn disabled={userId === propertyData?.userId?._id} onClick={chatMutate}>
+                    Contact {propertyData?.userId.fullName}
+                  </ContactBtn>
                 </ProfileDetail>
               </PosterContainer>
             </DescriptionSection>

@@ -9,11 +9,27 @@ export const ChatContentContainer = styled.div`
   align-items: center;
   background-color: #fff;
   border-radius: 10px;
+  position: relative;
+
   padding: 1rem;
   @media screen and (max-width: 1024px) {
     flex: 1;
   }
 `;
+
+export const ChatRoomBar = styled.div`
+  height:10%;
+  width:100%;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  border-radius: 10px;
+  background-color: #FFF;
+  display: flex;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: flex-start;
+`
 
 export const ChatArea = styled.div`
   flex: 0.9;
@@ -27,6 +43,7 @@ export const ChatArea = styled.div`
   align-items: flex-start;
   flex-direction: column;
   overflow: auto;
+  margin-top: 3vh;
 `;
 
 export const ReceivedMsg = styled.p`
@@ -103,4 +120,12 @@ export const InfoDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const ChatTitle = styled.h4`
+  margin: 0;
+  margin-block-end: 0;
+  margin-block-start: 0;
+  font-size: 0.9rem;
+  color: #424242;
 `;
