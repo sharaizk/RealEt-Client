@@ -42,7 +42,7 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
         let image = data?.images[i].originFileObj;
         formData.append("photos", image);
       }
-      const postAddResponse = await server.post("/ads/post", formData, {
+      const postAddResponse = await server.post("/properties/post", formData, {
         headers: {
           "x-access-token": token,
         },

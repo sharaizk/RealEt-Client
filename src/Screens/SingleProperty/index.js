@@ -83,7 +83,7 @@ const SingleProperty = () => {
   const { data: propertyData, isLoading: propertyLoading } = useQuery(
     ["Ad Detail", propertyid],
     async () => {
-      const adDetail = await server.get(`/ads/single-property/${propertyid}`);
+      const adDetail = await server.get(`/properties/single-property/${propertyid}`);
       return adDetail.data.data;
     },
     {
