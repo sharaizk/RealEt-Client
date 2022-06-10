@@ -21,7 +21,7 @@ const ProfileSection = () => {
   const { data: adCountData, isLoading: adCountLoading } = useQuery(
     ["Ads Count", userId],
     async () => {
-      const adsCount = await server.get("/ads/myAds", {
+      const adsCount = await server.get("/properties/myAds", {
         headers: {
           "x-access-token": token,
         },

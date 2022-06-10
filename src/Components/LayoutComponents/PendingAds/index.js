@@ -13,7 +13,7 @@ const PendingAds = () => {
   const { data: propertyData, isLoading } = useQuery(
     ["Pending Ads", pageNumber],
     async () => {
-      const postedAdsResponse = await server.get("/ads/myAds", {
+      const postedAdsResponse = await server.get("/properties/myAds", {
         headers: {
           "x-access-token": token,
         },
