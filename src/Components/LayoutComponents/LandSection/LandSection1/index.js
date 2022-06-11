@@ -15,7 +15,7 @@ const LandSection1 = () => {
           <br />
           instantly
         </BuyandSell>
-        <AdvanceSearchField />
+        <AdvanceSearchField search="properties" />
       </SectionContainer>
     </LandingScreenContainer>
   );

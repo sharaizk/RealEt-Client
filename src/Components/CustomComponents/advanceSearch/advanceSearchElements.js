@@ -28,7 +28,7 @@ export const OptionsContainer = styled.div`
 `;
 
 export const CityDropDown = styled(Select)`
-  flex: 0.2;
+  flex: ${({ $flex }) => $flex};
   @media screen and (max-width: 550px) {
     width: 100%;
     margin-bottom: 5px;

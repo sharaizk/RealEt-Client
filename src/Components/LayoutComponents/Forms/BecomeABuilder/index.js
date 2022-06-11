@@ -45,12 +45,19 @@ const BecomeABuilder = () => {
     }
   );
 
-  const { mutate, isLoading } = useMutation(
+  const { mutate, status } = useMutation(
     async (formValues) => {
       const formData = new FormData();
       formData.append("officeName", formValues.officeName);
       formData.append("officeContact", formValues.officeContact);
       formData.append("logo", formValues.logo);
+      formData.append("city", formValues.city);
+      formData.append("location", formValues.location);
+      formData.append("cnic", formValues.cnic);
+      for (let i = 0; i < cnic.length; i++) {
+        let image = cnic[i];
+        formData.append("cnic", image);
+      }
       const token = getToken();
       const builderResponse = await server.post("/builder/apply", formData, {
         headers: {
@@ -63,6 +70,7 @@ const BecomeABuilder = () => {
       onSuccess: () => {
         form.resetFields();
         setOfficeLogo({});
+        setCnic([]);
         message.success("An Admin will approve your request, shortly!");
       },
       onError: (error) => {
@@ -72,6 +80,7 @@ const BecomeABuilder = () => {
     }
   );
   const onFinish = (values) => {
+    // console.log(cnic);
     mutate({
       officeName: values.officeName,
       officeContact: values.officeContact,
@@ -226,6 +235,7 @@ const BecomeABuilder = () => {
         <ImgCrop
           quality={0.5}
           grid={true}
+          aspect={2.75 / 1.75}
           zoom={true}
           rotate
           modalOk="Upload"
@@ -289,7 +299,11 @@ const BecomeABuilder = () => {
         </ImgCrop>
       </Form.Item>
 
-      <FormSubmissionBtn loading={isLoading} type="primary" htmlType="submit">
+      <FormSubmissionBtn
+        loading={status?.loading}
+        type="primary"
+        htmlType="submit"
+      >
         Request to Become a Builder
       </FormSubmissionBtn>
     </Form>

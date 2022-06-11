@@ -43,7 +43,7 @@ const BuilderProfile = () => {
               size={{ xs: 40, sm: 32, md: 64, lg: 64, xl: 100, xxl: 130 }}
               src={
                 <Image
-                  src="https://real-register.s3.me-south-1.amazonaws.com/ea4e39c8323096656e7fbd616128ffb1-SRL-image-2.jpeg"
+                  src={builderProfileData?.builder?.logo}
                   style={{ width: "100%" }}
                 />
               }

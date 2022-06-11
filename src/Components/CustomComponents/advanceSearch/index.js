@@ -18,7 +18,7 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import server from "../../../Axios";
 
-const AdvanceSearchField = () => {
+const AdvanceSearchField = ({ search }) => {
   const navigate = useNavigate();
   const [searchParam, setSearchParam] = useState({
     propertyIntent: "sell",
@@ -26,7 +26,7 @@ const AdvanceSearchField = () => {
     location: null,
     category: "",
   });
-  const onSubmit = () => {
+  const onSearchProperties = () => {
     if (!searchParam.city || !searchParam.location || !searchParam.category) {
       message.error("Please fill the form");
     } else {
@@ -43,6 +43,9 @@ const AdvanceSearchField = () => {
     });
   };
 
+  const onSearchBuilders = () => {
+    console.log(searchParam);
+  };
   const { data: cities } = useQuery("Cities", async () => {
     const cityDataResponse = await server.get("/geography/cities");
 
@@ -67,24 +70,27 @@ const AdvanceSearchField = () => {
 
   return (
     <SearchFieldContainer>
-      <ButtonContainer>
-        <BuyRentBtn
-          onClick={() => toggleBtn("sell")}
-          isActive={searchParam.propertyIntent === "sell"}
-          type="text"
-        >
-          Sell
-        </BuyRentBtn>
-        <BuyRentBtn
-          onClick={() => toggleBtn("rent")}
-          isActive={searchParam.propertyIntent === "rent"}
-          type="text"
-        >
-          Rent
-        </BuyRentBtn>
-      </ButtonContainer>
+      {search === "properties" && (
+        <ButtonContainer>
+          <BuyRentBtn
+            onClick={() => toggleBtn("sell")}
+            isActive={searchParam.propertyIntent === "sell"}
+            type="text"
+          >
+            Sell
+          </BuyRentBtn>
+          <BuyRentBtn
+            onClick={() => toggleBtn("rent")}
+            isActive={searchParam.propertyIntent === "rent"}
+            type="text"
+          >
+            Rent
+          </BuyRentBtn>
+        </ButtonContainer>
+      )}
       <OptionsContainer>
         <CityDropDown
+          $flex={search === "properties" ? 0.2 : 0.5}
           placeholder={"Select a City"}
           bordered={false}
           suffixIcon={<MdKeyboardArrowDown />}
@@ -132,34 +138,45 @@ const AdvanceSearchField = () => {
           })}
         </AreaDropDown>
 
-        <CategoryDropDown
-          placeholder={"Category"}
-          bordered={false}
-          suffixIcon={<MdKeyboardArrowDown />}
-          showSearch={true}
-          onChange={(values) => {
-            setSearchParam({ ...searchParam, category: values });
+        {search === "properties" && (
+          <CategoryDropDown
+            placeholder={"Category"}
+            bordered={false}
+            suffixIcon={<MdKeyboardArrowDown />}
+            showSearch={true}
+            onChange={(values) => {
+              setSearchParam({ ...searchParam, category: values });
+            }}
+            filterOption={(input, option) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            <COption value="House">House</COption>
+            <COption value="Green House">Green House</COption>
+            <COption value="Apartment">Apartment</COption>
+            <COption value="Upper Portion">Upper Portion</COption>
+            <COption value="Lower Portion">Lower Portion</COption>
+            <COption value="Farm House">Farm House</COption>
+            <COption value="Room">Room</COption>
+            <COption value="Penthouse">Penthouse</COption>
+            <COption value="Hotel Suites">Hotel Suites</COption>
+            <COption value="Basement">Basement</COption>
+            <COption value="Anexxe">Anexxe</COption>
+            <COption value="Hostel">Hostel</COption>
+            <COption value="Other">Other</COption>
+          </CategoryDropDown>
+        )}
+        <SearchButton
+          onClick={() => {
+            if (search === "properties") {
+              onSearchProperties();
+            } else {
+              onSearchBuilders();
+            }
           }}
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
+          icon={<SearchOutlined />}
         >
-          <COption value="House">House</COption>
-          <COption value="Green House">Green House</COption>
-          <COption value="Apartment">Apartment</COption>
-          <COption value="Upper Portion">Upper Portion</COption>
-          <COption value="Lower Portion">Lower Portion</COption>
-          <COption value="Farm House">Farm House</COption>
-          <COption value="Room">Room</COption>
-          <COption value="Penthouse">Penthouse</COption>
-          <COption value="Hotel Suites">Hotel Suites</COption>
-          <COption value="Basement">Basement</COption>
-          <COption value="Anexxe">Anexxe</COption>
-          <COption value="Hostel">Hostel</COption>
-          <COption value="Other">Other</COption>
-        </CategoryDropDown>
-        <SearchButton onClick={onSubmit} icon={<SearchOutlined />}>
           Search
         </SearchButton>
       </OptionsContainer>

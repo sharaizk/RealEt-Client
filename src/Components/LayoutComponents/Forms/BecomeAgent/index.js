@@ -27,6 +27,9 @@ const BecomeAgent = () => {
       formData.append("officeName", formValues.officeName);
       formData.append("officeContact", formValues.officeContact);
       formData.append("logo", formValues.logo);
+      formData.append("city", formValues.city);
+      formData.append("location", formValues.location);
+      formData.append("cnic", formValues.cnic);
       const token = getToken();
       const agentResponse = await server.post("/agent/apply", formData, {
         headers: {
@@ -39,6 +42,7 @@ const BecomeAgent = () => {
       onSuccess: () => {
         form.resetFields();
         setOfficeLogo({});
+        setCnic([]);
         message.success("An Admin will approve your request, shortly!");
       },
       onError: (error) => {
@@ -54,7 +58,7 @@ const BecomeAgent = () => {
       logo: officeLogo,
       cnic: cnic,
       city: values.city,
-      location:values.location
+      location: values.location,
     });
   };
   const { data: cities, isLoading: isCityLoading } = useQuery(
