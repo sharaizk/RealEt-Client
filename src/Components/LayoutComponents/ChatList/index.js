@@ -22,6 +22,9 @@ const ChatList = ({ isOpen, setOpen }) => {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
+        params: {
+          userId:userId
+        }
       });
       return roomsResponse.data;
     },
@@ -66,6 +69,7 @@ const ChatList = ({ isOpen, setOpen }) => {
       </ChatListSearch>
       {roomData ? (
         roomData?.map((room) => {
+          console.log(room)
           return (
             <ChatListItem
               receiverId={

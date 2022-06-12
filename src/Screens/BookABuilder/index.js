@@ -60,12 +60,27 @@ const BookABuilder = () => {
             <Title>Searched Builders</Title>
           </Divider>
           <CardsContainer>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((builder, i) => {
-              return <BuilderCard key={i} />;
+            {builders?.searchedBuilders?.map((builder, i) => {
+              return (
+                <BuilderCard
+                  key={i}
+                  logo={builder?.logo}
+                  status={builder?.status}
+                  officeContact={builder?.officeContact}
+                  officeName={builder?.officeName}
+                  avatar={builder.userId.profileImage}
+                  receiver={builder._id}
+                />
+              );
             })}
           </CardsContainer>
           <PaginationContainor>
-            <Pagination defaultCurrent={1} total={50} />
+            <Pagination
+              defaultCurrent={1}
+              onChange={(val) => setPageNumber(val)}
+              current={pageNumber}
+              total={builders?.totalBuilders || 1}
+            />
           </PaginationContainor>
         </BuilderCardContainer>
       )}
