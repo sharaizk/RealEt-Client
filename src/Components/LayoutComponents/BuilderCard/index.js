@@ -1,16 +1,23 @@
 import React from "react";
 
-import { Card, Avatar, Row, Col,notification } from "antd";
-import {AiOutlineMessage,AiOutlineFolderOpen} from 'react-icons/ai'
+import { Card, Avatar, Row, Col, notification } from "antd";
+import { AiOutlineMessage, AiOutlineFolderOpen } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import server from '../../../Axios'
+import server from "../../../Axios";
 
-const BuilderCard = ({ logo, officeContact, officeName, status,avatar,receiver }) => {
+const BuilderCard = ({
+  logo,
+  officeContact,
+  officeName,
+  status,
+  avatar,
+  receiver,
+}) => {
   const { Meta } = Card;
   const { userId } = useSelector((state) => state.auth);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const { mutate: chatMutate } = useMutation(
     async () => {
@@ -30,7 +37,7 @@ const BuilderCard = ({ logo, officeContact, officeName, status,avatar,receiver }
     },
     {
       onSuccess: () => {
-          navigate('/dashboard/chats')
+        navigate("/dashboard/chats");
       },
     }
   );
@@ -46,12 +53,10 @@ const BuilderCard = ({ logo, officeContact, officeName, status,avatar,receiver }
       cover={
         <img alt="example" style={{ border: "1px solid #f0f0f0" }} src={logo} />
       }
-      actions={
-        [
-          <AiOutlineMessage size={18} onClick={chatMutate} key="message" />,
-          <AiOutlineFolderOpen size={18} key="portfolio"/>
-        ]
-      }
+      actions={[
+        <AiOutlineMessage size={18} onClick={chatMutate} key="message" />,
+        <AiOutlineFolderOpen size={18} key="portfolio" />,
+      ]}
     >
       <Meta
         avatar={<Avatar src={avatar} />}

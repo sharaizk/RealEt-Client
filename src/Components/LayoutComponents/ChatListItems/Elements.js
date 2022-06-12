@@ -21,13 +21,15 @@ export const ChatTitle = styled.h4`
   color: #424242;
 `;
 
-export const ChatSubTitle = styled.caption`
+export const ChatSubTitle = styled.p`
   margin: 0;
   margin-block-end: 0;
   margin-block-start: 0;
   padding-top: 0;
   padding-bottom: 0;
   width: 100%;
+  opacity: 0.75;
+  text-transform: capitalize;
 `;
 
 export const Badge = styled.div`

@@ -2,24 +2,30 @@ import React from "react";
 import { ChatItemContainer, ChatTitle, ChatSubTitle, Badge } from "./Elements";
 import { Avatar, Row, Col } from "antd";
 import { ChatRoomAnimation } from "utils/StepperAnimationConfiguration";
-import { activateChatRoom } from "Redux/actions/chatActions";
-import { useDispatch } from "react-redux";
+import { activateChatRoom, resetMessages } from "Redux/actions/chatActions";
+import { useDispatch, useSelector } from "react-redux";
 const ChatListItem = ({
   setOpen,
   chatRoomTitle,
   role,
-  secondaryRole,
   chatRoomImg,
   badge,
   chatRoomId,
-  receiverId
+  receiverId,
 }) => {
   const dispatch = useDispatch();
+  const { activeChatRoomId } = useSelector((state) => state.chat);
   return (
     <ChatItemContainer
       onClick={() => {
         setOpen(false);
-        dispatch(activateChatRoom(chatRoomId,receiverId,chatRoomTitle,chatRoomImg));
+
+        if (activeChatRoomId !== chatRoomId) {
+          dispatch(resetMessages());
+          dispatch(
+            activateChatRoom(chatRoomId, receiverId, chatRoomTitle, chatRoomImg)
+          );
+        }
       }}
       {...ChatRoomAnimation}
     >
@@ -40,9 +46,7 @@ const ChatListItem = ({
               <ChatTitle>{chatRoomTitle}</ChatTitle>
             </Col>
             <Col span={24}>
-              <ChatSubTitle>
-                {secondaryRole ? secondaryRole : role}
-              </ChatSubTitle>
+              <ChatSubTitle>{role}</ChatSubTitle>
             </Col>
           </Row>
         </Col>

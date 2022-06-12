@@ -215,7 +215,7 @@ export const BuilderLinks = [
   {
     key: 2,
     title: "Chats",
-    to: "chats",
+    to: "builder/chats",
     icon: <BsChatSquareDotsFill />,
   },
   {
@@ -240,8 +240,8 @@ export const BuilderRoutes = [
   },
   {
     key: 2,
-    path: "chats",
-    element: <p>Chats</p>,
+    path: "builder/chats",
+    element: <ChatScreen />,
   },
   {
     key: 3,

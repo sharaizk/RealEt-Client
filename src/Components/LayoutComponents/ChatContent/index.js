@@ -10,7 +10,7 @@ import {
   TimeStamp,
   InfoDiv,
   ChatRoomBar,
-  ChatTitle
+  ChatTitle,
 } from "./ChatContentElements";
 
 import { BiSend } from "react-icons/bi";
@@ -18,15 +18,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { newMessages, reloadMessages } from "Redux/actions/chatActions";
 import { useMutation } from "react-query";
 import { getToken } from "Redux/localstorage";
-import { Row, Col, Avatar } from "antd";
+import { Row, Col, Avatar, Spin } from "antd";
 import server from "../../../Axios";
 import Pusher from "pusher-js";
 const ChatContent = () => {
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const chatRef = useRef(null);
-  const { activeChatRoomId, chatRoomMessages, receiver,chatRoomTitle,chatRoomImg } = useSelector(
-    (state) => state.chat
-  );
+  const {
+    activeChatRoomId,
+    chatRoomMessages,
+    receiver,
+    chatRoomTitle,
+    chatRoomImg,
+  } = useSelector((state) => state.chat);
   const { userId } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const saveMessage = useCallback(
@@ -36,7 +41,7 @@ const ChatContent = () => {
     [dispatch]
   );
 
-  const { mutate } = useMutation(
+  const { mutate, status } = useMutation(
     async () => {
       const newMessageResponse = await server.post(
         "/message/new-message",
@@ -63,7 +68,12 @@ const ChatContent = () => {
 
   useEffect(() => {
     if (!activeChatRoomId || !dispatch) return;
-    dispatch(reloadMessages(activeChatRoomId));
+    const loadMessages = async () => {
+      setLoading(true);
+      await dispatch(reloadMessages(activeChatRoomId));
+      setLoading(false);
+    };
+    loadMessages();
   }, [activeChatRoomId, dispatch]);
 
   useEffect(() => {
@@ -107,7 +117,7 @@ const ChatContent = () => {
                   xs={{ span: 6 }}
                   sm={{ span: 2 }}
                   xl={{ span: 2 }}
-                  xxl={{ span: 3 }}
+                  xxl={{ span: 2 }}
                 >
                   <Avatar src={chatRoomImg} />
                 </Col>
@@ -120,9 +130,18 @@ const ChatContent = () => {
                 </Col>
               </Row>
             </ChatRoomBar>
+            {loading && (
+              <Spin
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                }}
+              />
+            )}
             {chatRoomMessages?.map((message, i) =>
               userId === message.sender ? (
-                <SentMsg>
+                <SentMsg key={i}>
                   {message?.message}
                   <TimeStamp>
                     {new Date(message?.timeStamp).toLocaleDateString(
@@ -132,7 +151,7 @@ const ChatContent = () => {
                   </TimeStamp>
                 </SentMsg>
               ) : (
-                <ReceivedMsg>
+                <ReceivedMsg key={i}>
                   {message?.message}
                   <TimeStamp>
                     {new Date(message?.timeStamp).toLocaleDateString(
@@ -144,13 +163,20 @@ const ChatContent = () => {
               )
             )}
           </ChatArea>
-          <TypeArea>
+          <TypeArea
+            onSubmit={(e) => {
+              e.preventDefault();
+              mutate();
+            }}
+          >
             <TextField
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
-            <SendBtn>
-              <BiSend size={24} color="#42ba96" onClick={mutate} />
+            <SendBtn type="submit">
+              <Spin spinning={status === "isLoading" ? true : false}>
+                <BiSend size={24} color="#42ba96" />
+              </Spin>
             </SendBtn>
           </TypeArea>
         </>

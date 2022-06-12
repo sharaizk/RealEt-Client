@@ -18,18 +18,18 @@ export const ChatContentContainer = styled.div`
 `;
 
 export const ChatRoomBar = styled.div`
-  height:10%;
-  width:100%;
+  height: 10%;
+  width: 100%;
   position: absolute;
   top: 0%;
   left: 0%;
   border-radius: 10px;
-  background-color: #FFF;
+  background-color: #fff;
   display: flex;
   padding: 0.5rem;
   justify-content: center;
   align-items: flex-start;
-`
+`;
 
 export const ChatArea = styled.div`
   flex: 0.9;
@@ -43,7 +43,10 @@ export const ChatArea = styled.div`
   align-items: flex-start;
   flex-direction: column;
   overflow: auto;
-  margin-top: 3vh;
+  margin-top: 5vh;
+  @media screen and (max-width: 1400px) {
+    margin-top: 3vh;
+  }
 `;
 
 export const ReceivedMsg = styled.p`
@@ -77,13 +80,13 @@ export const SentMsg = styled.div`
   flex-direction: column;
 `;
 
-export const TimeStamp = styled.p`
+export const TimeStamp = styled.label`
   font-size: 0.6rem;
   color: ${({ $color }) => $color};
   font-weight: 400;
 `;
 
-export const TypeArea = styled.div`
+export const TypeArea = styled.form`
   flex: 0.1;
   width: 100%;
   background-color: #f4f3f8;

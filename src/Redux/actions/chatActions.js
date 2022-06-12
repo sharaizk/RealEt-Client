@@ -1,10 +1,21 @@
-import { NEW_MESSAGES, RELOAD_MESSAGES, ACTIVE_CHAT_ROOM } from "../types";
+import {
+  NEW_MESSAGES,
+  RELOAD_MESSAGES,
+  ACTIVE_CHAT_ROOM,
+  RESET_MESSAGES,
+  RESET_CHATROOM,
+} from "../types";
 import server from "../../Axios";
 import { getToken } from "Redux/localstorage";
-export const activateChatRoom = (chatRoomId,receiver,chatRoomTitle,chatRoomImg) => {
+export const activateChatRoom = (
+  chatRoomId,
+  receiver,
+  chatRoomTitle,
+  chatRoomImg
+) => {
   return {
     type: ACTIVE_CHAT_ROOM,
-    payload: {chatRoomId,receiver,chatRoomTitle,chatRoomImg},
+    payload: { chatRoomId, receiver, chatRoomTitle, chatRoomImg },
   };
 };
 
@@ -42,5 +53,17 @@ export const reloadMessages = (chatRoomId) => {
     } catch (error) {
       return error;
     }
+  };
+};
+
+export const resetMessages = () => {
+  return {
+    type: RESET_MESSAGES,
+  };
+};
+
+export const resetChatroom = () => {
+  return {
+    type: RESET_CHATROOM,
   };
 };
