@@ -3,8 +3,10 @@ import builderBG from "../../assets/images/buildbg.jpg";
 const animatedBackground = keyframes`
   0%{
     opacity: 0.25;
+    filter: blur(0px);
   }
   100%{
+    filter: blur(5px);
     opacity: 1;
   }
 `;
@@ -29,7 +31,8 @@ export const BuilderScreenContainer = styled.section`
   flex-direction: column;
   padding: 0 30px;
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
+  max-height: 100%;
   padding-top: 14vh;
   position: relative;
   z-index: 1;
@@ -39,12 +42,13 @@ export const BuilderScreenContainer = styled.section`
 export const AdvanceSearchContainer = styled.div`
   width: 100%;
   padding: 0 20%;
-  height: 50vh;
+  height: ${({ height }) => height};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  transition: height 0.5s ease-in;
   &::before {
     content: "";
     background-image: url(${builderBG});
@@ -66,7 +70,6 @@ export const AdvanceSearchContainer = styled.div`
     padding: 0 15%;
   }
   @media screen and (max-width: 480px) {
-    height: 100%;
     padding: 0 5%;
   }
 `;
@@ -94,4 +97,52 @@ export const PageTtile = styled.h3`
   @media screen and (max-width: 320px) {
     font-size: 1rem;
   }
+`;
+
+export const BuilderCardContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  margin: 2vh 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const Title = styled.h4`
+  font-size: 2rem;
+  color: #424242;
+  font-weight: 400;
+  opacity: 0.5;
+`;
+
+export const CardsContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(auto-fill, auto);
+  grid-column-gap: 1em;
+  grid-row-gap: 3em;
+
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fill, auto);
+  }
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(auto-fill, auto);
+    grid-row-gap: 3em;
+  }
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(auto-fill, auto);
+    grid-row-gap: 3em;
+  }
+`;
+
+export const PaginationContainor = styled.div`
+  margin-top: 2vh;
+  align-self: flex-end;
 `;

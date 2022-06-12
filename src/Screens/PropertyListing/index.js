@@ -23,7 +23,6 @@ const PropertyListing = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [sortBy, setSortBy] = useState("createdAt");
   const { city, location, propertySubType, propertyIntent } = useParams();
-  console.log(city,location,propertySubType,propertyIntent)
   const { data: propertyData, isLoading: properttLoading } = useQuery(
     ["Properties", city, location, propertySubType, pageNumber, sortBy],
     async () => {

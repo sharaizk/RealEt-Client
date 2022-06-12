@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   SearchFieldContainer,
   CityDropDown,
@@ -13,29 +13,16 @@ import {
 import "./style.css";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { SearchOutlined } from "@ant-design/icons";
-import { message } from "antd";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
 import server from "../../../Axios";
 
-const AdvanceSearchField = ({ search }) => {
-  const navigate = useNavigate();
-  const [searchParam, setSearchParam] = useState({
-    propertyIntent: "sell",
-    city: null,
-    location: null,
-    category: "",
-  });
-  const onSearchProperties = () => {
-    if (!searchParam.city || !searchParam.location || !searchParam.category) {
-      message.error("Please fill the form");
-    } else {
-      navigate(
-        `/property-list/${searchParam.city}/${searchParam.location}/${searchParam.category}/${searchParam.propertyIntent}`
-      );
-    }
-  };
-
+const AdvanceSearchField = ({
+  search,
+  onSearchBuilders,
+  searchParam,
+  setSearchParam,
+  onSearchProperties,
+}) => {
   const toggleBtn = (type) => {
     setSearchParam({
       ...searchParam,
@@ -43,18 +30,15 @@ const AdvanceSearchField = ({ search }) => {
     });
   };
 
-  const onSearchBuilders = () => {
-    console.log(searchParam);
-  };
   const { data: cities } = useQuery("Cities", async () => {
     const cityDataResponse = await server.get("/geography/cities");
 
     return cityDataResponse.data.data;
   });
 
-  const isCitySelected = searchParam.city ? true : false;
+  const isCitySelected = searchParam?.city ? true : false;
   const { data: locations } = useQuery(
-    ["Location", searchParam.city],
+    ["Location", searchParam?.city],
     async () => {
       const locationDataResponse = await server.get("/geography/locations", {
         params: {
@@ -127,7 +111,7 @@ const AdvanceSearchField = ({ search }) => {
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
-          defaultValue={searchParam.city && searchParam.location}
+          defaultValue={searchParam?.city && searchParam?.location}
         >
           {locations?.map((location) => {
             return (
