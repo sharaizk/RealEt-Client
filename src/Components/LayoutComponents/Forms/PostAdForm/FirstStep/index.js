@@ -101,7 +101,7 @@ const FirstStep = ({ data, handleNextStep }) => {
                 message: "Property Sub type is required",
               },
             ]}
-            initialValue={data.subtype && data.subtype}
+            initialValue={data.propertySubType && data.propertySubType}
           >
             <SubTypeCat
               ref={selectRef}
@@ -130,7 +130,7 @@ const FirstStep = ({ data, handleNextStep }) => {
             name="features"
             label="Property Features"
             rules={[{ required: true, message: "Please Select A Feature" }]}
-            initialValue={data?.features}
+            initialValue={data?.features || data?.info?.features}
           >
             <CheckboxGroup>
               <Row>
@@ -150,7 +150,7 @@ const FirstStep = ({ data, handleNextStep }) => {
             name="utilities"
             label="Utilities"
             rules={[{ required: true, message: "Please Select an utility" }]}
-            initialValue={data?.utilities}
+            initialValue={data?.utilities || data?.info?.utilities}
           >
             <CheckboxGroup>
               <Row>

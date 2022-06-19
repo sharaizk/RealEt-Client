@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 export const PostedAdsContainter = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -13,6 +13,12 @@ export const PostedAdsContainter = styled.div`
   }
   & .ant-table-container {
     overflow-y: auto;
+  }
+`;
+export const Edit = styled(Link)`
+  color: #fc6e20;
+  &:hover {
+    color: #fc6e20;
   }
 `;
 

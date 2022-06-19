@@ -8,7 +8,14 @@ import { useMutation } from "react-query";
 import server from "../../../../../Axios/";
 import { getToken } from "Redux/localstorage";
 import { getConfig, destroy } from "react-pannellum";
-const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
+const FourthStep = ({
+  data,
+  handlePrevStep,
+  setData,
+  setStep,
+  isEdit,
+  propertyId,
+}) => {
   const [virtualTour, setVirtualTour] = useState(false);
   const token = getToken();
   let hide;
@@ -42,11 +49,18 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
         let image = data?.images[i].originFileObj;
         formData.append("photos", image);
       }
-      const postAddResponse = await server.post("/properties/post", formData, {
-        headers: {
-          "x-access-token": token,
-        },
-      });
+      const apiPath = isEdit
+        ? server.put(`/properties/update/${propertyId}`, formData, {
+            headers: {
+              "x-access-token": token,
+            },
+          })
+        : server.post("/properties/post", formData, {
+            headers: {
+              "x-access-token": token,
+            },
+          });
+      const postAddResponse = await apiPath;
       if (virtualTour) destroy();
       return postAddResponse.data;
     },
@@ -105,7 +119,7 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
         </>
       ) : (
         <>
-          <VTour />
+          <VTour scenes={data?.virtualTour} />
           <MoveContainer>
             <MoveBtn onClick={() => setVirtualTour(false)}>
               Cancel VTour
@@ -113,11 +127,9 @@ const FourthStep = ({ data, handlePrevStep, setData, setStep }) => {
             <MoveBtn
               onClick={() => {
                 const scenes = getConfig().scenes;
-                console.log(scenes);
                 let virtualTourConfig = [];
                 Object.keys(scenes).map((scene, i) => {
                   if (scene !== "NOTVALID") {
-                    // console.log(scenes[Object.keys(scenes)[i]]);
                     virtualTourConfig = [
                       ...virtualTourConfig,
                       { [scene]: scenes[Object.keys(scenes)[i]] },

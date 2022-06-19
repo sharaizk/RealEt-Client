@@ -116,11 +116,6 @@ export const adsPostColumn = [
     dataIndex: "view",
     key: "view",
   },
-  {
-    title: "Delete",
-    dataIndex: "delete",
-    key: "delete",
-  },
 ];
 
 export const pendingAdsColumn = [
@@ -154,6 +149,16 @@ export const pendingAdsColumn = [
     title: "Status",
     dataIndex: "status",
     key: "status",
+  },
+  {
+    title: "Admin Response",
+    dataIndex: "adRejectionMessage",
+    key: "adRejectionMessage",
+  },
+  {
+    title: "Edit",
+    dataIndex: "edit",
+    key: "edit",
   },
 ];
 

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Table, Divider, Modal } from "antd";
 import { adsPostColumn } from "helpers/Dashboard";
-import { PostedAdsContainter, Title, View, DelBtn } from "./Elements";
+import { PostedAdsContainter, Title, View } from "./Elements";
 import { useMutation, useQuery } from "react-query";
 import { getToken } from "Redux/localstorage";
-import { MdDelete } from "react-icons/md";
 import server from "../../../Axios";
 
 const PostedAds = () => {
@@ -62,15 +61,6 @@ const PostedAds = () => {
             <View key={property._id} to={`/property-detail/${property._id}`}>
               View
             </View>
-          ),
-          delete: (
-            <DelBtn>
-              <MdDelete
-                onClick={() => setAdDelete(property?._id)}
-                size={20}
-                color="#ff3333"
-              />
-            </DelBtn>
           ),
         };
       })

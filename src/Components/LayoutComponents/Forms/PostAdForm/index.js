@@ -8,9 +8,9 @@ import FourthStep from "./FourthStep";
 import "./styles.scss";
 import { AnimatePresence } from "framer-motion";
 
-const PostAdForm = () => {
+const PostAdForm = ({ editData, isEdit }) => {
   const [step, setStep] = useState(0);
-  const [data, setData] = useState({});
+  const [data, setData] = useState(editData);
 
   const handleNextStep = useCallback(
     (formData) => {
@@ -86,6 +86,7 @@ const PostAdForm = () => {
             handleNextStep={handleNextStep}
             setData={setData}
             setStep={setStep}
+            isEdit={isEdit}
           />
         )}
       </AnimatePresence>

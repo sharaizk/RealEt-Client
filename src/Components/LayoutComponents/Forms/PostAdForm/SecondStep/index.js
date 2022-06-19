@@ -29,10 +29,11 @@ const SecondStep = ({ data, handleNextStep, handlePrevStep }) => {
     lat: 30.37532,
     zoom: 3,
   });
-
   useEffect(() => {
-    citySelectRef.current.focus();
-  }, [citySelectRef]);
+    if (data?.city) {
+      setSelectedCity(data?.city);
+    }
+  }, [data?.city]);
   // ================================== || Fetching The Cities and Locations || ============
   const { data: cities, isLoading: isCityLoading } = useQuery(
     "Cities",
@@ -82,18 +83,19 @@ const SecondStep = ({ data, handleNextStep, handlePrevStep }) => {
           onFinish={handleNextStep}
           layout="vertical"
           requiredMark="optional"
+          initialValues={data}
         >
-          <Form.Item
-            name="city"
-            label="Where's your place located?"
-            rules={[
-              {
-                required: true,
-                message: "Please select your city",
-              },
-            ]}
-          >
-            <Spin spinning={isCityLoading}>
+          <Spin spinning={isCityLoading}>
+            <Form.Item
+              name="city"
+              label="Where's your place located?"
+              rules={[
+                {
+                  required: true,
+                  message: "Please select your city",
+                },
+              ]}
+            >
               <LocationCat
                 ref={citySelectRef}
                 onSelect={() => {
@@ -124,8 +126,9 @@ const SecondStep = ({ data, handleNextStep, handlePrevStep }) => {
                   );
                 })}
               </LocationCat>
-            </Spin>
-          </Form.Item>
+            </Form.Item>
+          </Spin>
+
           <Spin spinning={isLocationLoading}>
             <Form.Item
               name="location"

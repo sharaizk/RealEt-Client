@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table, Divider } from "antd";
 import { pendingAdsColumn } from "helpers/Dashboard";
-import { PostedAdsContainter, Title } from "./Elements";
+import { PostedAdsContainter, Title, Edit } from "./Elements";
 import { useQuery } from "react-query";
 import { getToken } from "Redux/localstorage";
 import server from "../../../Axios";
@@ -28,7 +28,19 @@ const PendingAds = () => {
       return postedAdsResponse.data;
     }
   );
-
+  console.log(propertyData);
+  const dataSource = propertyData
+    ? propertyData.data?.map((property) => {
+        return {
+          ...property,
+          edit: (
+            <Edit key={property._id} to={`/edit-add/${property._id}`}>
+              Edit
+            </Edit>
+          ),
+        };
+      })
+    : [];
   return (
     <PostedAdsContainter>
       <Title>Pending Ads</Title>
@@ -36,7 +48,7 @@ const PendingAds = () => {
       <Table
         loading={isLoading}
         columns={pendingAdsColumn}
-        dataSource={propertyData?.data}
+        dataSource={dataSource}
         pagination={{
           defaultCurrent: 1,
           total: propertyData?.totalAds || 1,

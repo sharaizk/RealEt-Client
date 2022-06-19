@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TourContainer,
   Panellum,
@@ -61,7 +61,34 @@ const RenderScene = ({ title, image, rerender, setRerender }) => {
   );
 };
 
-const VTour = () => {
+const VTour = ({ scenes = [] }) => {
+  console.log("received", scenes);
+  const [temp, setTemp] = useState(false);
+  useEffect(() => {
+    const addAllScenes = async () => {
+      await Promise.all(
+        getAllScenes().map((scene) => {
+          removeScene(Object.keys(scene)[0]);
+          return null;
+        })
+      );
+      await Promise.all(
+        scenes.map((scene) => {
+          addScene(scene.sceneName, {
+            imageSource: scene.imageSource,
+            hotSpots: scene.hotSpots,
+          });
+          return null;
+        })
+      );
+      loadScene(scenes[0].sceneName);
+      setTemp(true);
+    };
+    if (scenes.length) {
+      addAllScenes();
+    }
+  }, [scenes]);
+  console.log(temp);
   const [sceneAdOpen, setSceneAdOpen] = useState(false);
   const [scenePhoto, setScenePhoto] = useState({});
   const [rerender, setRerender] = useState(false);
@@ -72,11 +99,11 @@ const VTour = () => {
     yaw: 0,
   });
   const [form] = Form.useForm();
-  const [form2] = Form.useForm()
-  
+  const [form2] = Form.useForm();
+
   const config = {
     sceneFadeDuration: 10000,
-  }
+  };
 
   const sceneBuilder = async (title) => {
     const reader = new FileReader();
@@ -126,6 +153,7 @@ const VTour = () => {
     }
     return true;
   };
+  console.log("loaded", AllScenes);
   return (
     <TourContainer>
       <Modal

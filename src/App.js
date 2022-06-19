@@ -51,6 +51,14 @@ function App() {
               }
             />
             <Route
+              path="/edit-add/:propertyId"
+              element={
+                <RequireAuth redirectTo={"/"}>
+                  <LazyPostAdd />
+                </RequireAuth>
+              }
+            />
+            <Route
               path="/signup"
               element={
                 <LoggedIn redirectTo={"/"}>

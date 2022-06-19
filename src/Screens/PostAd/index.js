@@ -10,7 +10,25 @@ import {
 } from "./PostElements";
 import bannerImg from "../../assets/images/postedad.png";
 import PostAdForm from "../../Components/LayoutComponents/Forms/PostAdForm";
+import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import server from "../../Axios";
 const AddProperty = () => {
+  const params = useParams();
+  const isEdit = params?.propertyId ? true : false;
+  const { data: propertyData = {} } = useQuery(
+    ["Edit Ad Detail", params?.propertyId],
+    async () => {
+      const adDetail = await server.get(
+        `/properties/single-property/${params?.propertyId}`
+      );
+      return adDetail.data.data;
+    },
+    {
+      refetchOnWindowFocus: false,
+      enabled: isEdit,
+    }
+  );
   return (
     <PostAddMainContainer>
       <TitleDiv>Add Property</TitleDiv>
@@ -24,7 +42,7 @@ const AddProperty = () => {
           <BannerImg src={bannerImg} alt="" />
         </BannerDiv>
         <FormContainer>
-          <PostAdForm />
+          <PostAdForm editData={propertyData} isEdit={isEdit} />
         </FormContainer>
       </BottomContainer>
     </PostAddMainContainer>

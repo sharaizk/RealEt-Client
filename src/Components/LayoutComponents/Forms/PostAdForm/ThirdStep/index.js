@@ -29,7 +29,7 @@ const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
   };
 
   const selectAfter = (
-    <Form.Item name="unit" initialValue={data?.unit || "Marla"} noStyle>
+    <Form.Item name="unit" noStyle>
       <UnitCat placeholder="Unit">
         <UnitOption value="Kanal">Kanal</UnitOption>
         <UnitOption value="Marla">Marla</UnitOption>
@@ -46,7 +46,6 @@ const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
       </UnitCat>
     </Form.Item>
   );
-
   const handlers = {
     moveNext() {
       form
@@ -71,6 +70,15 @@ const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
     return e && e.fileList;
   };
 
+  const uploadedFileList = data?.photos?.map((photo, i) => {
+    return {
+      uid: i,
+      name: `${i}.png`,
+      status: "done",
+      url: photo,
+    };
+  });
+
   return (
     <StepContainer {...StepperTransition}>
       <HotKeys keyMap={stepFormMap} handlers={handlers}>
@@ -85,12 +93,18 @@ const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
               setPrice(v.price);
             }
           }}
+          initialValues={{
+            description: data?.description,
+            price: data?.price || data?.info?.price,
+            unit: data?.unit || data?.info?.unit,
+            size: data?.size || data?.info?.size,
+            images: data?.images || uploadedFileList,
+          }}
         >
           <Row gutter={{ xs: 0, md: 16 }}>
             <Col xs={24} sm={12}>
               <Form.Item
                 name="size"
-                initialValue={data?.size}
                 rules={[
                   {
                     required: true,
@@ -108,7 +122,6 @@ const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
             <Col xs={24} sm={12}>
               <Form.Item
                 name="price"
-                initialValue={data?.price}
                 rules={[
                   {
                     required: true,
@@ -155,7 +168,6 @@ const ThirdStep = ({ data, handleNextStep, handlePrevStep }) => {
             name="images"
             valuePropName="fileList"
             getValueFromEvent={normFile}
-            initialValue={data?.images}
             rules={[
               () => ({
                 validator(_, value) {
