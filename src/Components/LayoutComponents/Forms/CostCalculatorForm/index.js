@@ -9,13 +9,13 @@ import {
   RadioBtnContainer,
   CalculateBtn,
 } from "./Elements";
-const CostCalculatorForm = () => {
+const CostCalculatorForm = ({calculatePrice}) => {
   return (
     <FormContainer>
       <Form
         layout="vertical"
         requiredMark="optional"
-        onFinish={(value) => console.log(value)}
+        onFinish={(value) => calculatePrice(value)}
         style={{ width: "100%" }}
       >
         <Form.Item

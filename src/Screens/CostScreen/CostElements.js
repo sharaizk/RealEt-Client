@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const CostScreenContainer = styled.div`
   display: flex;
@@ -8,10 +9,11 @@ export const CostScreenContainer = styled.div`
   padding-top: 16vh;
   height: 100vh;
   flex-direction: column;
+  overflow-x: hidden;
   @media screen and (max-width: 1024px) {
     padding-top: 7vh;
   }
-  @media screen and (max-width:768px){
+  @media screen and (max-width: 768px) {
     padding-top: 12vh;
   }
   @media screen and (max-width: 280px) {
@@ -20,19 +22,20 @@ export const CostScreenContainer = styled.div`
 
 export const FormContainer = styled.div`
   height: 100%;
-  width: 100%;
+  width: 80%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   @media screen and (max-width: 768px) {
     flex-direction: column;
     justify-content: flex-start;
     margin-top: 2vh;
+    width: 100%;
   }
 `;
 
-export const FormSection = styled.div`
-  flex: 0.5;
+export const FormSection = styled(motion.div)`
+  flex: 0.6;
   height: 80%;
   display: flex;
   justify-content: center;
@@ -43,7 +46,22 @@ export const FormSection = styled.div`
     flex: 0.4;
   }
 `;
-export const HistorySection = styled.div`
+
+export const AnimationSection = styled(motion.div)`
+  flex: 0.6;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  @media screen and (max-width: 768px) {
+    height: 100%;
+    width: 100%;
+    flex: 0.4;
+  }
+`;
+
+export const HistorySection = styled(motion.div)`
   flex: 0.3;
   max-height: 60vh;
   border: 1px solid #424242;
@@ -97,3 +115,9 @@ export const Card = styled.div`
   margin-top: 1vh;
   background-color: #fff;
 `;
+
+export const CalculatingText = styled.p`
+  font-size: 1rem;
+  font-weight: 400;
+  font-family:'Poppins','Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+`

@@ -23,7 +23,6 @@ import ReactHtmlParser from "react-html-parser";
 import NotFoundAnimation from "assets/animations/NotFound.json";
 const PropertyList = ({ propertyData }) => {
   const navigate = useNavigate();
-  console.log(propertyData);
   return (
     <>
       {propertyData?.length > 0 ? (
