@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ManagePortfolioContainer,
   ScreenTitle,
@@ -18,6 +18,9 @@ import { useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 
 const ManagePortfolio = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [adPortfolio, setAdPortfolio] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
   const limit = 4;

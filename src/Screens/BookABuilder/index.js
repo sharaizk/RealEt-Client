@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BuilderScreenContainer,
   AdvanceSearchContainer,
@@ -20,6 +20,9 @@ const BookABuilder = () => {
     city: null,
     location: null,
   });
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { data: builders = {}, refetch: onSearchBuilders } = useQuery(
     ["builders", searchParam.city, searchParam.location, pageNumber],
     async () => {

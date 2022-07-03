@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   PropertyListContainer,
   CrumbContainer,
@@ -20,6 +20,9 @@ import { useParams } from "react-router-dom";
 import server from "../../Axios";
 import SkeletonProperties from "Components/CustomComponents/SkeletonLoadings/SkeletonProperties";
 const PropertyListing = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [pageNumber, setPageNumber] = useState(1);
   const [sortBy, setSortBy] = useState("createdAt");
   const { city, location, propertySubType, propertyIntent } = useParams();

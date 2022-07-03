@@ -37,7 +37,10 @@ const CostCalculatorForm = ({calculatePrice}) => {
             marginTop: "3vh",
           }}
         >
-          <TextField type="number" placeholder="Size of your property in SQFT" />
+          <TextField
+            type="number"
+            placeholder="Size of your property in SQFT"
+          />
         </Form.Item>
         <Form.Item
           name="structureClass"
@@ -46,12 +49,12 @@ const CostCalculatorForm = ({calculatePrice}) => {
             marginTop: "3vh",
           }}
           rules={[{ required: true, message: "Please select the category" }]}
-          initialValue={"A"}
+          initialValue={"firstClassPrice"}
         >
           <RadioBtnContainer>
-            <RadioBtn value={"A"}>Luxury</RadioBtn>
-            <RadioBtn value={"B"}>Economical</RadioBtn>
-            <RadioBtn value={"C"}>Starter</RadioBtn>
+            <RadioBtn value={"firstClassPrice"}>Luxury</RadioBtn>
+            <RadioBtn value={"secondClassPrice"}>Economical</RadioBtn>
+            <RadioBtn value={"thirdClassPrice"}>Starter</RadioBtn>
           </RadioBtnContainer>
         </Form.Item>
         <CalculateBtn htmlType="submit">Calculate</CalculateBtn>

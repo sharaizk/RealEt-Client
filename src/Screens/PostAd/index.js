@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   PostAddMainContainer,
   TitleDiv,
@@ -14,6 +14,9 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import server from "../../Axios";
 const AddProperty = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const params = useParams();
   const isEdit = params?.propertyId ? true : false;
   const { data: propertyData = {} } = useQuery(

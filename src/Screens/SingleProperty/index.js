@@ -45,6 +45,9 @@ import { useNavigate } from "react-router-dom";
 const RenderVirtualTour = ({ scenes }) => {
   const [isReady, setReady] = useState(false);
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
     const addAllScenes = async () => {
       await Promise.all(
         scenes.map((scene) => {

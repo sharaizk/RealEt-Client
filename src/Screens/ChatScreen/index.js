@@ -6,6 +6,9 @@ import { GrChatOption } from "react-icons/gr";
 import { useDispatch } from "react-redux";
 import { resetChatroom } from "Redux/actions/chatActions";
 const ChatScreen = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [isOpen, setOpen] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {

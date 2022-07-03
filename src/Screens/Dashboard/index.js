@@ -14,6 +14,9 @@ const Dashboard = () => {
     }
   }, [authState.isSignedIn, dispatch]);
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
     fetchProfile();
   }, [fetchProfile]);
 
