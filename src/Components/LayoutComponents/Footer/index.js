@@ -19,7 +19,6 @@ import {
   FaFacebookF,
   FaTwitter,
   FaInstagram,
-  FaLinkedinIn,
   FaPinterestP,
 } from "react-icons/fa";
 import Logo from "../../../assets/images/logo2.png";
@@ -50,14 +49,14 @@ const Footer = () => {
           <FollowUs>Follow Us</FollowUs>
           <IconContainer>
             <FollowIcons
-              href="https://www.facebook.com"
+              href="https://www.facebook.com/BeRealEt/"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaFacebookF />
             </FollowIcons>
             <FollowIcons
-              href="https://twitter.com/home"
+              href="https://twitter.com/realet_pk"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -70,15 +69,9 @@ const Footer = () => {
             >
               <FaInstagram />
             </FollowIcons>
+
             <FollowIcons
-              href="https://www.linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaLinkedinIn />
-            </FollowIcons>
-            <FollowIcons
-              href="https://www.pinterest.com"
+              href="https://www.pinterest.com/RealEt_pk/"
               target="_blank"
               rel="noopener noreferrer"
             >
