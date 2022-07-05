@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import Footer from "Components/LayoutComponents/Footer";
 import { getToken } from "Redux/localstorage";
 import { Navigate } from "react-router-dom";
+import { notification } from "antd";
 import Dashboard from "Screens/Dashboard";
 import Schema from "async-validator";
 
@@ -15,6 +16,10 @@ Schema.warning = function () {};
 
 function RequireAuth({ children, redirectTo }) {
   let isAuthenticated = getToken();
+  notification['error']({
+    message:"Please login first"
+  })
+
   return isAuthenticated ? children : <Navigate to={redirectTo} />;
 }
 
@@ -33,6 +38,7 @@ function App() {
   const LazyListing = lazy(() => import("Screens/PropertyListing"));
   const LazyDetail = lazy(() => import("Screens/SingleProperty"));
   const LazyBookABuilder = lazy(() => import("Screens/BookABuilder"));
+  const Lazy404 = lazy(() => import("Screens/404"));
   return (
     <Suspense fallback={<Loading />}>
       <div className="App">
@@ -82,7 +88,14 @@ function App() {
               path="/property-detail/:propertyid"
               element={<LazyDetail />}
             />
-            <Route path="/costcalculator" element={<LazyCalculator />} />
+            <Route
+              path="/costcalculator"
+              element={
+                <RequireAuth redirectTo={"/"}>
+                  <LazyCalculator />
+                </RequireAuth>
+              }
+            />
             <Route
               path="/dashboard/*"
               element={
@@ -92,6 +105,7 @@ function App() {
               }
             />
             <Route path="/book-a-builder" element={<LazyBookABuilder />} />
+            <Route path="/*" element={<Lazy404 />} />
           </Routes>
         </AnimatePresence>
         {location.pathname !== "/signup" && location.pathname !== "/signin" ? (
