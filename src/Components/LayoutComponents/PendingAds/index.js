@@ -28,7 +28,6 @@ const PendingAds = () => {
       return postedAdsResponse.data;
     }
   );
-  console.log(propertyData);
   const dataSource = propertyData
     ? propertyData.data?.map((property) => {
         return {

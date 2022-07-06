@@ -29,6 +29,7 @@ const AddProperty = () => {
     },
     {
       refetchOnWindowFocus: false,
+      refetchOnMount: true,
       enabled: isEdit,
     }
   );

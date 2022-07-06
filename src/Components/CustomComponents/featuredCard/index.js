@@ -18,11 +18,16 @@ import {
 import { Divider } from "antd";
 import verifiedLogo from "../../../assets/images/logo2.png";
 import { BiCheckDouble } from "react-icons/bi";
-
 import "./style.css";
-const FeaturedCard = ({ img, title, city, price, postedby, verified }) => {
+import { useNavigate } from "react-router-dom";
+const FeaturedCard = ({ id, img, title, city, price, postedby, verified }) => {
+  const navigate = useNavigate();
   return (
-    <CardContainer >
+    <CardContainer
+      onClick={() => {
+        navigate(`/property-detail/${id}`);
+      }}
+    >
       <ImgContainer>
         <Img src={img} alt="img" />
         {verified ? (

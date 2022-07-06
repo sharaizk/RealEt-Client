@@ -13,15 +13,17 @@ const BuilderCard = ({
   officeName,
   status,
   avatar,
+  userId,
   receiver,
+  setBuilderId,
 }) => {
   const { Meta } = Card;
-  const { userId } = useSelector((state) => state.auth);
+  const { userId: currentUserId } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const { mutate: chatMutate } = useMutation(
     async () => {
-      if (!userId) {
+      if (!currentUserId) {
         notification["error"]({
           message: "Can't chat right now",
           description: "Please login to chat with the seller",
@@ -30,7 +32,7 @@ const BuilderCard = ({
       }
       const chatRoomResponse = await server.post("/chatroom/new-chatroom", {
         name: officeName,
-        sender: userId,
+        sender: currentUserId,
         receiver: receiver,
       });
       return chatRoomResponse.data;
@@ -41,7 +43,6 @@ const BuilderCard = ({
       },
     }
   );
-
   return (
     <Card
       style={{
@@ -54,8 +55,19 @@ const BuilderCard = ({
         <img alt="example" style={{ border: "1px solid #f0f0f0" }} src={logo} />
       }
       actions={[
-        <AiOutlineMessage size={18} onClick={chatMutate} key="message" />,
-        <AiOutlineFolderOpen size={18} key="portfolio" />,
+        <AiOutlineMessage
+          size={18}
+          onClick={() => {
+            if (currentUserId === receiver || currentUserId === userId) return;
+            chatMutate();
+          }}
+          key="message"
+        />,
+        <AiOutlineFolderOpen
+          onClick={() => setBuilderId(userId)}
+          size={18}
+          key="portfolio"
+        />,
       ]}
     >
       <Meta

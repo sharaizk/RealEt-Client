@@ -7,15 +7,19 @@ import {
   Title,
   CardsContainer,
   PaginationContainor,
+  PortfolioContainer,
+  PortfolioLink,
 } from "./Elements";
 import AdvanceSearchField from "Components/CustomComponents/advanceSearch";
 import { useQuery } from "react-query";
 import server from "../../Axios";
 import BuilderCard from "Components/LayoutComponents/BuilderCard";
-import { Divider } from "antd";
+import { BsHouse } from "react-icons/bs";
+import { Divider, Modal, Spin } from "antd";
 import { Pagination } from "antd";
 const BookABuilder = () => {
   const [pageNumber, setPageNumber] = useState(1);
+  const [builderId, setBuilderId] = useState("");
   const [searchParam, setSearchParam] = useState({
     city: null,
     location: null,
@@ -40,6 +44,22 @@ const BookABuilder = () => {
       enabled: false,
     }
   );
+
+  const { data: portfolioData = [], isLoading } = useQuery(
+    ["Portfolio", builderId],
+    async () => {
+      const portfolioResponse = await server.get(
+        `/portfolio/builder/${builderId}`
+      );
+      return portfolioResponse.data;
+    },
+    {
+      enabled: builderId ? true : false,
+    }
+  );
+
+  console.log(portfolioData);
+
   return (
     <BuilderScreenContainer>
       <AdvanceSearchContainer
@@ -59,6 +79,26 @@ const BookABuilder = () => {
       </AdvanceSearchContainer>
       {builders?.searchedBuilders && (
         <BuilderCardContainer>
+          <Modal
+            visible={builderId ? true : false}
+            onCancel={() => setBuilderId("")}
+            footer={null}
+            title={"Portfolios"}
+            centered
+          >
+            <Spin spinning={isLoading}>
+              <PortfolioContainer>
+                {portfolioData?.data?.map((portfolio) => (
+                  <>
+                    <PortfolioLink to={`/single-portfolio/${portfolio._id}`}>
+                      <BsHouse size={20} />
+                      <p>{portfolio.title}</p>
+                    </PortfolioLink>
+                  </>
+                ))}
+              </PortfolioContainer>
+            </Spin>
+          </Modal>
           <Divider>
             <Title>Searched Builders</Title>
           </Divider>
@@ -73,6 +113,8 @@ const BookABuilder = () => {
                   officeName={builder?.officeName}
                   avatar={builder.userId.profileImage}
                   receiver={builder._id}
+                  setBuilderId={setBuilderId}
+                  userId={builder?.userId?._id}
                 />
               );
             })}

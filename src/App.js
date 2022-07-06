@@ -16,9 +16,11 @@ Schema.warning = function () {};
 
 function RequireAuth({ children, redirectTo }) {
   let isAuthenticated = getToken();
-  notification['error']({
-    message:"Please login first"
-  })
+  if (!isAuthenticated) {
+    notification["error"]({
+      message: "Please login first",
+    });
+  }
 
   return isAuthenticated ? children : <Navigate to={redirectTo} />;
 }
@@ -39,6 +41,11 @@ function App() {
   const LazyDetail = lazy(() => import("Screens/SingleProperty"));
   const LazyBookABuilder = lazy(() => import("Screens/BookABuilder"));
   const Lazy404 = lazy(() => import("Screens/404"));
+  const LazyAboutUs = lazy(() => import("Screens/AboutUs"));
+  const LazyTOS = lazy(() => import("Screens/TOS"));
+  const LazyPrivacy = lazy(() => import("Screens/Privacy"));
+  const LazyOurStory = lazy(() => import("Screens/OurStory"));
+  const LazySinglePortfolio = lazy(() => import("Screens/SinglePortfolio"));
   return (
     <Suspense fallback={<Loading />}>
       <div className="App">
@@ -105,6 +112,14 @@ function App() {
               }
             />
             <Route path="/book-a-builder" element={<LazyBookABuilder />} />
+            <Route path="/about-us" element={<LazyAboutUs />} />
+            <Route path="/tos" element={<LazyTOS />} />
+            <Route path="/privacy" element={<LazyPrivacy />} />
+            <Route path="/our-story" element={<LazyOurStory />} />
+            <Route
+              path="/single-portfolio/:portfolioId"
+              element={<LazySinglePortfolio />}
+            />
             <Route path="/*" element={<Lazy404 />} />
           </Routes>
         </AnimatePresence>

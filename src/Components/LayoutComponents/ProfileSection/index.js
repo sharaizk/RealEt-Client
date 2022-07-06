@@ -50,7 +50,7 @@ const ProfileSection = () => {
                   <CardTitle>Ads</CardTitle>
                   <CardContent>
                     <DashboardBar
-                      title={"Listed Ads"}
+                      title={"Total Ads"}
                       percentage={getPercentage(adCountData.listed)}
                       value={adCountData.listed}
                     />

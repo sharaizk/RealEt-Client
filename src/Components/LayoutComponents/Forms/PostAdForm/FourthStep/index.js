@@ -8,6 +8,7 @@ import { useMutation } from "react-query";
 import server from "../../../../../Axios/";
 import { getToken } from "Redux/localstorage";
 import { getConfig, destroy } from "react-pannellum";
+import { useParams } from "react-router-dom";
 const FourthStep = ({
   data,
   handlePrevStep,
@@ -17,6 +18,7 @@ const FourthStep = ({
   propertyId,
 }) => {
   const [virtualTour, setVirtualTour] = useState(false);
+  const params = useParams();
   const token = getToken();
   let hide;
   const handleAddPost = useMutation(
@@ -45,12 +47,13 @@ const FourthStep = ({
       formData.append("location", data?.location);
       formData.append("info", JSON.stringify(info));
       formData.append("virtualTour", JSON.stringify(cvirtualTour));
+      formData.append("prevImg", JSON.stringify(data?.photos));
       for (let i = 0; i < data?.images.length; i++) {
         let image = data?.images[i].originFileObj;
         formData.append("photos", image);
       }
       const apiPath = isEdit
-        ? server.put(`/properties/update/${propertyId}`, formData, {
+        ? server.put(`/properties/update/${params.propertyId}`, formData, {
             headers: {
               "x-access-token": token,
             },
@@ -140,6 +143,7 @@ const FourthStep = ({
 
                 handleAddPost.mutate(virtualTourConfig);
               }}
+              loading={handleAddPost.isLoading}
             >
               Publish
             </MoveBtn>

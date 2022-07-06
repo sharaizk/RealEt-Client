@@ -6,7 +6,7 @@ import { notification } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./styles.scss";
 
-const OTPContainer = ({ setVisible, login, password }) => {
+const OTPContainer = ({ setVisible, login, password, setIsOTP }) => {
   const navigate = useNavigate();
   const [otp, setResult] = useState("");
 
@@ -19,6 +19,7 @@ const OTPContainer = ({ setVisible, login, password }) => {
         });
         setVisible(false);
         setResult("");
+        setIsOTP();
         setTimeout(() => {
           navigate("/signin");
         }, 500);

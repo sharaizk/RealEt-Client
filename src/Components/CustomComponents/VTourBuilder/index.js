@@ -103,6 +103,11 @@ const VTour = ({ scenes = [] }) => {
 
   const config = {
     sceneFadeDuration: 10000,
+    multires: {
+      tileResolution: 1024,
+      maxLevel: 6,
+      cubeResolution: 8432,
+    },
   };
 
   const sceneBuilder = async (title) => {

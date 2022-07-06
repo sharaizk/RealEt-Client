@@ -31,11 +31,10 @@ const Footer = () => {
     <FooterContainer>
       <LinksContainer>
         <TopLinkS>
-          <Links to="/">About Us</Links>
-          <Links to="/">Press Releases</Links>
-          <Links to="/">Terms of Services</Links>
-          <Links to="/">Privacy</Links>
-          <Links to="/">Our Story</Links>
+          <Links to="/about-us">About Us</Links>
+          <Links to="/tos">Terms of Services</Links>
+          <Links to="/privacy">Privacy</Links>
+          <Links to="/our-story">Our Story</Links>
         </TopLinkS>
       </LinksContainer>
       <SocialContainer>
@@ -63,7 +62,7 @@ const Footer = () => {
               <FaTwitter />
             </FollowIcons>
             <FollowIcons
-              href="https://www.instagram.com"
+              href="https://www.instagram.com/real_et_pk/"
               target="_blank"
               rel="noopener noreferrer"
             >

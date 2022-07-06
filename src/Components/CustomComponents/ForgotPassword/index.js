@@ -142,6 +142,7 @@ const ForgotPassword = ({ setVisible }) => {
           login={cred}
           type="resetpassword"
           password={password}
+          setIsOTP={setIsOTP}
         />
       )}
     </ModalContainer>

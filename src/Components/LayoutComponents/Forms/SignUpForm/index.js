@@ -42,10 +42,15 @@ const SignUpForm = () => {
   };
 
   const onFinish = async (values) => {
-    setTempLogin(values.login);
+    const tlogin = values?.loginemail || values?.loginphone;
+    setTempLogin(tlogin);
     form.resetFields();
     setLoading(true);
-    const res = await dispatch(signUp(values, profilePhoto));
+    const signUpValues = {
+      ...values,
+      login: values?.loginemail || values?.loginphone,
+    };
+    const res = await dispatch(signUp(signUpValues, profilePhoto));
     setLoading(false);
     if (!res) {
       setVisible(true);
@@ -69,7 +74,7 @@ const SignUpForm = () => {
       })
     );
     if (!res) {
-      navigate('/signin')
+      navigate("/signin");
     }
   };
 
@@ -124,7 +129,7 @@ const SignUpForm = () => {
         </Form.Item>
         {isEmail ? (
           <Form.Item
-            name="login"
+            name="loginemail"
             label={<label className="formLabel">Email</label>}
             rules={[
               {
@@ -144,7 +149,7 @@ const SignUpForm = () => {
           </Form.Item>
         ) : (
           <Form.Item
-            name="login"
+            name="loginphone"
             label={<label className="formLabel">Phone Number</label>}
             hasFeedback
             rules={[

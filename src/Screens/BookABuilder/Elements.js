@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import builderBG from "../../assets/images/buildbg.jpg";
+import { Link } from "react-router-dom";
 const animatedBackground = keyframes`
   0%{
     opacity: 0.25;
@@ -145,4 +146,33 @@ export const CardsContainer = styled.div`
 export const PaginationContainor = styled.div`
   margin-top: 2vh;
   align-self: flex-end;
+`;
+
+export const PortfolioContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+`;
+
+export const PortfolioLink = styled(Link)`
+  color: #424242;
+  text-decoration: none;
+  background-color: #f2efe7;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 2vh;
+  & p {
+    margin-bottom: 0;
+    margin-left: 0.5vw;
+  }
+  &:hover {
+    color: #f56e28;
+  }
 `;
