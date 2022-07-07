@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import LoadingOverlay from "react-loading-overlay";
 
 export const PostAddMainContainer = styled.div`
   min-height: 100vh;
@@ -93,5 +94,20 @@ export const FormContainer = styled.div`
   }
   @media screen and (max-width: 280px) {
     width: 85%;
+  }
+`;
+export const LoadingContainer = styled.div`
+  height: 100vh;
+`;
+
+export const StyledLoader = styled(LoadingOverlay)`
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+  .MyLoader_overlay {
+    background: rgba(255, 0, 0, 0.5);
+  }
+  &.MyLoader_wrapper--active {
+    overflow: hidden;
   }
 `;

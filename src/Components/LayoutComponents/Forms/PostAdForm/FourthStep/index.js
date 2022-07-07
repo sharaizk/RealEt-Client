@@ -19,7 +19,6 @@ const FourthStep = ({
 }) => {
   const [virtualTour, setVirtualTour] = useState(false);
   const params = useParams();
-  const token = getToken();
   let hide;
   const handleAddPost = useMutation(
     async (cvirtualTour = {}) => {
@@ -55,12 +54,12 @@ const FourthStep = ({
       const apiPath = isEdit
         ? server.put(`/properties/update/${params.propertyId}`, formData, {
             headers: {
-              "x-access-token": token,
+              "x-access-token": getToken(),
             },
           })
         : server.post("/properties/post", formData, {
             headers: {
-              "x-access-token": token,
+              "x-access-token": getToken(),
             },
           });
       const postAddResponse = await apiPath;

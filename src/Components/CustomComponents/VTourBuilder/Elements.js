@@ -142,6 +142,7 @@ export const UploadScene = styled(Upload)`
 
   border-radius: 10px;
   padding: 0.75rem 0;
+  margin-bottom: 1vh;
   & .ant-upload.ant-upload-select {
     width: 100%;
     display: flex;
@@ -158,6 +159,7 @@ export const SubmitButton = styled(Button)`
   cursor: pointer;
   background-color: #fc6e20;
   border-radius: 10px;
+  margin-top:1vh;
   border: none;
   &:hover,
   :active,

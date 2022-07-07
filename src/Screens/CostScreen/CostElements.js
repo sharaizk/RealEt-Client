@@ -8,11 +8,12 @@ export const CostScreenContainer = styled.div`
   align-items: center;
   padding: 0 30px;
   padding-top: 8vh;
-  height: 100vh;
+  padding-bottom: 10px;
+  height: 100%;
   flex-direction: column;
   overflow-x: hidden;
   @media screen and (max-width: 1400px) {
-    padding-top: 9vh;
+    padding-top: 12vh;
   }
   @media screen and (max-width: 1024px) {
     padding-top: 9vh;
@@ -165,7 +166,7 @@ export const CalculatedPriceTitle = styled.p`
   font-size: 1.6rem;
   color: #424242;
   text-align: center;
-
+  margin-bottom: 0em;
   & span {
     font-size: 1.2rem;
     font-weight: 500;
@@ -177,7 +178,7 @@ export const ResetBtn = styled.button`
   outline: none;
   border: none;
   background-color: #f56e28;
-  padding: 0.5rem;
+  padding: 0.5rem 0.3rem;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -191,4 +192,5 @@ export const BookBtn = styled(NavLink)`
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 1vh;
 `;

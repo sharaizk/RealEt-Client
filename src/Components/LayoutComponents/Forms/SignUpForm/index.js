@@ -48,7 +48,7 @@ const SignUpForm = () => {
     setLoading(true);
     const signUpValues = {
       ...values,
-      login: values?.loginemail || values?.loginphone,
+      login: isEmail ? values?.loginemail : values?.loginphone,
     };
     const res = await dispatch(signUp(signUpValues, profilePhoto));
     setLoading(false);

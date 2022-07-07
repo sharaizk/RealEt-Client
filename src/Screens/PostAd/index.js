@@ -7,6 +7,8 @@ import {
   BannerDetails,
   BottomContainer,
   FormContainer,
+  StyledLoader,
+  LoadingContainer
 } from "./PostElements";
 import bannerImg from "../../assets/images/postedad.png";
 import PostAdForm from "../../Components/LayoutComponents/Forms/PostAdForm";
@@ -19,7 +21,7 @@ const AddProperty = () => {
   }, []);
   const params = useParams();
   const isEdit = params?.propertyId ? true : false;
-  const { data: propertyData = {} } = useQuery(
+  const { data: propertyData = {},isLoading } = useQuery(
     ["Edit Ad Detail", params?.propertyId],
     async () => {
       const adDetail = await server.get(
@@ -33,9 +35,20 @@ const AddProperty = () => {
       enabled: isEdit,
     }
   );
+  if (isEdit && isLoading) {
+    return (
+      <LoadingContainer>
+        <StyledLoader
+          active={isLoading}
+          spinner
+          text="Loading your content..."
+        ></StyledLoader>
+      </LoadingContainer>
+    )
+  }
   return (
     <PostAddMainContainer>
-      <TitleDiv>Add Property</TitleDiv>
+      <TitleDiv>{isEdit?<p style={{margin:'0em'}}>Update Property</p> :<p>Add Property</p>}</TitleDiv>
       <BottomContainer>
         <BannerDiv>
           <BannerDetails>
