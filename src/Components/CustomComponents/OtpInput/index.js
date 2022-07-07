@@ -19,7 +19,10 @@ const OTPContainer = ({ setVisible, login, password, setIsOTP }) => {
         });
         setVisible(false);
         setResult("");
+        if (setIsOTP) {
         setIsOTP();
+          
+        }
         setTimeout(() => {
           navigate("/signin");
         }, 500);
