@@ -16,6 +16,7 @@ import {
   AddHotspot,
   ScenesCat,
   ScencesOpt,
+  IconContainer
 } from "./Elements";
 import { AiOutlineDelete } from "react-icons/ai";
 
@@ -161,6 +162,15 @@ const VTour = ({ scenes = [] }) => {
   console.log("loaded", AllScenes);
   return (
     <TourContainer>
+      <IconContainer>
+        <a
+          href="https://www.loom.com/share/075144ae52fb476a924b4f81d07a5912"
+          target="_blank"
+          rel="noreferrer"
+        >
+          How To Build a Tour
+        </a>
+      </IconContainer>
       <Modal
         footer={null}
         title="Create New Scene"

@@ -8,16 +8,28 @@ export const TourContainer = styled.div`
   align-items: center;
   height: 50vh;
   width: 100%;
-
-  @media screen and (max-width:1400px){
-    height:65vh ;
+  position: relative;
+  @media screen and (max-width: 1400px) {
+    height: 65vh;
   }
+`;
+
+export const IconContainer = styled.div`
+  position: absolute;
+  height: auto;
+  width: auto;
+  padding:1rem;
+  border-radius: 10px;
+  top:0;
+  left:-30%;
+  background-color: #f7f7f7;
+  color:#f56e28 !important;
 `;
 export const Panellum = styled(ReactPannellum)`
   width: 44vw !important;
   height: 400px !important;
-  @media screen and (max-width:1400px){
-    width:45.5vw !important;
+  @media screen and (max-width: 1400px) {
+    width: 45.5vw !important;
   }
 `;
 
@@ -159,7 +171,7 @@ export const SubmitButton = styled(Button)`
   cursor: pointer;
   background-color: #fc6e20;
   border-radius: 10px;
-  margin-top:1vh;
+  margin-top: 1vh;
   border: none;
   &:hover,
   :active,
